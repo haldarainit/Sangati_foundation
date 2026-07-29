@@ -1,0 +1,8 @@
+{
+  "/yatra/page": "app/yatra/page.js",
+  "/stories/[slug]/page": "app/stories/[slug]/page.js",
+  "/stories/page": "app/stories/page.js",
+  "/page": "app/page.js",
+  "/programs/[slug]/page": "app/programs/[slug]/page.js",
+  "/donate/page": "app/donate/page.js"
+}

@@ -1,0 +1,111 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --ink: #10231C;
+  --field: #F7F4EC;
+  --road: #1F6F5C;
+  --marigold: #E8A33D;
+  --clay: #C25436;
+  --mist: #DCE5E0;
+  
+  --base-font-size: 18px;
+  --line-height-body: 1.65;
+}
+
+/* High Contrast Override */
+[data-high-contrast="true"] {
+  --ink: #FFFFFF;
+  --field: #0A0F0D;
+  --road: #3DE8B0;
+  --marigold: #FFD700;
+  --clay: #FF6B4A;
+  --mist: #1E2D27;
+}
+
+/* Text Size Variations */
+[data-text-size="large"] {
+  font-size: 115%;
+}
+
+[data-text-size="xlarge"] {
+  font-size: 130%;
+}
+
+/* Reduced Motion Override */
+[data-reduce-motion="true"] *,
+[data-reduce-motion="true"] *::before,
+[data-reduce-motion="true"] *::after {
+  animation-duration: 0.001ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.001ms !important;
+  scroll-behavior: auto !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+body {
+  background-color: var(--field);
+  color: var(--ink);
+  font-family: var(--font-source-serif), Georgia, serif;
+  font-size: var(--base-font-size);
+  line-height: var(--line-height-body);
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Focus Ring Non-Negotiable Specification */
+*:focus-visible {
+  outline: 2px solid var(--marigold) !important;
+  outline-offset: 2px !important;
+}
+
+/* Headings font */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-bricolage), sans-serif;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+/* Eyebrows, stats & mono labels */
+.eyebrow, .stat-label, .mono-text {
+  font-family: var(--font-ibm-plex-mono), monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Screen reader utility */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+.focus\:not-sr-only:focus {
+  position: fixed;
+  width: auto;
+  height: auto;
+  padding: 0.75rem 1.25rem;
+  margin: 0;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
+}
