@@ -27,13 +27,13 @@ export const AccessibilityToolbar: React.FC = () => {
           onClick={() => setIsOpen(true)}
           aria-expanded={false}
           aria-controls="accessibility-panel"
-          className="flex items-center gap-2 bg-road text-field border-2 border-ink px-4 py-3 min-h-[44px] min-w-[44px] shadow-lg hover:bg-marigold hover:text-ink font-bold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-marigold"
+          className="flex items-center gap-1.5 sm:gap-2 bg-road text-field border-2 border-ink px-3 py-2 sm:px-4 sm:py-3 min-h-[44px] min-w-[44px] shadow-lg hover:bg-marigold hover:text-ink font-bold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-marigold"
         >
-          <span className="text-xl font-mono font-black" aria-hidden="true">
+          <span className="text-lg sm:text-xl font-mono font-black" aria-hidden="true">
             A⚡
           </span>
-          <span className="text-sm font-semibold">Accessibility</span>
-          <ChevronUp className="w-4 h-4 ml-1" aria-hidden="true" />
+          <span className="text-xs sm:text-sm font-semibold">Accessibility</span>
+          <ChevronUp className="w-3.5 h-3.5 sm:w-4 sm:h-4 ml-0.5 sm:ml-1" aria-hidden="true" />
         </button>
       ) : (
         <div

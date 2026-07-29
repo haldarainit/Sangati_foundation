@@ -11,6 +11,7 @@ import { useAccessibility } from '../context/AccessibilityContext';
 export const Header: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isMegaMenuOpen, setIsMegaMenuOpen] = useState(false);
+  const [isTopBarDismissed, setIsTopBarDismissed] = useState(false);
   const pathname = usePathname();
   const { highContrast, toggleHighContrast } = useAccessibility();
 
@@ -34,43 +35,92 @@ export const Header: React.FC = () => {
 
   return (
     <header className="w-full bg-field border-b-2 border-ink sticky top-0 z-40">
-      {/* Top Banner: Helpline & High Contrast Shortcut */}
-      <div className="bg-ink text-field px-4 py-2 text-xs md:text-sm border-b border-ink/30">
-        <div className="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-2">
-          <div className="flex items-center gap-4 font-mono">
-            <a
-              href={`tel:${organizationInfo.helpline.replace(/\s+/g, '')}`}
-              className="flex items-center gap-1.5 font-bold hover:text-marigold transition-colors min-h-[44px] px-1 focus-visible:outline-marigold"
-              aria-label={`Call National Helpline: ${organizationInfo.helpline}`}
-            >
-              <Phone className="w-4 h-4 text-marigold" aria-hidden="true" />
-              <span>Helpline: <strong className="text-marigold font-black">{organizationInfo.helpline}</strong></span>
-            </a>
-            <span className="hidden sm:inline text-field/40" aria-hidden="true">|</span>
-            <span className="hidden md:inline text-field/80">
-              Registered Charitable Trust (Est. 14 Feb 2019)
-            </span>
-          </div>
+      {/* Top Banner: Compact Mobile & Dismissible */}
+      {!isTopBarDismissed && (
+        <div className="bg-ink text-field px-3 py-1 text-xs border-b border-ink/30">
+          <div className="max-w-7xl mx-auto flex items-center justify-between gap-2">
+            {/* Mobile Layout (Slim 1-line) */}
+            <div className="flex items-center gap-3 font-mono sm:hidden w-full justify-between">
+              <a
+                href={`tel:${organizationInfo.helpline.replace(/\s+/g, '')}`}
+                className="flex items-center gap-1.5 font-bold text-marigold hover:underline py-1 focus-visible:outline-marigold"
+                aria-label={`Call National Helpline: ${organizationInfo.helpline}`}
+              >
+                <Phone className="w-3.5 h-3.5 text-marigold shrink-0" aria-hidden="true" />
+                <span>Helpline: <strong>{organizationInfo.helpline}</strong></span>
+              </a>
+              
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={toggleHighContrast}
+                  className="p-1 hover:text-marigold font-bold flex items-center gap-1 border border-field/30"
+                  aria-label="Toggle High Contrast Mode"
+                  aria-pressed={highContrast}
+                >
+                  <Eye className="w-3 h-3" aria-hidden="true" />
+                  <span className="sr-only">Toggle Contrast</span>
+                </button>
+                
+                <button
+                  onClick={() => setIsTopBarDismissed(true)}
+                  className="p-1.5 hover:text-marigold text-field font-bold ml-1 min-h-[36px] min-w-[36px] flex items-center justify-center"
+                  aria-label="Dismiss top notification bar"
+                  title="Close top bar"
+                >
+                  <X className="w-4 h-4" aria-hidden="true" />
+                </button>
+              </div>
+            </div>
 
-          <div className="flex items-center gap-3">
-            <button
-              onClick={toggleHighContrast}
-              className="flex items-center gap-1 text-xs font-mono font-bold hover:text-marigold px-2 py-1 border border-field/30 min-h-[44px]"
-              aria-label="Toggle High Contrast Mode"
-              aria-pressed={highContrast}
-            >
-              <Eye className="w-3.5 h-3.5" aria-hidden="true" />
-              <span>{highContrast ? 'Normal Contrast' : 'High Contrast'}</span>
-            </button>
-            <Link
-              href="/accessibility"
-              className="text-xs font-mono underline hover:text-marigold min-h-[44px] flex items-center px-1"
-            >
-              Accessibility Statement
-            </Link>
+            {/* Desktop / Tablet Layout (Sm & up) */}
+            <div className="hidden sm:flex items-center justify-between w-full">
+              <div className="flex items-center gap-4 font-mono">
+                <a
+                  href={`tel:${organizationInfo.helpline.replace(/\s+/g, '')}`}
+                  className="flex items-center gap-1.5 font-bold hover:text-marigold transition-colors py-1 focus-visible:outline-marigold"
+                  aria-label={`Call National Helpline: ${organizationInfo.helpline}`}
+                >
+                  <Phone className="w-4 h-4 text-marigold" aria-hidden="true" />
+                  <span>Helpline: <strong className="text-marigold font-black">{organizationInfo.helpline}</strong></span>
+                </a>
+                <span className="text-field/40" aria-hidden="true">|</span>
+                <span className="text-field/80">
+                  Registered Charitable Trust (Est. 14 Feb 2019)
+                </span>
+              </div>
+
+              <div className="flex items-center gap-3">
+                <button
+                  onClick={toggleHighContrast}
+                  className="flex items-center gap-1 text-xs font-mono font-bold hover:text-marigold px-2 py-0.5 border border-field/30"
+                  aria-label="Toggle High Contrast Mode"
+                  aria-pressed={highContrast}
+                >
+                  <Eye className="w-3.5 h-3.5" aria-hidden="true" />
+                  <span>{highContrast ? 'Normal Contrast' : 'High Contrast'}</span>
+                </button>
+                
+                <Link
+                  href="/accessibility"
+                  className="text-xs font-mono underline hover:text-marigold px-1"
+                >
+                  Accessibility Statement
+                </Link>
+
+                {/* Dismiss Close Button */}
+                <button
+                  onClick={() => setIsTopBarDismissed(true)}
+                  className="p-1.5 hover:text-marigold text-field/80 hover:text-field transition-colors ml-1 min-h-[36px] min-w-[36px] flex items-center justify-center"
+                  aria-label="Dismiss top notification bar"
+                  title="Close top bar"
+                >
+                  <X className="w-4 h-4" aria-hidden="true" />
+                </button>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
+      )}
 
       {/* Main Header Container */}
       <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
@@ -251,6 +301,25 @@ export const Header: React.FC = () => {
           aria-label="Mobile Navigation Menu"
           className="lg:hidden bg-field border-t-2 border-ink px-4 py-6 space-y-4 max-h-[85vh] overflow-y-auto"
         >
+          {/* Mobile Quick Accessibility Bar */}
+          <div className="flex items-center justify-between gap-2 p-2 bg-ink text-field border-2 border-ink font-mono text-xs mb-2">
+            <button
+              onClick={toggleHighContrast}
+              className="flex items-center gap-1 font-bold text-marigold px-2 py-1 border border-field/30"
+              aria-label="Toggle High Contrast Mode"
+            >
+              <Eye className="w-3.5 h-3.5" aria-hidden="true" />
+              <span>{highContrast ? 'Normal Contrast' : 'High Contrast'}</span>
+            </button>
+            <Link
+              href="/accessibility"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="underline text-field hover:text-marigold"
+            >
+              Accessibility Statement
+            </Link>
+          </div>
+
           <div className="space-y-2 border-b-2 border-ink pb-4">
             <Link
               href="/"
