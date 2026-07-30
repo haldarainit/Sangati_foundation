@@ -4,7 +4,11 @@ import React, { useState } from 'react';
 import { contactContent } from '@/content/contact';
 import { AlertCircle, CheckCircle2, Send } from 'lucide-react';
 
-export const ContactForm: React.FC = () => {
+interface ContactFormProps {
+  formType?: 'general' | 'volunteer' | 'partner';
+}
+
+export const ContactForm: React.FC<ContactFormProps> = ({ formType = 'general' }) => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
