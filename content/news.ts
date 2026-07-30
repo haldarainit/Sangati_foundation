@@ -8,7 +8,7 @@ export const newsList: NewsPosterItem[] = [
     category: 'Flagship Campaign',
     image: '/images/posters/poster-01.jpg',
     description:
-      'Official campaign flyer for the 6,000 km Delhi to Dhanushkodi ride driven entirely by persons with disability.',
+      'Official campaign flyer for the 6,500 km Delhi to Dhanushkodi ride driven entirely by persons with disability.',
   },
   {
     id: 'poster-02',

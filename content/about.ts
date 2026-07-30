@@ -28,7 +28,7 @@ export const aboutContent = {
     {
       name: 'Mr Sudhir Dhir',
       role: 'Founder & Trustee',
-      bio: 'Visionary leader behind Sangati Foundation and driver of the 6,000 km Sangati Yatra. Champion of independent mobility, accessible tourism, and disability rights across India.',
+      bio: 'Visionary leader behind Sangati Foundation and driver of the 6,500 km Sangati Yatra. Champion of independent mobility, accessible tourism, and disability rights across India.',
       image: '/images/stories/story-01.jpg',
     },
     {
@@ -50,7 +50,7 @@ export const aboutContent = {
     { year: 2021, event: 'COVID relief meals for 500+ daily; Project Pehchaan UDID drive; Sangati Star Awards.' },
     { year: 2022, event: 'Jodhpur Skill Centre opened; Bathri medical camp reached 500+ villagers.' },
     { year: 2023, event: '170 candidates assessed; 25 runners at Delhi Half-Marathon; World Book Fair booth.' },
-    { year: 2024, event: 'Hazrat Nizamuddin Station made accessible; Cancer camp; 6,000 km Sangati Yatra flagged off.' },
+    { year: 2024, event: 'Hazrat Nizamuddin Station made accessible; Cancer camp; 6,500 km Sangati Yatra flagged off.' },
     { year: 2025, event: 'Sangati Yatra completed on 3 January 2025 in New Delhi.' },
   ],
 };

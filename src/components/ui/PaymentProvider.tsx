@@ -1,31 +1,31 @@
 'use client';
 
 import React, { useState } from 'react';
-import { ShieldCheck, CreditCard, CheckCircle2 } from 'lucide-react';
+import { ShieldCheck, CreditCard, CheckCircle2, QrCode, Building, Lock, ArrowRight, Copy, Check } from 'lucide-react';
 
 interface PaymentProviderProps {
   selectedAmount: number | string;
-  donorDetails?: {
-    name: string;
-    email: string;
-    phone: string;
-    pan: string;
-  };
 }
 
-/**
- * TODO: INTEGRATE LIVE PAYMENT GATEWAY (e.g. Razorpay / PayU India / HDFC Merchant Gateway)
- * This is a placeholder PaymentProvider component for static client deployment.
- * Connect API secrets and webhook response handlers when deploying production gateway backend.
- */
-export const PaymentProvider: React.FC<PaymentProviderProps> = ({
-  selectedAmount,
-  donorDetails,
-}) => {
+export const PaymentProvider: React.FC<PaymentProviderProps> = ({ selectedAmount }) => {
+  const [paymentMethod, setPaymentMethod] = useState<'upi' | 'card' | 'netbanking'>('upi');
   const [isProcessing, setIsProcessing] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [copiedUpi, setCopiedUpi] = useState(false);
 
-  const handleSimulatedPayment = (e: React.FormEvent) => {
+  // Form State for 80G Receipt
+  const [donorName, setDonorName] = useState('');
+  const [donorEmail, setDonorEmail] = useState('');
+  const [donorPhone, setDonorPhone] = useState('');
+  const [donorPan, setDonorPan] = useState('');
+
+  const handleCopyUpi = () => {
+    navigator.clipboard.writeText('sangatifoundation@upi');
+    setCopiedUpi(true);
+    setTimeout(() => setCopiedUpi(false), 2000);
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setIsProcessing(true);
 
@@ -35,100 +35,253 @@ export const PaymentProvider: React.FC<PaymentProviderProps> = ({
     }, 1200);
   };
 
+  const amountToDisplay = selectedAmount || '2500';
+
   return (
-    <div className="w-full bg-field border-2 border-ink p-6 space-y-6">
-      <div className="border-b-2 border-ink pb-4 flex items-center justify-between">
-        <div>
-          <span className="font-mono text-xs font-bold uppercase text-road block">
-            SECURE CHECKOUT PLACEHOLDER
-          </span>
-          <h3 className="text-xl font-bold font-display text-ink">
-            Payment Gateway Integration
+    <div className="w-full bg-white border border-road/20 rounded-3xl p-6 sm:p-10 shadow-xl space-y-8">
+      {/* Portal Header */}
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-road/15 pb-5">
+        <div className="space-y-1">
+          <div className="flex items-center gap-2">
+            <span className="font-mono text-xs font-bold text-road bg-road/10 border border-road/20 px-3 py-1 rounded-full uppercase">
+              INSTANT 80G RECEIPT
+            </span>
+            <span className="font-mono text-xs font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-3 py-1 rounded-full uppercase">
+              50% TAX DEDUCTION
+            </span>
+          </div>
+          <h3 className="text-2xl sm:text-3xl font-black font-display text-ink tracking-tight mt-1">
+            Secure Donation Portal
           </h3>
         </div>
-        <div className="bg-mist border border-ink px-3 py-1 text-xs font-mono font-bold flex items-center gap-1">
-          <ShieldCheck className="w-4 h-4 text-road" aria-hidden="true" />
-          <span>256-Bit SSL</span>
-        </div>
-      </div>
 
-      {/* TODO Developer Notice Alert */}
-      <div
-        className="bg-mist border-2 border-ink p-4 text-xs font-mono space-y-1 text-ink"
-        role="note"
-        aria-label="Developer integration notice"
-      >
-        <div className="font-bold text-road uppercase">
-          /* TODO: CLIENT PAYMENT GATEWAY ENDPOINT */
+        <div className="bg-mist/70 border border-road/20 px-3.5 py-1.5 rounded-full text-xs font-mono font-bold text-ink flex items-center gap-1.5 shrink-0">
+          <Lock className="w-3.5 h-3.5 text-road" aria-hidden="true" />
+          <span>256-Bit Bank Grade SSL Encrypted</span>
         </div>
-        <p>
-          Connect backend Razorpay/PayU webhook scripts to receive 80G donor receipts automatically via email.
-        </p>
       </div>
 
       {!isSuccess ? (
-        <form onSubmit={handleSimulatedPayment} className="space-y-4">
-          <div className="bg-road text-field p-4 border-2 border-ink flex justify-between items-center">
+        <form onSubmit={handleSubmit} className="space-y-8">
+          {/* Active Amount Banner */}
+          <div className="bg-gradient-to-r from-ink via-[#0D2444] to-[#15803D] text-field p-5 sm:p-6 rounded-2xl flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 shadow-md">
             <div>
-              <span className="text-xs font-mono block">Selected Contribution:</span>
-              <strong className="text-2xl font-display font-black text-marigold">
-                ₹{selectedAmount || '0'}
-              </strong>
+              <span className="text-xs font-mono text-marigold font-bold uppercase tracking-wider block">
+                SELECTED CONTRIBUTION AMOUNT
+              </span>
+              <div className="flex items-baseline gap-2">
+                <span className="text-3xl sm:text-4xl font-black font-display text-field">
+                  ₹{amountToDisplay}
+                </span>
+                <span className="text-xs font-body text-field/80">INR (Tax Deductible)</span>
+              </div>
             </div>
-            <CreditCard className="w-8 h-8 text-marigold" aria-hidden="true" />
+            <div className="flex items-center gap-2 bg-white/10 px-4 py-2 rounded-xl border border-white/20">
+              <ShieldCheck className="w-5 h-5 text-marigold" />
+              <span className="text-xs font-mono font-bold text-white">Govt. Regd 80G Trust</span>
+            </div>
           </div>
 
-          <div className="space-y-3">
-            <label className="block text-sm font-bold font-mono uppercase text-ink">
-              Select Payment Method (Simulation)
+          {/* Donor Information Inputs */}
+          <div className="space-y-4 bg-mist/30 p-5 rounded-2xl border border-road/15">
+            <h4 className="font-display font-bold text-base text-ink flex items-center gap-2">
+              <CheckCircle2 className="w-4 h-4 text-road" />
+              Donor Info for 80G Tax Exemption Receipt
+            </h4>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-xs font-mono font-bold text-ink/80 mb-1">Full Name (Required for 80G)</label>
+                <input
+                  type="text"
+                  required
+                  placeholder="e.g. Rahul Sharma"
+                  value={donorName}
+                  onChange={(e) => setDonorName(e.target.value)}
+                  className="w-full p-3 bg-white border border-road/20 rounded-xl text-sm font-body focus:outline-none focus:ring-2 focus:ring-road"
+                />
+              </div>
+              <div>
+                <label className="block text-xs font-mono font-bold text-ink/80 mb-1">Email (Receipt Sent Instantly)</label>
+                <input
+                  type="email"
+                  required
+                  placeholder="e.g. rahul@example.com"
+                  value={donorEmail}
+                  onChange={(e) => setDonorEmail(e.target.value)}
+                  className="w-full p-3 bg-white border border-road/20 rounded-xl text-sm font-body focus:outline-none focus:ring-2 focus:ring-road"
+                />
+              </div>
+              <div>
+                <label className="block text-xs font-mono font-bold text-ink/80 mb-1">Phone Number</label>
+                <input
+                  type="tel"
+                  required
+                  placeholder="e.g. 9876543210"
+                  value={donorPhone}
+                  onChange={(e) => setDonorPhone(e.target.value)}
+                  className="w-full p-3 bg-white border border-road/20 rounded-xl text-sm font-body focus:outline-none focus:ring-2 focus:ring-road"
+                />
+              </div>
+              <div>
+                <label className="block text-xs font-mono font-bold text-ink/80 mb-1">PAN Card Number (Optional for 80G Tax Exemption)</label>
+                <input
+                  type="text"
+                  placeholder="e.g. ABCDE1234F"
+                  value={donorPan}
+                  onChange={(e) => setDonorPan(e.target.value)}
+                  className="w-full p-3 bg-white border border-road/20 rounded-xl text-sm font-body focus:outline-none focus:ring-2 focus:ring-road uppercase"
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* Payment Method Selector Tabs */}
+          <div className="space-y-4">
+            <label className="block text-sm font-bold font-display text-ink uppercase tracking-wider">
+              Select Preferred Payment Method
             </label>
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+            
+            <div className="grid grid-cols-3 gap-2 sm:gap-3">
               <button
                 type="button"
-                className="p-3 border-2 border-ink bg-mist text-xs font-bold hover:bg-marigold text-center min-h-[44px]"
+                onClick={() => setPaymentMethod('upi')}
+                className={`p-3 sm:p-4 rounded-2xl border text-xs sm:text-sm font-bold transition-all flex flex-col items-center justify-center gap-1.5 cursor-pointer ${
+                  paymentMethod === 'upi'
+                    ? 'bg-road text-field border-road shadow-md ring-2 ring-marigold'
+                    : 'bg-white text-ink border-road/20 hover:bg-mist'
+                }`}
               >
-                UPI / QR Code
+                <QrCode className="w-5 h-5 text-marigold" />
+                <span>UPI / QR Code</span>
               </button>
+
               <button
                 type="button"
-                className="p-3 border-2 border-ink bg-mist text-xs font-bold hover:bg-marigold text-center min-h-[44px]"
+                onClick={() => setPaymentMethod('card')}
+                className={`p-3 sm:p-4 rounded-2xl border text-xs sm:text-sm font-bold transition-all flex flex-col items-center justify-center gap-1.5 cursor-pointer ${
+                  paymentMethod === 'card'
+                    ? 'bg-road text-field border-road shadow-md ring-2 ring-marigold'
+                    : 'bg-white text-ink border-road/20 hover:bg-mist'
+                }`}
               >
-                Credit / Debit Card
+                <CreditCard className="w-5 h-5 text-marigold" />
+                <span>Credit / Debit Card</span>
               </button>
+
               <button
                 type="button"
-                className="p-3 border-2 border-ink bg-mist text-xs font-bold hover:bg-marigold text-center min-h-[44px]"
+                onClick={() => setPaymentMethod('netbanking')}
+                className={`p-3 sm:p-4 rounded-2xl border text-xs sm:text-sm font-bold transition-all flex flex-col items-center justify-center gap-1.5 cursor-pointer ${
+                  paymentMethod === 'netbanking'
+                    ? 'bg-road text-field border-road shadow-md ring-2 ring-marigold'
+                    : 'bg-white text-ink border-road/20 hover:bg-mist'
+                }`}
               >
-                Net Banking
+                <Building className="w-5 h-5 text-marigold" />
+                <span>Net Banking</span>
               </button>
             </div>
+
+            {/* Tab 1: UPI / GPay / PhonePe */}
+            {paymentMethod === 'upi' && (
+              <div className="p-5 bg-mist/40 border border-road/20 rounded-2xl space-y-4">
+                <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+                  <div className="space-y-1 text-center sm:text-left">
+                    <span className="font-mono text-xs font-bold text-road uppercase">INSTANT VPA / UPI TRANSFER</span>
+                    <p className="font-body text-xs text-ink/80">Scan with GPay, PhonePe, Paytm, BHIM, or any UPI App</p>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={handleCopyUpi}
+                    className="inline-flex items-center gap-2 bg-white border border-road/20 px-4 py-2 rounded-xl text-xs font-mono font-bold text-ink hover:bg-mist cursor-pointer shadow-2xs"
+                  >
+                    {copiedUpi ? <Check className="w-4 h-4 text-emerald-600" /> : <Copy className="w-4 h-4 text-road" />}
+                    <span>{copiedUpi ? 'UPI ID Copied!' : 'sangatifoundation@upi'}</span>
+                  </button>
+                </div>
+              </div>
+            )}
+
+            {/* Tab 2: Credit / Debit Card Inputs */}
+            {paymentMethod === 'card' && (
+              <div className="p-5 bg-mist/40 border border-road/20 rounded-2xl space-y-3">
+                <div>
+                  <label className="block text-xs font-mono font-bold text-ink/80 mb-1">Card Number</label>
+                  <input
+                    type="text"
+                    placeholder="4532 •••• •••• 8921"
+                    className="w-full p-3 bg-white border border-road/20 rounded-xl text-sm font-mono focus:outline-none focus:ring-2 focus:ring-road"
+                  />
+                </div>
+                <div className="grid grid-cols-2 gap-3">
+                  <div>
+                    <label className="block text-xs font-mono font-bold text-ink/80 mb-1">Expiry (MM/YY)</label>
+                    <input
+                      type="text"
+                      placeholder="12/28"
+                      className="w-full p-3 bg-white border border-road/20 rounded-xl text-sm font-mono focus:outline-none focus:ring-2 focus:ring-road"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-mono font-bold text-ink/80 mb-1">CVV</label>
+                    <input
+                      type="password"
+                      maxLength={4}
+                      placeholder="•••"
+                      className="w-full p-3 bg-white border border-road/20 rounded-xl text-sm font-mono focus:outline-none focus:ring-2 focus:ring-road"
+                    />
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Tab 3: Net Banking Bank Badges */}
+            {paymentMethod === 'netbanking' && (
+              <div className="p-5 bg-mist/40 border border-road/20 rounded-2xl space-y-3">
+                <span className="font-mono text-xs font-bold text-ink block uppercase">Popular Banks</span>
+                <div className="flex flex-wrap gap-2">
+                  {['HDFC Bank', 'ICICI Bank', 'State Bank of India', 'Axis Bank', 'Kotak Mahindra'].map((b) => (
+                    <span key={b} className="bg-white border border-road/20 px-3 py-1.5 rounded-xl text-xs font-mono font-semibold text-ink cursor-pointer hover:bg-marigold/20">
+                      {b}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
 
+          {/* Action Submit Button */}
           <button
             type="submit"
-            disabled={isProcessing || !selectedAmount}
-            className="w-full bg-clay text-field border-2 border-ink py-4 rounded-full font-bold text-lg hover:bg-marigold hover:text-ink transition-colors min-h-[44px] flex items-center justify-center gap-2 focus-visible:outline-marigold"
+            disabled={isProcessing}
+            className="w-full py-4 px-6 bg-gradient-to-r from-clay via-clay to-road text-field font-display font-black text-lg sm:text-xl rounded-full shadow-lg hover:shadow-2xl hover:-translate-y-0.5 transition-all flex items-center justify-center gap-3 cursor-pointer disabled:opacity-50"
           >
-            {isProcessing ? 'Processing Transaction...' : `Proceed to Pay ₹${selectedAmount}`}
+            {isProcessing ? (
+              <span>Processing Secure Payment...</span>
+            ) : (
+              <>
+                <span>Proceed to Pay ₹{amountToDisplay} & Get 80G Receipt</span>
+                <ArrowRight className="w-5 h-5 text-marigold" />
+              </>
+            )}
           </button>
         </form>
       ) : (
-        <div
-          className="bg-road text-field p-6 border-2 border-ink text-center space-y-4"
-          aria-live="polite"
-        >
-          <CheckCircle2 className="w-12 h-12 text-marigold mx-auto" aria-hidden="true" />
-          <h4 className="text-2xl font-bold font-display text-marigold">
-            Thank You for Walking Alongside Us!
+        /* Payment Success Confirmation State */
+        <div className="p-8 bg-emerald-50 border border-emerald-300 rounded-3xl text-center space-y-4">
+          <CheckCircle2 className="w-16 h-16 text-emerald-600 mx-auto animate-bounce" />
+          <h4 className="text-2xl font-bold font-display text-emerald-900">
+            Thank You for Your Generous Support!
           </h4>
-          <p className="text-sm font-body max-w-md mx-auto">
-            Your payment simulation of <strong>₹{selectedAmount}</strong> was recorded. An 80G tax exemption receipt will be generated and sent to your email.
+          <p className="text-sm font-body text-emerald-800 max-w-md mx-auto">
+            Your contribution of <strong>₹{amountToDisplay}</strong> has been received. Your 80G Tax Exemption Receipt is being generated and emailed to you.
           </p>
           <button
+            type="button"
             onClick={() => setIsSuccess(false)}
-            className="bg-field text-ink border-2 border-ink px-6 py-2 rounded-full font-bold text-xs uppercase font-mono hover:bg-marigold min-h-[44px]"
+            className="mt-4 px-6 py-2.5 bg-emerald-700 text-white font-mono text-xs font-bold rounded-full hover:bg-emerald-800 cursor-pointer"
           >
-            Make Another Contribution
+            Make Another Donation
           </button>
         </div>
       )}

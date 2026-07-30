@@ -36,6 +36,7 @@ export interface ProgramItem {
   highlights: string[];
   keyStats?: string[];
   partners?: string[];
+  gallery?: { id: string; title: string; src: string; caption: string }[];
 }
 
 export interface YatraStop {

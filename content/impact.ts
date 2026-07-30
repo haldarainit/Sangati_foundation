@@ -5,7 +5,7 @@ export const impactContent = {
   subtitle: 'Five years of breaking barriers, empowering lives, and driving change from 2019 to 2025.',
   bannerImage: '/images/hero/banner-impact.jpg',
   keyStats: [
-    { number: '6,000 km', label: 'Cross-Country Yatra Driven by Divyang Team' },
+    { number: '6,500 km', label: 'Cross-Country Yatra Driven by Divyang Team' },
     { number: '500+', label: 'Daily Meals Distributed in COVID Lockdowns' },
     { number: '300', label: 'Daily Rural OPD Patients at Bathri Care Center' },
     { number: '170+', label: 'Trainees Assessed in Tech & Skill Programs' },
@@ -76,13 +76,13 @@ export const impactContent = {
         'March 2024 Cancer Screening Camp tested 140 people (80% women) with mammography, Pap smear, X-ray, ENT.',
         'Launched Sangati Chess Club in July 2024 in partnership with Gems Modern Academy Dubai students.',
         'Free Health Camp in New Delhi on 10 August 2024.',
-        'Flagged off the historic 6,000 km Sangati Yatra on 14 December 2024 from Modern School, New Delhi by Padma Shri Dr Deepa Malik.',
+        'Flagged off the historic 6,500 km Sangati Yatra on 14 December 2024 from Modern School, New Delhi by Padma Shri Dr Deepa Malik.',
       ],
     },
     {
       year: 2025,
       title: 'Triumphant Yatra Completion',
-      summary: 'Sangati Yatra team concluded the 6,000 km ride in New Delhi on 3 January 2025.',
+      summary: 'Sangati Yatra team concluded the 6,500 km ride in New Delhi on 3 January 2025.',
       details: [
         'The team of five drivers with disability completed the longest cross-country ride ever driven by Divyang leaders.',
         'Crossed Telangana, Karnataka, and Tamil Nadu to reach Dhanushkodi before returning to Delhi.',

@@ -39,7 +39,7 @@ export const storiesList: StoryItem[] = [
   },
   {
     slug: 'sangati-yatra-2024-expedition',
-    title: '6,000 Kilometers Driven by Five Divyang Trailblazers',
+    title: '6,500 Kilometers Driven by Five Divyang Trailblazers',
     subtitle: 'From New Delhi to Dhanushkodi and back: proving distance is no barrier.',
     category: 'Mobility & Campaign',
     date: 'Jan 2025',
@@ -48,7 +48,7 @@ export const storiesList: StoryItem[] = [
     excerpt:
       'Founder Sudhir Dhir and four fellow drivers with disability traversed highways, mountain passes, and coastal routes in hand-controlled vehicles.',
     fullStory: [
-      'On 15 December 2024, five drivers with physical disabilities set off from Modern School in New Delhi on an unprecedented 6,000 km expedition across India.',
+      'On 15 December 2024, five drivers with physical disabilities set off from Modern School in New Delhi on an unprecedented 6,500 km expedition across India.',
       'Flagged off by Paralympic legend Padma Shri Dr Deepa Malik, the convoy pushed through rain, highway detours, and inaccessible roadside stops, driving all the way to Rameshwaram and Dhanushkodi at the southern border.',
       'Along the way, the team audited highway dhabas, petrol stations, and hotels, demonstrating that persons with disability can lead long-distance expeditions independently.',
       'On 3 January 2025, the convoy returned triumphantly to Delhi, establishing a historic milestone for adaptive driving in India.',

@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { organizationInfo } from '@/content/organization';
 import { Phone, Mail, MapPin, ExternalLink, ShieldCheck, Heart } from 'lucide-react';
 
@@ -43,13 +44,24 @@ export const Footer: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 py-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
         {/* Col 1: About & Mission */}
         <div className="space-y-4">
-          <div className="flex items-center gap-2">
-            <span className="text-2xl font-black font-display tracking-tight text-marigold">
-              SANGATI
-            </span>
-            <span className="text-xs font-mono bg-field text-ink px-2 py-0.5 font-bold">
-              FOUNDATION
-            </span>
+          <div className="flex items-center gap-3">
+            <div className="relative w-10 h-10 rounded-full overflow-hidden border border-marigold/60 bg-white shrink-0">
+              <Image
+                src="/sangati-logo.jpg"
+                alt="Sangati Foundation Logo"
+                fill
+                sizes="40px"
+                className="object-contain p-0.5"
+              />
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="text-2xl font-black font-display tracking-tight text-marigold">
+                SANGATI
+              </span>
+              <span className="text-xs font-mono bg-marigold text-ink px-2 py-0.5 font-bold rounded-full">
+                FOUNDATION
+              </span>
+            </div>
           </div>
           <p className="text-sm leading-relaxed text-field/90 font-sans">
             {organizationInfo.missionLine}
@@ -85,7 +97,7 @@ export const Footer: React.FC = () => {
             </li>
             <li>
               <Link href="/yatra" className="hover:text-marigold underline min-h-[44px] inline-flex items-center font-bold text-marigold">
-                Sangati Yatra 2024–25 (6,000 km Drive)
+                Sangati Yatra 2024–25 (6,500 km Drive)
               </Link>
             </li>
             <li>

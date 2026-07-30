@@ -3,15 +3,23 @@
 @tailwind utilities;
 
 :root {
-  --ink: #10231C;
-  --field: #F7F4EC;
-  --road: #1F6F5C;
-  --marigold: #E8A33D;
-  --clay: #C25436;
-  --mist: #DCE5E0;
+  --ink: #0B1E38;
+  --field: #FAF8F5;
+  --road: #15803D;
+  --marigold: #D4AF37;
+  --clay: #EA580C;
+  --purple: #7E22CE;
+  --mist: #EAEFE9;
   
-  --base-font-size: 18px;
-  --line-height-body: 1.65;
+  --base-font-size: 16px;
+  --line-height-body: 1.55;
+}
+
+@media (min-width: 640px) {
+  :root {
+    --base-font-size: 18px;
+    --line-height-body: 1.65;
+  }
 }
 
 /* High Contrast Override */
@@ -26,11 +34,11 @@
 
 /* Text Size Variations */
 [data-text-size="large"] {
-  font-size: 115%;
+  font-size: 110%;
 }
 
 [data-text-size="xlarge"] {
-  font-size: 130%;
+  font-size: 120%;
 }
 
 /* Reduced Motion Override */
@@ -57,55 +65,55 @@
 body {
   background-color: var(--field);
   color: var(--ink);
-  font-family: var(--font-source-serif), Georgia, serif;
   font-size: var(--base-font-size);
   line-height: var(--line-height-body);
-  margin: 0;
-  padding: 0;
-  overflow-x: hidden;
+  font-family: var(--font-source-serif), serif;
   -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
 }
 
-/* Focus Ring Non-Negotiable Specification */
-*:focus-visible {
-  outline: 2px solid var(--marigold) !important;
-  outline-offset: 2px !important;
+/* Custom Glassmorphic Card Utility */
+.glass-card {
+  background: rgba(250, 248, 245, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 
-/* Headings font */
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-bricolage), sans-serif;
-  font-weight: 700;
-  line-height: 1.2;
+/* Smooth Horizontal Scrollbar hiding for mobile swipe bars */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
-/* Eyebrows, stats & mono labels */
-.eyebrow, .stat-label, .mono-text {
-  font-family: var(--font-ibm-plex-mono), monospace;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+/* Subtle Pulse Keyframes */
+@keyframes pulseSubtle {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.85;
+  }
 }
 
-/* Screen reader utility */
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border-width: 0;
+.animate-pulse-subtle {
+  animation: pulseSubtle 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
-.focus\:not-sr-only:focus {
-  position: fixed;
-  width: auto;
-  height: auto;
-  padding: 0.75rem 1.25rem;
-  margin: 0;
-  overflow: visible;
-  clip: auto;
-  white-space: normal;
+/* Continuous Infinite Marquee Animation Keyframes */
+@keyframes marquee {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-33.333%, 0, 0);
+  }
 }
+
+.animate-marquee {
+  animation: marquee 30s linear infinite;
+  will-change: transform;
+}
+

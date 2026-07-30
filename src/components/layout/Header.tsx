@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { organizationInfo } from '@/content/organization';
 import { programsList } from '@/content/programs';
@@ -34,10 +35,10 @@ export const Header: React.FC = () => {
   }, []);
 
   return (
-    <header className="w-full bg-field border-b-2 border-ink sticky top-0 z-40">
+    <header className="w-full bg-field/95 backdrop-blur-md border-b border-road/20 sticky top-0 z-40 shadow-xs">
       {/* Top Banner: Compact Mobile & Dismissible */}
       {!isTopBarDismissed && (
-        <div className="bg-ink text-field px-3 py-1 text-xs border-b border-ink/30">
+        <div className="bg-ink text-field px-3 py-1.5 text-xs border-b border-ink/30">
           <div className="max-w-7xl mx-auto flex items-center justify-between gap-2">
             {/* Mobile Layout (Slim 1-line) */}
             <div className="flex items-center gap-3 font-mono sm:hidden w-full justify-between">
@@ -53,7 +54,7 @@ export const Header: React.FC = () => {
               <div className="flex items-center gap-2">
                 <button
                   onClick={toggleHighContrast}
-                  className="p-1 hover:text-marigold font-bold flex items-center gap-1 border border-field/30"
+                  className="p-1 hover:text-marigold font-bold flex items-center gap-1 border border-field/30 rounded-md"
                   aria-label="Toggle High Contrast Mode"
                   aria-pressed={highContrast}
                 >
@@ -92,7 +93,7 @@ export const Header: React.FC = () => {
               <div className="flex items-center gap-3">
                 <button
                   onClick={toggleHighContrast}
-                  className="flex items-center gap-1 text-xs font-mono font-bold hover:text-marigold px-2 py-0.5 border border-field/30"
+                  className="flex items-center gap-1 text-xs font-mono font-bold hover:text-marigold px-2.5 py-0.5 border border-field/30 rounded-full"
                   aria-label="Toggle High Contrast Mode"
                   aria-pressed={highContrast}
                 >
@@ -123,24 +124,37 @@ export const Header: React.FC = () => {
       )}
 
       {/* Main Header Container */}
-      <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
+      <div className="max-w-7xl mx-auto px-3 sm:px-4 py-2 sm:py-3 flex items-center justify-between gap-2 sm:gap-4">
         {/* Brand Logo & Tagline */}
         <Link
           href="/"
-          className="flex flex-col group min-h-[44px] justify-center focus-visible:outline-road"
+          className="flex items-center gap-2 sm:gap-3 group min-h-[44px] focus-visible:outline-road"
           aria-label="Sangati Foundation - Home Page"
         >
-          <div className="flex items-center gap-2">
-            <span className="text-2xl md:text-3xl font-black font-display tracking-tight text-road group-hover:text-ink transition-colors">
-              SANGATI
-            </span>
-            <span className="text-xs font-mono bg-marigold text-ink px-2 py-0.5 font-bold border border-ink">
-              FOUNDATION
+          <div className="relative w-9 h-9 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-full overflow-hidden border-2 border-marigold/50 shadow-sm shrink-0 bg-white">
+            <Image
+              src="/sangati-logo.jpg"
+              alt="Sangati Foundation Official Logo Emblem"
+              fill
+              priority
+              sizes="56px"
+              className="object-contain p-0.5"
+            />
+          </div>
+
+          <div className="flex flex-col justify-center">
+            <div className="flex items-center gap-1.5 sm:gap-2">
+              <span className="text-xl sm:text-2xl md:text-3xl font-black font-display tracking-tight text-ink group-hover:text-road transition-colors">
+                SANGATI
+              </span>
+              <span className="text-[9px] sm:text-[10px] md:text-xs font-mono bg-marigold text-ink px-2 py-0.5 font-extrabold rounded-full border border-marigold/40 shadow-2xs">
+                FOUNDATION
+              </span>
+            </div>
+            <span className="text-[10px] sm:text-xs font-mono text-ink/80 tracking-wide font-semibold line-clamp-1">
+              {organizationInfo.tagline}
             </span>
           </div>
-          <span className="text-xs font-mono text-ink/80 tracking-wide font-semibold">
-            {organizationInfo.tagline}
-          </span>
         </Link>
 
         {/* Desktop Navigation */}
@@ -199,7 +213,7 @@ export const Header: React.FC = () => {
                   </Link>
                 </div>
 
-                {programsList.map((prog) => (
+                {programsList.filter((prog) => prog.slug !== 'mobility').map((prog) => (
                   <Link
                     key={prog.slug}
                     href={`/programs/${prog.slug}`}
@@ -347,7 +361,7 @@ export const Header: React.FC = () => {
               <span className="block font-mono text-xs text-road font-bold uppercase">
                 Specific Programmes
               </span>
-              {programsList.map((prog) => (
+              {programsList.filter((prog) => prog.slug !== 'mobility').map((prog) => (
                 <Link
                   key={prog.slug}
                   href={`/programs/${prog.slug}`}

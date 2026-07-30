@@ -34,7 +34,7 @@ export const RouteLine: React.FC<RouteLineProps> = ({
   }
 
   return (
-    <div className={`w-full py-8 overflow-x-auto ${className}`} aria-label="Sangati Yatra 6,000 km Interactive Route Map">
+    <div className={`w-full py-8 overflow-x-auto ${className}`} aria-label="Sangati Yatra 6,500 km Interactive Route Map">
       <div className="min-w-[700px] relative px-6 py-10">
         {/* Connecting Marigold Line */}
         <div className="absolute top-1/2 left-10 right-10 h-1 bg-marigold -translate-y-1/2 z-0 border-t border-b border-ink/40"></div>

@@ -6,288 +6,284 @@ import { programsList } from '@/content/programs';
 import { newsList } from '@/content/news';
 import { StatCounter } from '@/components/ui/StatCounter';
 import { RouteLine } from '@/components/ui/RouteLine';
-import { Carousel } from '@/components/ui/Carousel';
+import { InfiniteMarqueeSlider } from '@/components/ui/InfiniteMarqueeSlider';
 import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
-import { ArrowRight, Heart, Shield, CheckCircle } from 'lucide-react';
+import { HeroVideoPlayer } from '@/components/ui/HeroVideoPlayer';
+import { ScrollReveal } from '@/components/ui/ScrollReveal';
+import { ScrollProgressBar } from '@/components/ui/ScrollProgressBar';
+import { ArrowRight, Heart, Shield, CheckCircle, Sparkles, Compass, Award } from 'lucide-react';
 
 export default function HomePage() {
   return (
-    <div className="space-y-16 pb-12">
-      {/* 1. HERO SECTION */}
-      <section className="relative w-full min-h-[560px] md:min-h-[640px] flex items-center justify-center bg-ink text-field overflow-hidden">
-        {/* Background Banner Image */}
-        <Image
-          src={homeContent.hero.bgImage}
-          alt="Sangati Foundation volunteers and persons with disability in an outdoor mobility campaign"
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover object-center opacity-40"
-        />
+    <div className="space-y-8 sm:space-y-14 pb-20 md:pb-16">
+      {/* Top Scroll Reading Progress Bar */}
+      <ScrollProgressBar />
 
-        {/* High-Contrast Overlay for 7:1 Text Legibility */}
-        <div className="absolute inset-0 bg-gradient-to-r from-ink/90 via-ink/80 to-ink/60"></div>
+      {/* 1. CRY.ORG STYLE HERO VIDEO BANNER AT TOP OF PAGE */}
+      <section className="relative w-full bg-field overflow-hidden">
+        {/* Full-Bleed Action Video Canvas at Top */}
+        <div className="max-w-7xl mx-auto sm:px-4 sm:pt-4">
+          <ScrollReveal variant="fade-down">
+            <HeroVideoPlayer src="/hero-video.mp4" variant="hero" />
+          </ScrollReveal>
+        </div>
 
-        <div className="relative z-10 max-w-5xl mx-auto px-4 py-16 text-center space-y-6">
-          <span className="inline-block font-mono text-xs md:text-sm font-bold bg-marigold text-ink px-3 py-1 border border-ink uppercase tracking-wider">
-            REGISTERED INDIAN CHARITABLE TRUST • EST. 14 FEB 2019
-          </span>
+        {/* Clean, Inspiring Writing & CTAs Directly Below Video */}
+        <div className="max-w-4xl mx-auto px-4 py-8 sm:py-12 text-center space-y-5">
+          <ScrollReveal variant="fade-up" delay={100}>
+            <span className="inline-flex items-center gap-1.5 sm:gap-2 font-mono text-[10px] sm:text-xs font-bold bg-marigold/20 text-ink border border-marigold/50 px-3.5 py-1 rounded-full uppercase tracking-wider shadow-2xs">
+              <Sparkles className="w-3.5 h-3.5 text-road shrink-0" />
+              <span>REGISTERED CHARITABLE TRUST • EST. 14 FEB 2019</span>
+            </span>
+          </ScrollReveal>
 
-          <h1 className="text-3xl sm:text-4xl md:text-6xl font-black font-display tracking-tight text-field leading-tight">
-            {homeContent.hero.headline}
-          </h1>
+          <ScrollReveal variant="fade-up" delay={200}>
+            <h1 className="text-2xl sm:text-4xl md:text-5xl font-black font-display tracking-tight text-ink leading-tight">
+              Accessibility. Mobility.{' '}
+              <span className="text-road bg-marigold/20 px-2 py-0.5 rounded-lg border border-marigold/30 inline-block mt-1">
+                Inclusivity. Visibility.
+              </span>
+            </h1>
+          </ScrollReveal>
 
-          <p className="text-lg md:text-xl font-body text-field/90 max-w-3xl mx-auto leading-relaxed">
-            {homeContent.hero.subheadline}
-          </p>
+          <ScrollReveal variant="fade-up" delay={300}>
+            <p className="text-sm sm:text-lg md:text-xl font-body text-ink/90 max-w-2xl mx-auto leading-relaxed font-normal">
+              {homeContent.hero.subheadline}
+            </p>
+          </ScrollReveal>
 
-          <div className="flex flex-wrap items-center justify-center gap-4 pt-4">
-            <Button href={homeContent.hero.primaryCtaLink} variant="road">
-              <span>{homeContent.hero.primaryCtaText}</span>
-              <ArrowRight className="w-5 h-5" aria-hidden="true" />
-            </Button>
+          <ScrollReveal variant="zoom-in" delay={400}>
+            <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 pt-3">
+              <Button
+                href="/donate"
+                variant="clay"
+                className="rounded-full shadow-lg hover:shadow-2xl hover:-translate-y-0.5 transition-all text-sm sm:text-base py-3 px-6 sm:px-8 border-2 border-clay"
+              >
+                <Heart className="w-4 h-4 sm:w-5 sm:h-5 fill-current text-marigold" aria-hidden="true" />
+                <span>Yes! I Want To Help (Donate 80G)</span>
+              </Button>
 
-            <Button href={homeContent.hero.secondaryCtaLink} variant="clay">
-              <Heart className="w-5 h-5 fill-current" aria-hidden="true" />
-              <span>{homeContent.hero.secondaryCtaText}</span>
-            </Button>
-          </div>
+              <Button
+                href="/programs"
+                variant="outline"
+                className="rounded-full shadow-sm hover:shadow-md transition-all text-sm sm:text-base py-3 px-6"
+              >
+                <span>See Our Work</span>
+                <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" aria-hidden="true" />
+              </Button>
+            </div>
+          </ScrollReveal>
         </div>
       </section>
 
-      {/* 2. STAT COUNTER BAND */}
-      <StatCounter stats={homeContent.stats} />
+      {/* 2. STAT COUNTER BAND WITH NGO AUTHENTICITY & DONATE CTA */}
+      <ScrollReveal variant="fade-up" delay={150}>
+        <StatCounter stats={homeContent.stats} />
+      </ScrollReveal>
 
-      {/* 3. WHO WE ARE SECTION */}
+      {/* 3. WHO WE ARE SECTION WITH HORIZONTAL SCROLL REVEAL */}
       <section className="max-w-7xl mx-auto px-4 py-4" aria-labelledby="who-we-are-heading">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Left Column Image */}
-          <div className="relative aspect-[4/3] w-full border-2 border-ink bg-mist overflow-hidden">
-            <Image
-              src={homeContent.whoWeAre.image}
-              alt="Sangati Foundation founders and community members gathering at a public accessibility initiative"
-              fill
-              sizes="(max-width: 1024px) 100vw, 50vw"
-              className="object-cover"
-            />
-          </div>
+          <ScrollReveal variant="fade-right" delay={200}>
+            <div className="relative aspect-[4/3] w-full rounded-3xl border border-road/20 bg-mist overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 group">
+              <Image
+                src={homeContent.whoWeAre.image}
+                alt="Sangati Foundation founders and community members gathering at a public accessibility initiative"
+                fill
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                className="object-cover group-hover:scale-105 transition-transform duration-700"
+              />
+            </div>
+          </ScrollReveal>
 
-          {/* Right Column Content */}
+          {/* Right Column Text */}
           <div className="space-y-6">
-            <span className="font-mono text-xs font-bold text-road bg-mist border border-ink px-2.5 py-1">
-              {homeContent.whoWeAre.eyebrow}
-            </span>
+            <ScrollReveal variant="fade-left" delay={150}>
+              <span className="font-mono text-xs font-bold text-road bg-road/10 border border-road/20 px-3 py-1 rounded-full inline-block uppercase tracking-wider">
+                {homeContent.whoWeAre.eyebrow}
+              </span>
+              <h2 id="who-we-are-heading" className="text-3xl sm:text-4xl font-bold font-display text-ink tracking-tight mt-2">
+                {homeContent.whoWeAre.title}
+              </h2>
+            </ScrollReveal>
 
-            <h2 id="who-we-are-heading" className="text-3xl md:text-4xl font-bold font-display text-ink">
-              {homeContent.whoWeAre.title}
-            </h2>
-
-            <div className="space-y-4 font-body text-base md:text-lg text-ink/90 leading-relaxed">
-              {homeContent.whoWeAre.paragraphs.map((p, idx) => (
-                <p key={idx}>{p}</p>
+            <div className="space-y-4 text-base md:text-lg font-body text-ink/90 leading-relaxed">
+              {homeContent.whoWeAre.paragraphs.map((para, idx) => (
+                <ScrollReveal key={idx} variant="fade-left" delay={200 + idx * 100}>
+                  <p>{para}</p>
+                </ScrollReveal>
               ))}
             </div>
 
-            <div className="pt-2">
-              <Button href={homeContent.whoWeAre.ctaLink} variant="road">
+            <ScrollReveal variant="fade-left" delay={450}>
+              <Button href={homeContent.whoWeAre.ctaLink} variant="outline" className="rounded-full">
                 <span>{homeContent.whoWeAre.ctaText}</span>
-                <ArrowRight className="w-5 h-5" aria-hidden="true" />
+                <ArrowRight className="w-4 h-4" aria-hidden="true" />
               </Button>
-            </div>
+            </ScrollReveal>
           </div>
         </div>
       </section>
 
-      {/* SECTION DIVIDER WITH ROUTE LINE MOTIF */}
+      {/* ROUTE LINE MOTIF */}
       <div className="max-w-7xl mx-auto px-4">
         <RouteLine />
       </div>
 
-      {/* 4. PROGRAMMES OVERVIEW GRID */}
-      <section className="max-w-7xl mx-auto px-4 py-4 space-y-8" aria-labelledby="programmes-heading">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b-2 border-ink pb-4">
-          <div>
-            <span className="font-mono text-xs font-bold text-road uppercase tracking-wider block">
-              OUR ACTION AREAS
-            </span>
-            <h2 id="programmes-heading" className="text-3xl md:text-4xl font-bold font-display text-ink">
-              Six Core Programmes
-            </h2>
-          </div>
-          <Link
-            href="/programs"
-            className="font-mono text-sm font-bold text-road hover:text-marigold underline min-h-[44px] flex items-center"
-          >
-            Explore Detailed Programmes →
-          </Link>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {programsList.map((program) => (
-            <article
-              key={program.slug}
-              className="border-2 border-ink bg-field flex flex-col justify-between group hover:border-road transition-colors"
-            >
-              <div className="space-y-4">
-                <div className="relative aspect-[16/10] w-full border-b-2 border-ink bg-mist overflow-hidden">
-                  <Image
-                    src={program.image}
-                    alt={`Photo representing Sangati Foundation's ${program.title} programme`}
-                    fill
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                    className="object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
-                </div>
-
-                <div className="p-6 space-y-3">
-                  <h3 className="text-2xl font-bold font-display text-ink group-hover:text-road transition-colors">
-                    {program.title}
-                  </h3>
-                  <p className="text-sm font-body text-ink/80 line-clamp-3 leading-relaxed">
-                    {program.summary}
-                  </p>
-                </div>
-              </div>
-
-              <div className="p-6 pt-0">
-                <Link
-                  href={`/programs/${program.slug}`}
-                  className="w-full bg-mist text-ink border-2 border-ink py-2.5 px-4 rounded-full font-bold font-mono text-xs uppercase hover:bg-road hover:text-field transition-colors flex items-center justify-between min-h-[44px]"
-                >
-                  <span>Read Full Story</span>
-                  <ArrowRight className="w-4 h-4" aria-hidden="true" />
-                </Link>
-              </div>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      {/* 5. YATRA FEATURE BAND */}
-      <section className="bg-road text-field border-y-2 border-ink py-16 px-4" aria-labelledby="yatra-feature-heading">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-          <div className="lg:col-span-7 space-y-6">
-            <span className="inline-block font-mono text-xs font-bold bg-marigold text-ink px-3 py-1 border border-ink">
-              {homeContent.yatraTeaser.eyebrow}
-            </span>
-
-            <h2 id="yatra-feature-heading" className="text-3xl md:text-5xl font-black font-display text-marigold leading-tight">
-              {homeContent.yatraTeaser.headline}
-            </h2>
-
-            <p className="text-base md:text-lg font-body text-field/90 leading-relaxed">
-              {homeContent.yatraTeaser.description}
-            </p>
-
-            <RouteLine />
-
-            <div className="pt-2">
-              <Button href={homeContent.yatraTeaser.ctaLink} variant="marigold">
-                <span>{homeContent.yatraTeaser.ctaText}</span>
-                <ArrowRight className="w-5 h-5 text-ink" aria-hidden="true" />
-              </Button>
+      {/* 4. SIX CORE PROGRAMMES SHOWCASE GRID */}
+      <section className="max-w-7xl mx-auto px-4 space-y-10" aria-labelledby="programmes-heading">
+        <ScrollReveal variant="fade-up">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b-2 border-ink pb-4">
+            <div>
+              <span className="font-mono text-xs font-bold text-road uppercase tracking-wider block">
+                ACTION AREAS & INITIATIVES
+              </span>
+              <h2 id="programmes-heading" className="text-3xl md:text-4xl font-bold font-display text-ink">
+                Our 6 Core Programmes
+              </h2>
             </div>
-          </div>
-
-          <div className="lg:col-span-5">
-            <div className="relative aspect-[4/3] w-full border-2 border-field bg-ink overflow-hidden">
-              <Image
-                src={homeContent.yatraTeaser.image}
-                alt="Sangati Yatra modified vehicles convoy driving on highway road"
-                fill
-                sizes="(max-width: 1024px) 100vw, 40vw"
-                className="object-cover"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 6. LATEST NEWS & POSTERS ARCHIVE PREVIEW */}
-      <section className="max-w-7xl mx-auto px-4 py-4 space-y-8" aria-labelledby="news-heading">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b-2 border-ink pb-4">
-          <div>
-            <span className="font-mono text-xs font-bold text-road uppercase tracking-wider block">
-              CAMPAIGNS & ANNOUNCEMENTS
-            </span>
-            <h2 id="news-heading" className="text-3xl md:text-4xl font-bold font-display text-ink">
-              Latest Posters & Events
-            </h2>
-          </div>
-          <Link
-            href="/news"
-            className="font-mono text-sm font-bold text-road hover:text-marigold underline min-h-[44px] flex items-center"
-          >
-            View Full News Archive →
-          </Link>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {newsList.slice(0, 3).map((item) => (
-            <article key={item.id} className="border-2 border-ink bg-mist p-4 space-y-4">
-              <div className="relative aspect-[3/4] w-full border-2 border-ink bg-field overflow-hidden">
-                <Image
-                  src={item.image}
-                  alt={item.title}
-                  fill
-                  sizes="(max-width: 768px) 100vw, 33vw"
-                  className="object-contain p-2"
-                />
-              </div>
-              <div className="space-y-1">
-                <span className="font-mono text-[11px] font-bold text-road bg-field border border-ink px-2 py-0.5 inline-block">
-                  {item.category} • {item.date}
-                </span>
-                <h3 className="text-lg font-bold font-display text-ink leading-snug">
-                  {item.title}
-                </h3>
-                <p className="text-xs font-body text-ink/80 line-clamp-2">
-                  {item.description}
-                </p>
-              </div>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      {/* 7. ACCESSIBLE PHOTO GALLERY CAROUSEL */}
-      <section className="max-w-7xl mx-auto px-4 py-4 space-y-6" aria-labelledby="gallery-heading">
-        <div className="border-b-2 border-ink pb-4">
-          <span className="font-mono text-xs font-bold text-road uppercase tracking-wider block">
-            WORK IN THE FIELD
-          </span>
-          <h2 id="gallery-heading" className="text-3xl md:text-4xl font-bold font-display text-ink">
-            Photo Gallery
-          </h2>
-        </div>
-
-        <Carousel slides={homeContent.gallery} ariaLabel="Sangati Foundation Recent Fieldwork Gallery" />
-      </section>
-
-      {/* 8. DONATE BAND */}
-      <section className="bg-clay text-field border-y-2 border-ink py-16 px-4" aria-labelledby="donate-band-heading">
-        <div className="max-w-4xl mx-auto text-center space-y-6">
-          <h2 id="donate-band-heading" className="text-3xl md:text-5xl font-black font-display text-field">
-            {homeContent.donateBand.title}
-          </h2>
-
-          <p className="text-lg md:text-xl font-body text-field/95 leading-relaxed">
-            {homeContent.donateBand.description}
-          </p>
-
-          <div className="pt-4">
-            <Button href={homeContent.donateBand.ctaLink} variant="marigold" className="text-lg px-8 py-4">
-              <Heart className="w-6 h-6 fill-current text-ink" aria-hidden="true" />
-              <span>{homeContent.donateBand.ctaText}</span>
+            <Button href="/programs" variant="outline" className="rounded-full">
+              <span>View All Programmes</span>
+              <ArrowRight className="w-4 h-4" aria-hidden="true" />
             </Button>
           </div>
+        </ScrollReveal>
 
-          <div className="pt-4 font-mono text-xs text-field/80 flex items-center justify-center gap-2">
-            <CheckCircle className="w-4 h-4 text-marigold" aria-hidden="true" />
-            <span>80G Tax Exemption Receipts issued for all contributions</span>
-          </div>
+        {/* 2x3 Grid of Programme Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {programsList.map((prog, index) => (
+            <ScrollReveal key={prog.slug} variant="fade-up" delay={index * 100}>
+              <Card
+                title={prog.title}
+                subtitle={`Programme 0${index + 1}`}
+                imageSrc={prog.image}
+                href={`/programs/${prog.slug}`}
+                ctaText="Read programme brief"
+                badgeText={prog.partners ? `Partners: ${prog.partners[0]}` : undefined}
+                className="h-full rounded-3xl overflow-hidden border border-road/20 shadow-sm hover:shadow-xl transition-all"
+              >
+                <p className="line-clamp-3 text-sm text-ink/80 leading-relaxed font-body">
+                  {prog.summary}
+                </p>
+              </Card>
+            </ScrollReveal>
+          ))}
         </div>
+      </section>
+
+      {/* 5. SANGATI YATRA CAMPAIGN HIGHLIGHT */}
+      <section className="max-w-7xl mx-auto px-4" aria-labelledby="yatra-highlight-heading">
+        <ScrollReveal variant="zoom-in">
+          <div className="bg-ink text-field rounded-3xl border border-road/30 overflow-hidden shadow-2xl">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 p-8 md:p-12 items-center">
+              <div className="lg:col-span-7 space-y-6">
+                <span className="font-mono text-xs font-bold bg-marigold text-ink px-3 py-1 rounded-full uppercase">
+                  {homeContent.yatraTeaser.eyebrow}
+                </span>
+                <h2 id="yatra-highlight-heading" className="text-3xl md:text-5xl font-black font-display tracking-tight text-field">
+                  {homeContent.yatraTeaser.title}
+                </h2>
+                <blockquote className="text-lg md:text-xl font-body text-marigold italic border-l-4 border-marigold pl-4 py-1">
+                  &quot;{homeContent.yatraTeaser.headline}&quot;
+                </blockquote>
+                <p className="text-base md:text-lg font-body text-field/90 leading-relaxed">
+                  {homeContent.yatraTeaser.description}
+                </p>
+                <Button href={homeContent.yatraTeaser.ctaLink} variant="marigold" className="px-8 py-3.5 rounded-full shadow-lg">
+                  <span>{homeContent.yatraTeaser.ctaText}</span>
+                  <ArrowRight className="w-5 h-5 text-ink" aria-hidden="true" />
+                </Button>
+              </div>
+
+              <div className="lg:col-span-5 relative aspect-[4/3] w-full rounded-2xl border border-field/20 bg-mist overflow-hidden shadow-xl">
+                <Image
+                  src={homeContent.yatraTeaser.image}
+                  alt="Sangati Yatra modified vehicles convoy driving across long-distance highway"
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 40vw"
+                  className="object-cover"
+                />
+              </div>
+            </div>
+          </div>
+        </ScrollReveal>
+      </section>
+
+      {/* 6. GALLERY CAROUSEL SECTION */}
+      <section className="max-w-7xl mx-auto px-4 space-y-8" aria-labelledby="gallery-heading">
+        <ScrollReveal variant="fade-up">
+          <div className="border-b-2 border-ink pb-4">
+            <span className="font-mono text-xs font-bold text-road uppercase tracking-wider block">
+              VISUAL CHRONICLE
+            </span>
+            <h2 id="gallery-heading" className="text-3xl md:text-4xl font-bold font-display text-ink">
+              Sangati Foundation in Action
+            </h2>
+          </div>
+        </ScrollReveal>
+
+        <ScrollReveal variant="zoom-in" delay={150}>
+          <InfiniteMarqueeSlider slides={homeContent.gallery} speedSeconds={32} />
+        </ScrollReveal>
+      </section>
+
+      {/* 7. LATEST NEWS & EVENTS GRID */}
+      <section className="max-w-7xl mx-auto px-4 space-y-8" aria-labelledby="news-heading">
+        <ScrollReveal variant="fade-up">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b-2 border-ink pb-4">
+            <div>
+              <span className="font-mono text-xs font-bold text-road uppercase tracking-wider block">
+                UPDATES & ANNOUNCEMENTS
+              </span>
+              <h2 id="news-heading" className="text-3xl md:text-4xl font-bold font-display text-ink">
+                Latest News & Events
+              </h2>
+            </div>
+            <Button href="/news" variant="outline" className="rounded-full">
+              <span>View All News & Posters</span>
+              <ArrowRight className="w-4 h-4" aria-hidden="true" />
+            </Button>
+          </div>
+        </ScrollReveal>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {newsList.slice(0, 3).map((item, index) => (
+            <ScrollReveal key={item.id} variant="fade-up" delay={index * 120}>
+              <Card
+                title={item.title}
+                subtitle={`${item.date} • ${item.category}`}
+                imageSrc={item.image}
+                href="/news"
+                ctaText="View event poster"
+                className="h-full rounded-3xl overflow-hidden border border-road/20 shadow-sm hover:shadow-xl transition-all"
+              >
+                <p className="line-clamp-3 text-sm text-ink/80 leading-relaxed font-body">
+                  {item.description}
+                </p>
+              </Card>
+            </ScrollReveal>
+          ))}
+        </div>
+      </section>
+
+      {/* 8. DONATE CTA BANNER */}
+      <section className="max-w-7xl mx-auto px-4">
+        <ScrollReveal variant="zoom-in">
+          <div className="bg-road text-field rounded-3xl border border-emerald-700 p-8 md:p-12 text-center space-y-6 shadow-2xl">
+            <h2 className="text-3xl md:text-4xl font-black font-display text-marigold">
+              Your Support Drives Inclusivity, Mobility & Dignity
+            </h2>
+            <p className="text-base md:text-lg font-body max-w-2xl mx-auto text-field/90">
+              Sangati Foundation is a registered charitable trust. All donations qualify for 80G tax deduction receipts.
+            </p>
+            <Button href="/donate" variant="marigold" className="px-8 py-4 text-lg rounded-full shadow-xl">
+              <Heart className="w-6 h-6 fill-current text-ink" aria-hidden="true" />
+              <span>Donate Now & Claim 80G Receipt</span>
+            </Button>
+          </div>
+        </ScrollReveal>
       </section>
     </div>
   );

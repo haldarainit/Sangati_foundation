@@ -1,8 +1,8 @@
 import { YatraCampaign } from './types';
 
 export const yatraCampaign: YatraCampaign = {
-  headline: '6,000 kilometres. Twenty days. Driven entirely by persons with disability.',
-  distance: '6,000 km',
+  headline: '6,500 kilometres. Twenty days. Driven entirely by persons with disability.',
+  distance: '6,500 km',
   duration: '20 Days',
   driverCount: 5,
   storyParagraphs: [
@@ -20,8 +20,8 @@ export const yatraCampaign: YatraCampaign = {
     date: '3 January 2025',
     location: 'New Delhi',
   },
-  heroImage: '/images/hero/hero-yatra.jpg',
-  bodyImage: '/images/featured/featured-02.jpg',
+  heroImage: '/images/yatra/yatra-flagoff-deepa-malik.jpg',
+  bodyImage: '/images/yatra/yatra-flagoff-deepa-malik.jpg',
   stops: [
     {
       id: 'stop-1',
@@ -72,7 +72,7 @@ export const yatraCampaign: YatraCampaign = {
       id: 'stop-6',
       name: 'Rameshwaram & Dhanushkodi',
       state: 'Tamil Nadu',
-      distanceKm: 3000,
+      distanceKm: 3250,
       date: '1-2 Jan 2025',
       description: 'Reached the southern tip at Sri Lanka border point — proving distance is no barrier.',
       isKeyStop: true,
@@ -81,7 +81,7 @@ export const yatraCampaign: YatraCampaign = {
       id: 'stop-7',
       name: 'Return Leg (Northbound)',
       state: 'Across Central India',
-      distanceKm: 4500,
+      distanceKm: 4800,
       date: '2-3 Jan 2025',
       description: 'Relay driving through highway stretches, gathering road accessibility audit data.',
       isKeyStop: false,
@@ -90,9 +90,9 @@ export const yatraCampaign: YatraCampaign = {
       id: 'stop-8',
       name: 'New Delhi (Homecoming)',
       state: 'Delhi NCR',
-      distanceKm: 6000,
+      distanceKm: 6500,
       date: '3 Jan 2025',
-      description: 'Triumphant return to a foggy Delhi winter, completing 6,000 km historic expedition.',
+      description: 'Triumphant return to a foggy Delhi winter, completing 6,500 km historic expedition.',
       isKeyStop: true,
     },
   ],

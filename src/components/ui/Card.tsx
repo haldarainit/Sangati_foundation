@@ -16,7 +16,7 @@ export const Card: React.FC<CardProps> = ({
   as: Component = 'div',
 }) => {
   const bgClasses = {
-    field: 'bg-field text-ink',
+    field: 'bg-white text-ink',
     mist: 'bg-mist text-ink',
     road: 'bg-road text-field',
     ink: 'bg-ink text-field',
@@ -24,7 +24,7 @@ export const Card: React.FC<CardProps> = ({
 
   return (
     <Component
-      className={`border-2 border-ink rounded-none p-6 ${bgClasses[bgColor]} ${className}`}
+      className={`border border-road/20 rounded-3xl p-4 sm:p-6 ${bgClasses[bgColor]} ${className}`}
     >
       {children}
     </Component>
