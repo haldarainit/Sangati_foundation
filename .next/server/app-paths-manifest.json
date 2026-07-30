@@ -1,7 +1,8 @@
 {
-  "/news/page": "app/news/page.js",
+  "/_not-found/page": "app/_not-found/page.js",
   "/stories/page": "app/stories/page.js",
-  "/page": "app/page.js",
   "/impact/page": "app/impact/page.js",
+  "/news/page": "app/news/page.js",
+  "/page": "app/page.js",
   "/donate/page": "app/donate/page.js"
 }

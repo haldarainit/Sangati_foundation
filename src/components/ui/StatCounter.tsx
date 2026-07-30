@@ -72,7 +72,7 @@ export const StatCounter: React.FC<StatCounterProps> = ({ stats }) => {
       case 'covid-fed':
         return <Heart className="w-5 h-5 text-clay" aria-hidden="true" />;
       case 'cancer-camp':
-        return <ShieldCheck className="w-5 h-5 text-purple" aria-hidden="true" />;
+        return <ShieldCheck className="w-5 h-5 text-road" aria-hidden="true" />;
       case 'opd-daily':
         return <Activity className="w-5 h-5 text-road" aria-hidden="true" />;
       default:
@@ -109,7 +109,7 @@ export const StatCounter: React.FC<StatCounterProps> = ({ stats }) => {
 
           <Link
             href="/donate"
-            className="shrink-0 bg-clay hover:bg-orange-600 text-field font-display font-bold text-sm px-5 py-2.5 rounded-full transition-all shadow-md hover:shadow-lg flex items-center gap-2 border border-clay"
+            className="shrink-0 bg-clay hover:bg-road text-field font-display font-bold text-sm px-5 py-2.5 rounded-full transition-all shadow-md hover:shadow-lg flex items-center gap-2 border border-clay"
           >
             <Heart className="w-4 h-4 fill-current text-marigold" aria-hidden="true" />
             <span>Donate (80G Receipt)</span>
@@ -159,3 +159,4 @@ export const StatCounter: React.FC<StatCounterProps> = ({ stats }) => {
     </section>
   );
 };
+

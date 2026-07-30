@@ -51,7 +51,7 @@ export default function ContactPage() {
       {/* HELPLINE BANNER */}
       <section className="max-w-7xl mx-auto px-4">
         <ScrollReveal variant="zoom-in">
-          <div className="bg-road text-field border border-emerald-700 rounded-3xl p-6 sm:p-10 md:p-12 flex flex-col md:flex-row items-center justify-between gap-6 shadow-2xl">
+          <div className="bg-road text-field border border-road/40 rounded-3xl p-6 sm:p-10 md:p-12 flex flex-col md:flex-row items-center justify-between gap-6 shadow-2xl">
             <div className="space-y-2 text-center md:text-left">
               <span className="font-mono text-xs font-bold text-marigold uppercase tracking-wider block">
                 NATIONAL TOLL-FREE DISABILITY HELPLINE
@@ -134,3 +134,4 @@ export default function ContactPage() {
     </div>
   );
 }
+

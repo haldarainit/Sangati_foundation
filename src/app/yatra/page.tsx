@@ -140,7 +140,7 @@ export default function YatraPage() {
       {/* 4. DONATE CTA */}
       <section className="max-w-7xl mx-auto px-4">
         <ScrollReveal variant="zoom-in">
-          <div className="bg-road text-field rounded-3xl border border-emerald-700 p-8 md:p-12 text-center space-y-6 shadow-2xl">
+          <div className="bg-road text-field rounded-3xl border border-road/40 p-8 md:p-12 text-center space-y-6 shadow-2xl">
             <h2 className="text-3xl md:text-4xl font-black font-display text-marigold">
               Fuel the Next Sangati Yatra Drive
             </h2>
@@ -157,3 +157,4 @@ export default function YatraPage() {
     </div>
   );
 }
+

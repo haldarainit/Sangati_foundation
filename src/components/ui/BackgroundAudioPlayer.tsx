@@ -175,7 +175,7 @@ export const BackgroundAudioPlayer: React.FC = () => {
         {/* Play/Pause Button */}
         <button
           onClick={togglePlay}
-          className="p-2 bg-marigold hover:bg-yellow-400 text-ink rounded-full transition-all shadow-md cursor-pointer border border-ink"
+          className="p-2 bg-marigold hover:bg-clay text-field rounded-full transition-all shadow-md cursor-pointer border border-ink"
           aria-label={isPlaying ? 'Pause background piano music' : 'Play encouraging background piano music'}
           title={isPlaying ? 'Pause Piano Music' : 'Play Piano Music'}
         >
@@ -186,7 +186,7 @@ export const BackgroundAudioPlayer: React.FC = () => {
         {isPlaying && (
           <button
             onClick={toggleMute}
-            className="p-2 bg-road hover:bg-emerald-600 text-field rounded-full transition-all shadow-md cursor-pointer border border-field/30"
+            className="p-2 bg-road hover:bg-ink text-field rounded-full transition-all shadow-md cursor-pointer border border-field/30"
             aria-label={isMuted ? 'Unmute music' : 'Mute music'}
             title={isMuted ? 'Unmute' : 'Mute'}
           >
@@ -197,3 +197,4 @@ export const BackgroundAudioPlayer: React.FC = () => {
     </div>
   );
 };
+

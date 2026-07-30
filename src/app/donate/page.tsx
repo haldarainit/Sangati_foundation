@@ -208,7 +208,7 @@ export default function DonatePage() {
                   className="p-2 bg-white border border-road/20 rounded-xl hover:bg-mist cursor-pointer"
                   title="Copy Account Number"
                 >
-                  {copiedField === 'acc' ? <Check className="w-4 h-4 text-emerald-600" /> : <Copy className="w-4 h-4 text-road" />}
+                  {copiedField === 'acc' ? <Check className="w-4 h-4 text-road" /> : <Copy className="w-4 h-4 text-road" />}
                 </button>
               </div>
 
@@ -223,7 +223,7 @@ export default function DonatePage() {
                   className="p-2 bg-white border border-road/20 rounded-xl hover:bg-mist cursor-pointer"
                   title="Copy IFSC Code"
                 >
-                  {copiedField === 'ifsc' ? <Check className="w-4 h-4 text-emerald-600" /> : <Copy className="w-4 h-4 text-road" />}
+                  {copiedField === 'ifsc' ? <Check className="w-4 h-4 text-road" /> : <Copy className="w-4 h-4 text-road" />}
                 </button>
               </div>
             </div>

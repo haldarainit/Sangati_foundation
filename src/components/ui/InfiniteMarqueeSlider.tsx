@@ -99,3 +99,4 @@ export const InfiniteMarqueeSlider: React.FC<InfiniteMarqueeSliderProps> = ({
     </div>
   );
 };
+

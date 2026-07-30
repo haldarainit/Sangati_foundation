@@ -8,13 +8,12 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        ink: 'var(--ink, #0B1E38)',
-        field: 'var(--field, #FAF8F5)',
-        road: 'var(--road, #15803D)',
-        marigold: 'var(--marigold, #D4AF37)',
+        ink: 'var(--ink, #0B2248)',
+        field: 'var(--field, #F8FAFF)',
+        road: 'var(--road, #16A34A)',
+        marigold: 'var(--marigold, #F97316)',
         clay: 'var(--clay, #EA580C)',
-        purple: 'var(--purple, #7E22CE)',
-        mist: 'var(--mist, #EAEFE9)',
+        mist: 'var(--mist, #EEF2FF)',
       },
       fontFamily: {
         display: ['var(--font-bricolage)', 'sans-serif'],

@@ -113,3 +113,4 @@ export const HeroVideoPlayer: React.FC<HeroVideoPlayerProps> = ({
     </div>
   );
 };
+

@@ -46,7 +46,7 @@ export const PaymentProvider: React.FC<PaymentProviderProps> = ({ selectedAmount
             <span className="font-mono text-xs font-bold text-road bg-road/10 border border-road/20 px-3 py-1 rounded-full uppercase">
               INSTANT 80G RECEIPT
             </span>
-            <span className="font-mono text-xs font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-3 py-1 rounded-full uppercase">
+            <span className="font-mono text-xs font-bold text-road bg-road/10 border border-road/20 px-3 py-1 rounded-full uppercase">
               50% TAX DEDUCTION
             </span>
           </div>
@@ -195,7 +195,7 @@ export const PaymentProvider: React.FC<PaymentProviderProps> = ({ selectedAmount
                     onClick={handleCopyUpi}
                     className="inline-flex items-center gap-2 bg-white border border-road/20 px-4 py-2 rounded-xl text-xs font-mono font-bold text-ink hover:bg-mist cursor-pointer shadow-2xs"
                   >
-                    {copiedUpi ? <Check className="w-4 h-4 text-emerald-600" /> : <Copy className="w-4 h-4 text-road" />}
+                    {copiedUpi ? <Check className="w-4 h-4 text-road" /> : <Copy className="w-4 h-4 text-road" />}
                     <span>{copiedUpi ? 'UPI ID Copied!' : 'sangatifoundation@upi'}</span>
                   </button>
                 </div>
@@ -241,7 +241,7 @@ export const PaymentProvider: React.FC<PaymentProviderProps> = ({ selectedAmount
                 <span className="font-mono text-xs font-bold text-ink block uppercase">Popular Banks</span>
                 <div className="flex flex-wrap gap-2">
                   {['HDFC Bank', 'ICICI Bank', 'State Bank of India', 'Axis Bank', 'Kotak Mahindra'].map((b) => (
-                    <span key={b} className="bg-white border border-road/20 px-3 py-1.5 rounded-xl text-xs font-mono font-semibold text-ink cursor-pointer hover:bg-marigold/20">
+                    <span key={b} className="bg-white border border-road/20 px-3 py-1.5 rounded-xl text-xs font-mono font-semibold text-ink cursor-pointer hover:bg-mist/60">
                       {b}
                     </span>
                   ))}
@@ -268,18 +268,18 @@ export const PaymentProvider: React.FC<PaymentProviderProps> = ({ selectedAmount
         </form>
       ) : (
         /* Payment Success Confirmation State */
-        <div className="p-8 bg-emerald-50 border border-emerald-300 rounded-3xl text-center space-y-4">
-          <CheckCircle2 className="w-16 h-16 text-emerald-600 mx-auto animate-bounce" />
-          <h4 className="text-2xl font-bold font-display text-emerald-900">
+        <div className="p-8 bg-mist border border-road/30 rounded-3xl text-center space-y-4">
+          <CheckCircle2 className="w-16 h-16 text-road mx-auto animate-bounce" />
+          <h4 className="text-2xl font-bold font-display text-ink">
             Thank You for Your Generous Support!
           </h4>
-          <p className="text-sm font-body text-emerald-800 max-w-md mx-auto">
+          <p className="text-sm font-body text-ink/80 max-w-md mx-auto">
             Your contribution of <strong>₹{amountToDisplay}</strong> has been received. Your 80G Tax Exemption Receipt is being generated and emailed to you.
           </p>
           <button
             type="button"
             onClick={() => setIsSuccess(false)}
-            className="mt-4 px-6 py-2.5 bg-emerald-700 text-white font-mono text-xs font-bold rounded-full hover:bg-emerald-800 cursor-pointer"
+            className="mt-4 px-6 py-2.5 bg-road text-field font-mono text-xs font-bold rounded-full hover:bg-ink cursor-pointer"
           >
             Make Another Donation
           </button>
@@ -288,3 +288,4 @@ export const PaymentProvider: React.FC<PaymentProviderProps> = ({ selectedAmount
     </div>
   );
 };
+

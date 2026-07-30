@@ -3,13 +3,12 @@
 @tailwind utilities;
 
 :root {
-  --ink: #0B1E38;
-  --field: #FAF8F5;
-  --road: #15803D;
-  --marigold: #D4AF37;
+  --ink: #0B2248;
+  --field: #F8FAFF;
+  --road: #16A34A;
+  --marigold: #F97316;
   --clay: #EA580C;
-  --purple: #7E22CE;
-  --mist: #EAEFE9;
+  --mist: #EEF2FF;
   
   --base-font-size: 16px;
   --line-height-body: 1.55;
@@ -25,11 +24,11 @@
 /* High Contrast Override */
 [data-high-contrast="true"] {
   --ink: #FFFFFF;
-  --field: #0A0F0D;
-  --road: #3DE8B0;
-  --marigold: #FFD700;
-  --clay: #FF6B4A;
-  --mist: #1E2D27;
+  --field: #0A0F1A;
+  --road: #22C55E;
+  --marigold: #FB923C;
+  --clay: #F97316;
+  --mist: #1E2A40;
 }
 
 /* Text Size Variations */

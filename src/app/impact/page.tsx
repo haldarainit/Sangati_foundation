@@ -110,7 +110,7 @@ export default function ImpactPage() {
       {/* SANGATI STAR AWARDS FEATURE BLOCK */}
       <section className="max-w-5xl mx-auto px-4">
         <ScrollReveal variant="zoom-in">
-          <div className="bg-road text-field rounded-3xl p-8 md:p-12 space-y-6 shadow-2xl border border-emerald-700">
+          <div className="bg-road text-field rounded-3xl p-8 md:p-12 space-y-6 shadow-2xl border border-road/40">
             <div className="flex items-center gap-3">
               <div className="p-3 bg-marigold/20 rounded-2xl border border-marigold/40">
                 <Award className="w-8 h-8 text-marigold" aria-hidden="true" />
@@ -133,3 +133,4 @@ export default function ImpactPage() {
     </div>
   );
 }
+

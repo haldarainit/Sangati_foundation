@@ -224,3 +224,4 @@ export const ContactForm: React.FC<ContactFormProps> = ({ formType = 'general' }
     </form>
   );
 };
+

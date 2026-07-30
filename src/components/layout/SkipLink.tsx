@@ -12,3 +12,4 @@ export const SkipLink: React.FC = () => {
     </a>
   );
 };
+

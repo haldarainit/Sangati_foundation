@@ -28,10 +28,10 @@ export const Button: React.FC<ButtonProps> = ({
     'inline-flex items-center justify-center gap-2 px-6 py-3 min-h-[44px] min-w-[44px] rounded-full border-2 border-ink font-display font-bold text-base transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-marigold cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed';
 
   const variants = {
-    road: 'bg-road text-field hover:bg-marigold hover:text-ink',
-    clay: 'bg-clay text-field hover:bg-marigold hover:text-ink',
-    marigold: 'bg-marigold text-ink hover:bg-road hover:text-field',
-    outline: 'bg-field text-ink hover:bg-mist',
+    road: 'bg-road text-field hover:bg-clay hover:text-field hover:border-clay',
+    clay: 'bg-clay text-field hover:bg-road hover:text-field hover:border-road',
+    marigold: 'bg-marigold text-field hover:bg-road hover:text-field hover:border-road',
+    outline: 'bg-field text-ink hover:bg-mist border-ink',
   };
 
   const combinedClasses = `${baseClasses} ${variants[variant]} ${className}`;
@@ -56,3 +56,4 @@ export const Button: React.FC<ButtonProps> = ({
     </button>
   );
 };
+
