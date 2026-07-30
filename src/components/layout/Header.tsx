@@ -131,29 +131,15 @@ export const Header: React.FC = () => {
           className="flex items-center gap-2 sm:gap-3 group min-h-[44px] focus-visible:outline-road"
           aria-label="Sangati Foundation - Home Page"
         >
-          <div className="relative w-9 h-9 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-full overflow-hidden border-2 border-marigold/50 shadow-sm shrink-0 bg-white">
+          <div className="relative w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 rounded-full overflow-hidden border-2 border-marigold/60 shadow-md shrink-0 bg-white hover:scale-105 transition-transform duration-200">
             <Image
               src="/sangati-logo.jpg"
-              alt="Sangati Foundation Official Logo Emblem"
+              alt="Sangati Foundation Official Logo"
               fill
               priority
-              sizes="56px"
+              sizes="80px"
               className="object-contain p-0.5"
             />
-          </div>
-
-          <div className="flex flex-col justify-center">
-            <div className="flex items-center gap-1.5 sm:gap-2">
-              <span className="text-xl sm:text-2xl md:text-3xl font-black font-display tracking-tight text-ink group-hover:text-road transition-colors">
-                SANGATI
-              </span>
-              <span className="text-[9px] sm:text-[10px] md:text-xs font-mono bg-marigold text-ink px-2 py-0.5 font-extrabold rounded-full border border-marigold/40 shadow-2xs">
-                FOUNDATION
-              </span>
-            </div>
-            <span className="text-[10px] sm:text-xs font-mono text-ink/80 tracking-wide font-semibold line-clamp-1">
-              {organizationInfo.tagline}
-            </span>
           </div>
         </Link>
 
