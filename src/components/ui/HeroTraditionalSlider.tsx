@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ChevronLeft, ChevronRight, Heart, ArrowRight, Sparkles } from 'lucide-react';
+import { Heart } from 'lucide-react';
 import { useAccessibility } from '../context/AccessibilityContext';
 
 export interface HeroSlideItem {
@@ -83,7 +83,6 @@ const HERO_SLIDES: HeroSlideItem[] = [
 export const HeroTraditionalSlider: React.FC = () => {
   const { reduceMotion } = useAccessibility();
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   const touchStartX = useRef<number | null>(null);
 
   const nextSlide = () => {
@@ -110,22 +109,22 @@ export const HeroTraditionalSlider: React.FC = () => {
     const touchEndX = e.changedTouches[0].clientX;
     const diff = touchStartX.current - touchEndX;
 
-    if (Math.abs(diff) > 40) {
+    if (Math.abs(diff) > 30) {
       if (diff > 0) nextSlide();
       else prevSlide();
     }
     touchStartX.current = null;
   };
 
-  // Auto-play timer
+  // Guaranteed 2-Second Automatic Slide Interval
   useEffect(() => {
-    if (!isAutoPlaying || reduceMotion) return;
+    if (reduceMotion) return;
     const timer = setInterval(() => {
-      nextSlide();
-    }, 5000);
+      setCurrentIndex((prev) => (prev + 1) % HERO_SLIDES.length);
+    }, 2000); // Fast 2-second interval
 
     return () => clearInterval(timer);
-  }, [isAutoPlaying, reduceMotion, currentIndex]);
+  }, [reduceMotion]);
 
   const currentSlide = HERO_SLIDES[currentIndex];
 
@@ -135,19 +134,17 @@ export const HeroTraditionalSlider: React.FC = () => {
       tabIndex={0}
       role="region"
       aria-label="Sangati Foundation Programmes Full-Bleed Hero Slider"
-      className="relative w-full h-[82vh] min-h-[540px] max-h-[720px] bg-ink overflow-hidden focus:outline-none group"
-      onMouseEnter={() => setIsAutoPlaying(false)}
-      onMouseLeave={() => setIsAutoPlaying(true)}
+      className="relative w-full h-[75vh] min-h-[460px] max-h-[680px] bg-ink overflow-hidden focus:outline-none select-none"
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
     >
-      {/* Background Images Slider with Smooth Transitions */}
+      {/* Background Images Slider with Zoom-In Animation */}
       {HERO_SLIDES.map((slide, idx) => {
         const isActive = idx === currentIndex;
         return (
           <div
             key={slide.id}
-            className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
+            className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${
               isActive ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'
             }`}
           >
@@ -157,75 +154,38 @@ export const HeroTraditionalSlider: React.FC = () => {
               fill
               priority={idx === 0}
               sizes="100vw"
-              className={`object-cover object-center transition-transform duration-[7000ms] ${
-                isActive ? 'scale-105' : 'scale-100'
+              className={`object-cover object-center transition-transform duration-[2000ms] ease-out ${
+                isActive ? 'scale-115' : 'scale-100'
               }`}
             />
-            {/* Cinematic Gradient Overlays for High Legibility */}
-            <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/50 to-black/30" />
-            <div className="absolute inset-0 bg-gradient-to-r from-ink/90 via-ink/40 to-transparent md:w-3/4" />
+            {/* Dark Vignette Overlay for High Legibility */}
+            <div className="absolute inset-0 bg-gradient-to-t from-ink/95 via-ink/50 to-black/40" />
           </div>
         );
       })}
 
-      {/* Hero Overlay Content Container */}
-      <div className="relative z-20 h-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col justify-end pb-14 sm:pb-16 md:pb-20">
-        <div className="max-w-2xl space-y-3 sm:space-y-4 animate-fade-up">
-          {/* Eyebrow Category Pill */}
-          <div className="inline-flex items-center gap-2 bg-road/90 text-field border border-road px-3.5 py-1 rounded-full text-xs font-mono font-bold tracking-wider uppercase shadow-md backdrop-blur-md">
-            <Sparkles className="w-3.5 h-3.5 text-field" />
-            <span>{currentSlide.category}</span>
-          </div>
-
+      {/* Hero Overlay Content Container: Title & Donate Button with Entry Animation */}
+      <div className="relative z-20 h-full max-w-7xl mx-auto px-6 sm:px-8 flex flex-col justify-end pb-12 sm:pb-16 items-center text-center">
+        <div key={currentSlide.id} className="max-w-3xl space-y-5 animate-fade-up">
           {/* Main Slide Title */}
-          <h1 className="text-3xl sm:text-5xl md:text-6xl font-black font-display tracking-tight text-white leading-[1.1] drop-shadow-lg">
+          <h1 className="text-3xl sm:text-5xl md:text-6xl font-black font-display tracking-tight text-white leading-[1.15] drop-shadow-xl px-2 transition-all transform">
             {currentSlide.title}
           </h1>
 
-          {/* Slide Subtitle Description */}
-          <p className="text-sm sm:text-lg font-body text-white/90 line-clamp-3 leading-relaxed drop-shadow">
-            {currentSlide.subtitle}
-          </p>
-
-          {/* Action CTA Buttons */}
-          <div className="flex flex-wrap items-center gap-3 pt-2 sm:pt-4">
-            <Link
-              href={currentSlide.ctaLink}
-              className="bg-road text-field hover:bg-clay font-display font-bold text-sm sm:text-base py-3 px-6 sm:px-8 rounded-full transition-all duration-300 flex items-center gap-2 border-2 border-road shadow-xl hover:scale-105 min-h-[48px]"
-            >
-              <span>{currentSlide.ctaText}</span>
-              <ArrowRight className="w-5 h-5" />
-            </Link>
-
+          {/* Primary Action CTA: Donate (80G Receipt) */}
+          <div className="pt-2 flex justify-center">
             <Link
               href="/donate"
-              className="bg-clay text-field hover:bg-road font-display font-bold text-sm sm:text-base py-3 px-6 sm:px-8 rounded-full transition-all duration-300 flex items-center gap-2 border-2 border-clay shadow-xl hover:scale-105 min-h-[48px]"
+              className="bg-clay text-field hover:bg-road font-display font-black text-base sm:text-lg py-3.5 px-8 sm:px-10 rounded-full transition-all duration-300 flex items-center justify-center gap-2.5 border-2 border-clay shadow-2xl hover:scale-105 min-h-[50px]"
             >
-              <Heart className="w-5 h-5 fill-current text-white" />
-              <span>Donate (80G Receipt)</span>
+              <Heart className="w-5 h-5 sm:w-6 sm:h-6 fill-current text-white shrink-0" />
+              <span>Donate Now (80G Receipt)</span>
             </Link>
           </div>
         </div>
       </div>
 
-      {/* Floating Navigation Flip Arrows */}
-      <button
-        onClick={prevSlide}
-        aria-label="Previous Slide"
-        className="absolute left-3 top-1/2 -translate-y-1/2 z-30 bg-black/40 hover:bg-black/80 text-white border border-white/30 p-3 rounded-full backdrop-blur-md transition-all shadow-xl hover:scale-110 min-h-[44px] min-w-[44px] flex items-center justify-center"
-      >
-        <ChevronLeft className="w-6 h-6" />
-      </button>
-
-      <button
-        onClick={nextSlide}
-        aria-label="Next Slide"
-        className="absolute right-3 top-1/2 -translate-y-1/2 z-30 bg-black/40 hover:bg-black/80 text-white border border-white/30 p-3 rounded-full backdrop-blur-md transition-all shadow-xl hover:scale-110 min-h-[44px] min-w-[44px] flex items-center justify-center"
-      >
-        <ChevronRight className="w-6 h-6" />
-      </button>
-
-      {/* Bottom Horizontal Slide Indicator Dots (Just like reference image) */}
+      {/* Bottom Horizontal Slide Indicator Dots */}
       <div className="absolute bottom-4 inset-x-0 z-30 flex items-center justify-center gap-2 sm:gap-2.5">
         {HERO_SLIDES.map((slide, idx) => {
           const isActive = idx === currentIndex;
