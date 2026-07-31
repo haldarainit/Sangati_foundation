@@ -6,6 +6,7 @@ import { AccessibilityProvider } from '@/components/context/AccessibilityContext
 import { SkipLink } from '@/components/layout/SkipLink';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
+import { ScrollProgressBar } from '@/components/ui/ScrollProgressBar';
 import { MobileQuickActions } from '@/components/ui/MobileQuickActions';
 import { organizationInfo } from '@/content/organization';
 
