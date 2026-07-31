@@ -8,7 +8,7 @@ export const storiesList: StoryItem[] = [
     category: 'Literature & Arts',
     date: '2022',
     author: 'Seema (Nehal’s Mother)',
-    image: '/images/stories/story-01.jpg',
+    image: '/images/skills/skill-cert-ceremony.png',
     excerpt:
       'Nehal is an artist and working woman on the autism spectrum. Her mother Seema shares the triumphs and struggles of nurturing an independent neurodivergent individual.',
     fullStory: [
@@ -26,7 +26,7 @@ export const storiesList: StoryItem[] = [
     category: 'Accessibility',
     date: '2024',
     author: 'Sangati Accessibility Team',
-    image: '/images/stories/story-02.jpg',
+    image: '/images/accessibility/accessibility-inauguration-ceremony.jpg',
     excerpt:
       'In partnership with Yatra and Anuprayaas, Sangati redesigned navigation, ramps, and tactile paths at one of India’s busiest railway terminals.',
     fullStory: [
@@ -44,7 +44,7 @@ export const storiesList: StoryItem[] = [
     category: 'Mobility & Campaign',
     date: 'Jan 2025',
     author: 'Sudhir Dhir',
-    image: '/images/stories/story-03.jpg',
+    image: '/images/yatra/yatra-flagoff-deepa-malik.jpg',
     excerpt:
       'Founder Sudhir Dhir and four fellow drivers with disability traversed highways, mountain passes, and coastal routes in hand-controlled vehicles.',
     fullStory: [
@@ -62,7 +62,7 @@ export const storiesList: StoryItem[] = [
     category: 'Skills & Jobs',
     date: '2023',
     author: 'Project Udaan Team',
-    image: '/images/stories/story-04.jpg',
+    image: '/images/skills/skill-bakery-mandi-group.jpg',
     excerpt:
       'In 2023, Sangati assessed 170 candidates with disability for certified technical training in laptop repair, DTP, and web design.',
     fullStory: [
@@ -79,7 +79,7 @@ export const storiesList: StoryItem[] = [
     category: 'Sports & Wellness',
     date: 'Oct 2023',
     author: 'Sangati Sports Club',
-    image: '/images/stories/story-05.jpg',
+    image: '/images/parasports/parasports-india-gate-yoga.jpg',
     excerpt:
       'A proud 25-member contingent of wheelchair runners and amputee athletes represented Sangati at the Vedanta Delhi Half-Marathon.',
     fullStory: [
@@ -96,7 +96,7 @@ export const storiesList: StoryItem[] = [
     category: 'Health Care',
     date: 'March 2024',
     author: 'Sangati Medical Team',
-    image: '/images/stories/story-06.jpg',
+    image: '/images/health/health-cancer-van-team.jpg',
     excerpt:
       'Deep in Dalhousie, Himachal Pradesh, Sangati operates a rural health center providing free OPD, deliveries, and specialized cancer detection.',
     fullStory: [

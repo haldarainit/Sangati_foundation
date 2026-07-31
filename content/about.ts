@@ -37,6 +37,26 @@ export const aboutContent = {
   },
   trustees: [
     {
+      name: 'Sudhir Dhir',
+      role: 'Founder Trustee | Sangati Foundation',
+      subtitle: 'Social Impact Leader | Disability Inclusion & Accessibility Advocate',
+      image: '/images/team/sudhir-dhir.jpg',
+      bio: [
+        'Sudhir Dhir is the Founder Trustee of Sangati Foundation, a nonprofit organization committed to advancing disability inclusion, accessibility and inclusive community development. Inspired by his lived experience as a person with disability, he works to promote equal opportunities, independent living and barrier-free environments.',
+        'His work focuses on accessible tourism, inclusive healthcare, para sports, women\'s health awareness, skill development, policy advocacy and CSR partnerships. Through collaborative initiatives with government, corporate and civil society partners, he strives to create sustainable social impact and empower persons with disabilities.',
+      ],
+      expertise: [
+        'Accessible Tourism & Nomads on Wheels',
+        'Inclusive Healthcare & Mobile Cancer Screening',
+        'Para Sports & Adaptive Athletics',
+        'Women\'s Health & Hygiene Awareness',
+        'Vocational Skill Training & Udaan',
+        'Policy Advocacy & Universal Barrier-Free Design',
+        'CSR & Civil Society Partnerships',
+      ],
+      quote: 'To create an India where disability is never a barrier to opportunity, dignity or leadership.',
+    },
+    {
       name: 'Alka Selot Asthana',
       role: 'Founder Trustee | Sangati Foundation',
       subtitle: 'Technology & Policy Leader | Telecom Executive | Accessibility & Inclusion Advocate',
@@ -59,10 +79,10 @@ export const aboutContent = {
   ],
   leadership: [
     {
-      name: 'Mr Sudhir Dhir',
+      name: 'Sudhir Dhir',
       role: 'Founder & Trustee',
       bio: 'Visionary leader behind Sangati Foundation and driver of the 6,500 km Sangati Yatra. Champion of independent mobility, accessible tourism, and disability rights across India.',
-      image: '/images/stories/story-01.jpg',
+      image: '/images/team/sudhir-dhir.jpg',
     },
     {
       name: 'Alka Selot Asthana',
