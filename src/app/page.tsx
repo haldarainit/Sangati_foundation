@@ -9,7 +9,7 @@ import { RouteLine } from '@/components/ui/RouteLine';
 import { InfiniteMarqueeSlider } from '@/components/ui/InfiniteMarqueeSlider';
 import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
-import { HeroProgramBookSlider } from '@/components/ui/HeroProgramBookSlider';
+import { HeroTraditionalSlider } from '@/components/ui/HeroTraditionalSlider';
 import { ScrollReveal } from '@/components/ui/ScrollReveal';
 import { ScrollProgressBar } from '@/components/ui/ScrollProgressBar';
 import { ArrowRight, Heart, Shield, CheckCircle, Sparkles, Compass, Award } from 'lucide-react';
@@ -20,39 +20,9 @@ export default function HomePage() {
       {/* Top Scroll Reading Progress Bar */}
       <ScrollProgressBar />
 
-      {/* 1. HERO SECTION WITH PROGRAMMES BOOK SLIDER */}
-      <section className="relative w-full bg-field pt-2 sm:pt-4 overflow-hidden">
-        {/* Inspiring Headline & Tagline at Top */}
-        <div className="max-w-4xl mx-auto px-4 pt-4 sm:pt-6 pb-6 text-center space-y-4">
-          <ScrollReveal variant="fade-up">
-            <span className="inline-flex items-center gap-1.5 sm:gap-2 font-mono text-[10px] sm:text-xs font-bold bg-marigold/20 text-ink border border-marigold/50 px-3.5 py-1 rounded-full uppercase tracking-wider shadow-2xs">
-              <Sparkles className="w-3.5 h-3.5 text-road shrink-0" />
-              <span>REGISTERED CHARITABLE TRUST • EST. 14 FEB 2019</span>
-            </span>
-          </ScrollReveal>
-
-          <ScrollReveal variant="fade-up" delay={100}>
-            <h1 className="text-2xl sm:text-4xl md:text-5xl font-black font-display tracking-tight text-ink leading-tight">
-              Accessibility. Mobility.{' '}
-              <span className="text-road bg-marigold/20 px-2 py-0.5 rounded-lg border border-marigold/30 inline-block mt-1">
-                Inclusivity. Visibility.
-              </span>
-            </h1>
-          </ScrollReveal>
-
-          <ScrollReveal variant="fade-up" delay={200}>
-            <p className="text-sm sm:text-base md:text-lg font-body text-ink/90 max-w-2xl mx-auto leading-relaxed">
-              {homeContent.hero.subheadline}
-            </p>
-          </ScrollReveal>
-        </div>
-
-        {/* Book-Structured Programmes Showcase Slider */}
-        <div className="max-w-7xl mx-auto px-2 sm:px-4 pb-6">
-          <ScrollReveal variant="zoom-in" delay={150}>
-            <HeroProgramBookSlider />
-          </ScrollReveal>
-        </div>
+      {/* 1. TRADITIONAL FULL-BLEED HERO SLIDER AT TOP OF HOMEPAGE */}
+      <section className="w-full">
+        <HeroTraditionalSlider />
       </section>
 
       {/* 2. STAT COUNTER BAND WITH NGO AUTHENTICITY & DONATE CTA */}
