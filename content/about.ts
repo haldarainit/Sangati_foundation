@@ -1,3 +1,14 @@
+export interface LeadershipMember {
+  name: string;
+  role: string;
+  subtitle?: string;
+  bio: string[];
+  image: string;
+  expertise?: string[];
+  quote?: string;
+  careerHighlights?: string[];
+}
+
 export const aboutContent = {
   title: 'Who We Are',
   subtitle: 'Walking alongside persons with disability across India since 14 February 2019.',
@@ -24,6 +35,28 @@ export const aboutContent = {
       attribution: 'Izaak Walton',
     },
   },
+  trustees: [
+    {
+      name: 'Alka Selot Asthana',
+      role: 'Founder Trustee | Sangati Foundation',
+      subtitle: 'Technology & Policy Leader | Telecom Executive | Accessibility & Inclusion Advocate',
+      image: '/images/team/alka-selot-asthana.jpg',
+      bio: [
+        'Alka Selot Asthana is a distinguished technology and public policy leader with over 30 years of experience in telecommunications, digital infrastructure, regulatory affairs and corporate leadership. She has served as an Indian Telecom Service (ITS) officer, held the position of Chief Technology Officer at Indus Towers, and currently serves as Global Head – Regulatory, Tata Communications Limited.',
+        'As Founder Trustee of Sangati Foundation, she provides strategic leadership to initiatives promoting disability inclusion, universal accessibility, accessible tourism, inclusive healthcare, digital empowerment, skill development and sustainable social impact. She is committed to building partnerships with government, industry and civil society to create an inclusive and accessible India.',
+      ],
+      expertise: [
+        'Telecommunications & Digital Infrastructure',
+        'Regulatory Affairs & Public Policy',
+        'Technology Strategy & Digital Transformation',
+        'Corporate Governance',
+        'Accessibility & Disability Inclusion',
+        'CSR & Strategic Partnerships',
+        'Leadership & Innovation',
+      ],
+      quote: 'Inclusive technology and accessible systems are essential for building a more equitable, resilient and empowered society.',
+    },
+  ],
   leadership: [
     {
       name: 'Mr Sudhir Dhir',
@@ -33,9 +66,9 @@ export const aboutContent = {
     },
     {
       name: 'Alka Selot Asthana',
-      role: 'Lead Author & Campaign Director',
-      bio: 'Author of all published Sangati updates, campaign strategist for Project Pehchaan, Project Udaan, and editor of Sangati’s disability awareness publications.',
-      image: '/images/stories/story-02.jpg',
+      role: 'Founder Trustee',
+      bio: 'Technology & Public Policy Leader (Global Head - Regulatory, Tata Communications). Drives strategic governance, accessibility policy, digital empowerment, and sustainable social impact.',
+      image: '/images/team/alka-selot-asthana.jpg',
     },
     {
       name: 'Sh Praveen Vyas',

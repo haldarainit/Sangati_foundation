@@ -5,12 +5,12 @@ import { organizationInfo } from '@/content/organization';
 import { RouteLine } from '@/components/ui/RouteLine';
 import { Button } from '@/components/ui/Button';
 import { ScrollReveal } from '@/components/ui/ScrollReveal';
-import { Heart, Quote, ArrowRight } from 'lucide-react';
+import { Heart, Quote, ArrowRight, CheckCircle2, ShieldCheck, Award, Briefcase, Sparkles } from 'lucide-react';
 
 export const metadata = {
-  title: 'About Us | Sangati Foundation',
+  title: 'About Us & Leadership | Sangati Foundation',
   description:
-    'Learn about Sangati Foundation, founded 14 February 2019 by Mr Sudhir Dhir. Our brand idea is companionship — walking alongside persons with disability.',
+    'Learn about Sangati Foundation, founded by Mr Sudhir Dhir and Alka Selot Asthana. Our brand idea is companionship — walking alongside persons with disability.',
 };
 
 export default function AboutPage() {
@@ -30,7 +30,7 @@ export default function AboutPage() {
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 py-8 sm:py-12 w-full space-y-3 sm:space-y-4">
           <ScrollReveal variant="fade-down">
-            <span className="font-mono text-[10px] sm:text-xs font-bold bg-marigold text-ink px-3 py-1 rounded-full uppercase tracking-wider inline-block">
+            <span className="font-mono text-[10px] sm:text-xs font-bold bg-road text-field px-3.5 py-1 rounded-full uppercase tracking-wider inline-block">
               WHO WE ARE & OUR FOUNDING STORY
             </span>
           </ScrollReveal>
@@ -61,7 +61,7 @@ export default function AboutPage() {
             </ScrollReveal>
 
             <ScrollReveal variant="fade-up" delay={100}>
-              <div className="p-4 bg-mist border-l-4 border-marigold border-y border-r border-ink/20 font-mono text-sm font-bold text-ink rounded-r-xl">
+              <div className="p-4 bg-mist border-l-4 border-clay border-y border-r border-ink/20 font-mono text-sm font-bold text-ink rounded-r-xl">
                 {aboutContent.brandIdea.quoteHindi}
               </div>
             </ScrollReveal>
@@ -100,6 +100,102 @@ export default function AboutPage() {
         <RouteLine />
       </div>
 
+      {/* FOUNDER TRUSTEE PROFILE: ALKA SELOT ASTHANA */}
+      <section className="max-w-7xl mx-auto px-4 space-y-10" aria-labelledby="founder-trustees-heading">
+        <ScrollReveal variant="fade-up">
+          <div className="border-b-2 border-ink pb-4">
+            <span className="font-mono text-xs font-bold text-road uppercase tracking-wider block">
+              GOVERNANCE & STRATEGIC LEADERSHIP
+            </span>
+            <h2 id="founder-trustees-heading" className="text-3xl md:text-4xl font-bold font-display text-ink">
+              Founder Trustees Profile
+            </h2>
+          </div>
+        </ScrollReveal>
+
+        {aboutContent.trustees.map((trustee) => (
+          <ScrollReveal key={trustee.name} variant="fade-up">
+            <div className="bg-white border-2 border-ink rounded-3xl p-6 sm:p-8 md:p-12 shadow-xl space-y-8 overflow-hidden">
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                {/* Left Profile Image Frame */}
+                <div className="lg:col-span-4 space-y-4">
+                  <div className="relative aspect-[4/5] w-full rounded-2xl border-2 border-ink bg-mist overflow-hidden shadow-lg group">
+                    <Image
+                      src={trustee.image}
+                      alt={`Portrait of ${trustee.name}`}
+                      fill
+                      priority
+                      sizes="(max-width: 1024px) 100vw, 33vw"
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                    <div className="absolute top-3 left-3 bg-road text-field text-xs font-mono font-bold px-3 py-1 rounded-full shadow-md border border-road">
+                      Founder Trustee
+                    </div>
+                  </div>
+                </div>
+
+                {/* Right Bio & Core Details */}
+                <div className="lg:col-span-8 space-y-6">
+                  <div>
+                    <span className="font-mono text-xs font-bold text-clay uppercase tracking-widest block">
+                      {trustee.role}
+                    </span>
+                    <h3 className="text-3xl sm:text-4xl font-black font-display text-ink mt-1">
+                      {trustee.name}
+                    </h3>
+                    {trustee.subtitle && (
+                      <p className="text-sm sm:text-base font-mono font-bold text-road mt-1 leading-snug">
+                        {trustee.subtitle}
+                      </p>
+                    )}
+                  </div>
+
+                  {/* Bio Paragraphs */}
+                  <div className="space-y-4 text-base md:text-lg font-body text-ink/90 leading-relaxed">
+                    {trustee.bio.map((paragraph, idx) => (
+                      <p key={idx}>{paragraph}</p>
+                    ))}
+                  </div>
+
+                  {/* Leadership Philosophy Quote Box */}
+                  {trustee.quote && (
+                    <div className="bg-mist/70 border-l-4 border-road border-y border-r border-ink/20 p-5 rounded-r-2xl space-y-2">
+                      <span className="font-mono text-xs font-bold text-road uppercase tracking-wider block">
+                        LEADERSHIP PHILOSOPHY
+                      </span>
+                      <p className="text-base sm:text-lg font-body text-ink font-semibold italic">
+                        &quot;{trustee.quote}&quot;
+                      </p>
+                    </div>
+                  )}
+
+                  {/* Core Expertise Tags */}
+                  {trustee.expertise && trustee.expertise.length > 0 && (
+                    <div className="space-y-3 pt-2 border-t-2 border-ink/10">
+                      <span className="font-mono text-xs font-bold uppercase tracking-wider text-ink/70 flex items-center gap-1.5">
+                        <Briefcase className="w-4 h-4 text-road" />
+                        <span>Core Expertise & Domain Leadership:</span>
+                      </span>
+                      <div className="flex flex-wrap gap-2">
+                        {trustee.expertise.map((exp, idx) => (
+                          <span
+                            key={idx}
+                            className="bg-white border border-road/30 text-ink font-mono text-xs font-semibold px-3 py-1.5 rounded-full shadow-2xs hover:bg-mist transition-colors flex items-center gap-1.5"
+                          >
+                            <CheckCircle2 className="w-3.5 h-3.5 text-road shrink-0" />
+                            <span>{exp}</span>
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+          </ScrollReveal>
+        ))}
+      </section>
+
       {/* FOUNDING POEM & MANIFESTO BLOCK */}
       <section className="max-w-5xl mx-auto px-4" aria-labelledby="founding-manifesto-heading">
         <ScrollReveal variant="zoom-in">
@@ -123,7 +219,7 @@ export default function AboutPage() {
             </div>
 
             {/* Invitation Text */}
-            <p className="text-lg md:text-xl font-body text-ink/90 leading-relaxed italic border-l-4 border-marigold pl-6 py-2">
+            <p className="text-lg md:text-xl font-body text-ink/90 leading-relaxed italic border-l-4 border-clay pl-6 py-2">
               &quot;{aboutContent.foundingPoem.invitation}&quot;
             </p>
 
@@ -148,7 +244,7 @@ export default function AboutPage() {
         </ScrollReveal>
       </section>
 
-      {/* LEADERSHIP TEAM */}
+      {/* LEADERSHIP & KEY AUTHORS TEAM GRID */}
       <section className="max-w-7xl mx-auto px-4 space-y-8" aria-labelledby="team-heading">
         <ScrollReveal variant="fade-up">
           <div className="border-b-2 border-ink pb-4">
@@ -156,7 +252,7 @@ export default function AboutPage() {
               THE PEOPLE BEHIND SANGATI
             </span>
             <h2 id="team-heading" className="text-3xl md:text-4xl font-bold font-display text-ink">
-              Leadership & Key Authors
+              Executive Leadership & Advisory Board
             </h2>
           </div>
         </ScrollReveal>
@@ -210,7 +306,7 @@ export default function AboutPage() {
           {aboutContent.timelinePreview.map((item, index) => (
             <ScrollReveal key={item.year} variant="fade-up" delay={index * 100}>
               <div className="rounded-2xl border border-road/20 bg-white p-5 space-y-2 shadow-xs hover:shadow-md transition-all">
-                <span className="font-mono text-xl font-black text-marigold bg-ink px-3 py-1 rounded-full inline-block">
+                <span className="font-mono text-xl font-black text-clay bg-ink px-3 py-1 rounded-full inline-block">
                   {item.year}
                 </span>
                 <p className="text-sm font-body text-ink font-semibold leading-snug">
@@ -242,4 +338,3 @@ export default function AboutPage() {
     </div>
   );
 }
-
