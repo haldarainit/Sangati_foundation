@@ -120,7 +120,7 @@ export const programsList: ProgramItem[] = [
     image: '/images/skills/skill-bakery-mandi-group.jpg',
     summary:
       'Project Udaan: Free skill training in Bakery & Culinary Arts, RPL Pump Operator, Laptop Repair, Web Dev, Python, DTP, and placement support.',
-    fullContent: `Under Project Udaan, Sangati runs free skill development and vocational training for persons with disability (PwD) and Below Poverty Line (BPL) candidates across Himachal Pradesh (Mandi & Kangra) and Delhi NCR. Initiatives include Bakery & Pastry Training, RPL Pump Operator Certification under State Sanitation Mission, Laptop Repair with CompTIA A+ certification, Web Development, and DTP. Delivered at our centers with partners including Charities Aid Foundation, State Sanitation Mission HP, and Sh Praveen Vyas (Jodhpur Center). Our job portal helps candidates prepare, interview and secure sustainable livelihoods with ongoing mentorship.`,
+    fullContent: `Under Project Udaan, Sangati runs free skill development and vocational training for persons with disability (PwD) and Below Poverty Line (BPL) candidates across Himachal Pradesh (Mandi & Kangra) and Delhi NCR. Initiatives include Bakery & Pastry Training, RPL Pump Operator Certification under State Sanitation Mission, Laptop Repair with CompTIA A+ certification, Web Development, and DTP. Delivered at our centers with partners including Charities Aid Foundation and State Sanitation Mission HP. Our job portal helps candidates prepare, interview and secure sustainable livelihoods with ongoing mentorship.`,
     highlights: [
       'Project Udaan Bakery & Pastry Training for PwD & BPL candidates in Mandi (HP)',
       'RPL Pump Operator Training in District Kangra (HP) under State Sanitation Mission',

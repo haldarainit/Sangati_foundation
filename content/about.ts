@@ -90,12 +90,6 @@ export const aboutContent = {
       bio: 'Technology & Public Policy Leader (Global Head - Regulatory, Tata Communications). Drives strategic governance, accessibility policy, digital empowerment, and sustainable social impact.',
       image: '/images/team/alka-selot-asthana.jpg',
     },
-    {
-      name: 'Sh Praveen Vyas',
-      role: 'Head of Jodhpur Skill Development Centre',
-      bio: 'Directs skill assessment, hands-on laptop repair, and tech education for persons with disability in Rajasthan.',
-      image: '/images/stories/story-03.jpg',
-    },
   ],
   timelinePreview: [
     { year: 2019, event: 'Sangati Foundation registered as a charitable trust on 14 February.' },

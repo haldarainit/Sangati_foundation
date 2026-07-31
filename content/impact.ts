@@ -51,7 +51,7 @@ export const impactContent = {
       title: 'Jodhpur Center & Rural Health Drive',
       summary: 'Skill center opened in Jodhpur, Bathri camp reached 500+, and autism book published.',
       details: [
-        'Opened Skill Development Centre in Jodhpur, Rajasthan, headed by Sh Praveen Vyas.',
+        'Opened Skill Development Centre in Jodhpur, Rajasthan, offering certified laptop repair and DTP courses.',
         'Bathri rural medical camp reached 500+ villagers in Himachal Pradesh.',
         'Participated in World Disability Day at Divyakala Mela with NHFDC, showcasing handcrafted products.',
         'Published pioneering book on autism spectrum awareness.',
