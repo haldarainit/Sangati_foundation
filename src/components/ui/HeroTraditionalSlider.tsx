@@ -73,8 +73,8 @@ const HERO_SLIDES: HeroSlideItem[] = [
     slug: 'yatra',
     category: 'SANGATI YATRA 2024-25',
     title: '6,500 KM Nationwide Accessibility Expedition',
-    subtitle: 'Travelling across states to audit travel hubs, engage communities, and drive policy for full disability inclusion.',
-    image: '/images/programs/program-mobility.jpg',
+    subtitle: 'Flagged off by Dr. Deepa Malik — travelling across India with retrofitted scooters to audit travel hubs and drive inclusion.',
+    image: '/images/yatra/yatra-flagoff-deepa-malik.jpg',
     ctaLink: '/yatra',
     ctaText: 'Discover Sangati Yatra',
   },
@@ -116,12 +116,12 @@ export const HeroTraditionalSlider: React.FC = () => {
     touchStartX.current = null;
   };
 
-  // Guaranteed 2-Second Automatic Slide Interval
+  // Guaranteed 5-Second Automatic Slide Interval
   useEffect(() => {
     if (reduceMotion) return;
     const timer = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % HERO_SLIDES.length);
-    }, 2000); // Fast 2-second interval
+    }, 5000); // 5-second interval
 
     return () => clearInterval(timer);
   }, [reduceMotion]);
@@ -144,7 +144,7 @@ export const HeroTraditionalSlider: React.FC = () => {
         return (
           <div
             key={slide.id}
-            className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${
+            className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
               isActive ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'
             }`}
           >
@@ -154,7 +154,7 @@ export const HeroTraditionalSlider: React.FC = () => {
               fill
               priority={idx === 0}
               sizes="100vw"
-              className={`object-cover object-center transition-transform duration-[2000ms] ease-out ${
+              className={`object-cover object-center transition-transform duration-[5000ms] ease-out ${
                 isActive ? 'scale-115' : 'scale-100'
               }`}
             />
@@ -164,7 +164,7 @@ export const HeroTraditionalSlider: React.FC = () => {
         );
       })}
 
-      {/* Hero Overlay Content Container: Title & Donate Button with Entry Animation */}
+      {/* Hero Overlay Content Container: ONLY Title and Donate Button */}
       <div className="relative z-20 h-full max-w-7xl mx-auto px-6 sm:px-8 flex flex-col justify-end pb-12 sm:pb-16 items-center text-center">
         <div key={currentSlide.id} className="max-w-3xl space-y-5 animate-fade-up">
           {/* Main Slide Title */}
