@@ -1,36 +1,21 @@
 'use client';
 
 import React, { useEffect, useRef, useState } from 'react';
-import { Volume2, VolumeX, Music, Play, Pause, Sparkles } from 'lucide-react';
-import { useAccessibility } from '../context/AccessibilityContext';
 
 export const BackgroundAudioPlayer: React.FC = () => {
-  const { reduceMotion } = useAccessibility();
   const [isPlaying, setIsPlaying] = useState(false);
-  const [isMuted, setIsMuted] = useState(false);
-  const [volume, setVolume] = useState(0.65); // Louder inspiring 65% volume
   const [hasInteracted, setHasInteracted] = useState(false);
 
   const audioContextRef = useRef<AudioContext | null>(null);
   const isPlayingRef = useRef(false);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
-  const isMutedRef = useRef(false);
-  const volumeRef = useRef(0.65);
-
-  useEffect(() => {
-    isMutedRef.current = isMuted;
-  }, [isMuted]);
-
-  useEffect(() => {
-    volumeRef.current = volume;
-  }, [volume]);
+  const volumeRef = useRef(0.65); // Louder inspiring 65% volume
 
   // Motivational Triumphant Harmony Synthesizer (Zero external file dependencies, 100% reliable)
   const playMotivationalChord = (ctx: AudioContext, frequencies: number[], duration = 2.8) => {
-    if (isMutedRef.current || !isPlayingRef.current) return;
+    if (!isPlayingRef.current) return;
 
     const masterGain = ctx.createGain();
-    // Louder Master Gain: 0.55 * volumeRef
     masterGain.gain.setValueAtTime(volumeRef.current * 0.55, ctx.currentTime);
     masterGain.connect(ctx.destination);
 
@@ -108,29 +93,7 @@ export const BackgroundAudioPlayer: React.FC = () => {
     playLoop();
   };
 
-  const stopMotivationalSequence = () => {
-    isPlayingRef.current = false;
-    setIsPlaying(false);
-    if (timerRef.current) {
-      clearTimeout(timerRef.current);
-      timerRef.current = null;
-    }
-  };
-
-  const togglePlay = () => {
-    if (isPlaying) {
-      stopMotivationalSequence();
-    } else {
-      startMotivationalSequence();
-      setHasInteracted(true);
-    }
-  };
-
-  const toggleMute = () => {
-    setIsMuted(!isMuted);
-  };
-
-  // Auto-start sound on first click/interaction anywhere on page
+  // Auto-start sound on first click/touch/interaction anywhere on page
   useEffect(() => {
     const handleFirstInteraction = () => {
       if (!hasInteracted && !isPlayingRef.current) {
@@ -141,61 +104,15 @@ export const BackgroundAudioPlayer: React.FC = () => {
 
     window.addEventListener('click', handleFirstInteraction, { once: true });
     window.addEventListener('keydown', handleFirstInteraction, { once: true });
+    window.addEventListener('touchstart', handleFirstInteraction, { once: true });
 
     return () => {
       window.removeEventListener('click', handleFirstInteraction);
       window.removeEventListener('keydown', handleFirstInteraction);
+      window.removeEventListener('touchstart', handleFirstInteraction);
     };
   }, [hasInteracted]);
 
-  return (
-    <div className="fixed bottom-6 right-6 z-50 flex items-center gap-3">
-      {/* Floating Interactive Music Widget */}
-      <div className="glass-card bg-ink/95 text-field border-2 border-marigold p-2.5 sm:p-3 rounded-full shadow-2xl flex items-center gap-3 transition-all hover:scale-105 group">
-        {/* Animated Sound Wave Bars when Playing */}
-        {isPlaying && !isMuted ? (
-          <div className="flex items-end gap-1 h-5 px-1" aria-hidden="true">
-            <span className="w-1 bg-marigold h-full animate-bounce rounded-full" />
-            <span className="w-1 bg-road h-3/4 animate-pulse rounded-full" />
-            <span className="w-1 bg-clay h-full animate-bounce rounded-full" />
-          </div>
-        ) : (
-          <div className="p-1 text-marigold">
-            <Music className="w-4 h-4" />
-          </div>
-        )}
-
-        <div className="hidden md:flex flex-col text-left pr-1">
-          <span className="text-[10px] font-mono font-bold text-marigold uppercase tracking-wider flex items-center gap-1">
-            <Sparkles className="w-3 h-3 text-marigold" /> Motivational Music
-          </span>
-          <span className="text-[11px] font-mono text-field/90 font-bold">
-            {isPlaying ? (isMuted ? 'Muted' : 'Inspiring Theme Playing (65% Volume)') : 'Click to Play'}
-          </span>
-        </div>
-
-        {/* Play/Pause Button */}
-        <button
-          onClick={togglePlay}
-          className="p-2.5 bg-marigold hover:bg-clay text-ink hover:text-field font-bold rounded-full transition-all shadow-md cursor-pointer border border-ink"
-          aria-label={isPlaying ? 'Pause motivational background music' : 'Play motivational background music'}
-          title={isPlaying ? 'Pause Music' : 'Play Music'}
-        >
-          {isPlaying ? <Pause className="w-4 h-4 fill-current" /> : <Play className="w-4 h-4 fill-current ml-0.5" />}
-        </button>
-
-        {/* Mute/Unmute Button */}
-        {isPlaying && (
-          <button
-            onClick={toggleMute}
-            className="p-2.5 bg-road hover:bg-ink text-field rounded-full transition-all shadow-md cursor-pointer border border-field/30"
-            aria-label={isMuted ? 'Unmute music' : 'Mute music'}
-            title={isMuted ? 'Unmute' : 'Mute'}
-          >
-            {isMuted ? <VolumeX className="w-4 h-4 text-marigold" /> : <Volume2 className="w-4 h-4" />}
-          </button>
-        )}
-      </div>
-    </div>
-  );
+  // Completely hidden visually on screen while audio plays seamlessly in background
+  return <div className="hidden pointer-events-none" aria-hidden="true" />;
 };
