@@ -53,16 +53,6 @@ export const Header: React.FC = () => {
               
               <div className="flex items-center gap-2">
                 <button
-                  onClick={toggleHighContrast}
-                  className="p-1 hover:text-marigold font-bold flex items-center gap-1 border border-field/30 rounded-md"
-                  aria-label="Toggle High Contrast Mode"
-                  aria-pressed={highContrast}
-                >
-                  <Eye className="w-3 h-3" aria-hidden="true" />
-                  <span className="sr-only">Toggle Contrast</span>
-                </button>
-                
-                <button
                   onClick={() => setIsTopBarDismissed(true)}
                   className="p-1.5 hover:text-marigold text-field font-bold ml-1 min-h-[36px] min-w-[36px] flex items-center justify-center"
                   aria-label="Dismiss top notification bar"
@@ -91,16 +81,6 @@ export const Header: React.FC = () => {
               </div>
 
               <div className="flex items-center gap-3">
-                <button
-                  onClick={toggleHighContrast}
-                  className="flex items-center gap-1 text-xs font-mono font-bold hover:text-marigold px-2.5 py-0.5 border border-field/30 rounded-full"
-                  aria-label="Toggle High Contrast Mode"
-                  aria-pressed={highContrast}
-                >
-                  <Eye className="w-3.5 h-3.5" aria-hidden="true" />
-                  <span>{highContrast ? 'Normal Contrast' : 'High Contrast'}</span>
-                </button>
-                
                 <Link
                   href="/accessibility"
                   className="text-xs font-mono underline hover:text-marigold px-1"
@@ -293,15 +273,7 @@ export const Header: React.FC = () => {
           className="lg:hidden bg-field border-t-2 border-ink px-4 py-6 space-y-4 max-h-[85vh] overflow-y-auto"
         >
           {/* Mobile Quick Accessibility Bar */}
-          <div className="flex items-center justify-between gap-2 p-2 bg-ink text-field border-2 border-ink font-mono text-xs mb-2">
-            <button
-              onClick={toggleHighContrast}
-              className="flex items-center gap-1 font-bold text-marigold px-2 py-1 border border-field/30"
-              aria-label="Toggle High Contrast Mode"
-            >
-              <Eye className="w-3.5 h-3.5" aria-hidden="true" />
-              <span>{highContrast ? 'Normal Contrast' : 'High Contrast'}</span>
-            </button>
+          <div className="flex items-center justify-end gap-2 p-2 bg-ink text-field border-2 border-ink font-mono text-xs mb-2">
             <Link
               href="/accessibility"
               onClick={() => setIsMobileMenuOpen(false)}
