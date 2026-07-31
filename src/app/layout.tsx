@@ -8,6 +8,7 @@ import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { ScrollProgressBar } from '@/components/ui/ScrollProgressBar';
 import { MobileQuickActions } from '@/components/ui/MobileQuickActions';
+import { BackgroundAudioPlayer } from '@/components/ui/BackgroundAudioPlayer';
 import { organizationInfo } from '@/content/organization';
 
 const bricolage = Bricolage_Grotesque({
@@ -82,9 +83,11 @@ export default function RootLayout({
 
           {/* Sticky Mobile Quick Action Bar */}
           <MobileQuickActions />
+
+          {/* Encouraging Background Music Synthesizer & Floating Controller */}
+          <BackgroundAudioPlayer />
         </AccessibilityProvider>
       </body>
     </html>
   );
 }
-

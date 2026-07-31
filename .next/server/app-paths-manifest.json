@@ -1,17 +1,17 @@
 {
   "/_not-found/page": "app/_not-found/page.js",
+  "/page": "app/page.js",
   "/films/page": "app/films/page.js",
   "/donate/page": "app/donate/page.js",
-  "/page": "app/page.js",
-  "/yatra/page": "app/yatra/page.js",
-  "/get-involved/page": "app/get-involved/page.js",
   "/contact/page": "app/contact/page.js",
-  "/impact/page": "app/impact/page.js",
   "/about/page": "app/about/page.js",
+  "/impact/page": "app/impact/page.js",
   "/accessibility/page": "app/accessibility/page.js",
   "/stories/page": "app/stories/page.js",
-  "/programs/page": "app/programs/page.js",
   "/news/page": "app/news/page.js",
+  "/get-involved/page": "app/get-involved/page.js",
+  "/programs/[slug]/page": "app/programs/[slug]/page.js",
   "/stories/[slug]/page": "app/stories/[slug]/page.js",
-  "/programs/[slug]/page": "app/programs/[slug]/page.js"
+  "/programs/page": "app/programs/page.js",
+  "/yatra/page": "app/yatra/page.js"
 }
