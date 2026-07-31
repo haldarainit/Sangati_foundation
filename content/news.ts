@@ -3,47 +3,47 @@ import { NewsPosterItem } from './types';
 export const newsList: NewsPosterItem[] = [
   {
     id: 'poster-01',
-    title: 'Sangati Yatra 2024–25 National Drive Poster',
-    date: 'December 2024',
-    category: 'Flagship Campaign',
+    title: 'Media Feature: Project Udaan Laptop & Web Training',
+    date: '2023–2024',
+    category: 'Media Coverage',
     image: '/images/posters/poster-01.jpg',
     description:
-      'Official campaign flyer for the 6,500 km Delhi to Dhanushkodi ride driven entirely by persons with disability.',
+      'Social media highlight celebrating Sangati Foundation’s free laptop repair, DTP, and web programming training drive for Divyang youth in Gurgaon and Jodhpur.',
   },
   {
     id: 'poster-02',
-    title: 'Free Cancer Screening & Rural Health Camp',
-    date: 'March 2024',
-    category: 'Health Camp',
+    title: 'Divya Kala Mela 2022 National Inclusion Pavilion',
+    date: 'December 2022',
+    category: 'National Exhibition',
     image: '/images/posters/poster-02.jpg',
     description:
-      'Mammography, Pap smear, ENT, and general OPD health screening poster for Bathri, Himachal Pradesh.',
+      'Sangati Foundation’s official pavilion at Divya Kala Mela showcasing Divyang craftsmanship, adaptive products, and accessibility awareness.',
   },
   {
     id: 'poster-03',
-    title: 'Project Udaan Skill Training Admissions',
-    date: 'August 2023',
-    category: 'Skill Development',
+    title: 'sangTea Accessible Mobile Kiosk Innovation',
+    date: '2023',
+    category: 'Livelihood Innovation',
     image: '/images/posters/poster-03.jpg',
     description:
-      'Free technical courses in Web Programming, Python, DTP, and CompTIA A+ Laptop Repair in Gurgaon & Jodhpur.',
+      'Custom retrofitted mobile tea cart engineered by Sangati to provide independent, dignified self-employment for persons with disability.',
   },
   {
     id: 'poster-04',
-    title: 'Sangati Chess Club Global Launch',
-    date: 'July 2024',
-    category: 'Sports & Games',
+    title: 'Empowering Divyang Women Entrepreneurs: sangTea Handover',
+    date: '2024',
+    category: 'Women Empowerment',
     image: '/images/posters/poster-04.jpg',
     description:
-      'Weekly online and physical chess coaching in partnership with Gems Modern Academy Dubai students.',
+      'Key handover ceremony of a custom motorized sangTea tricycle cart, enabling female Divyang entrepreneurs to run mobile tea micro-enterprises.',
   },
   {
     id: 'poster-05',
-    title: 'Sangati Star Awards & UDID Registration Drive',
-    date: 'November 2021',
-    category: 'Awards & Rights',
+    title: 'sangTea Micro-Enterprise Operating in Local Markets',
+    date: '2024',
+    category: 'Micro-Enterprise',
     image: '/images/posters/poster-05.jpg',
     description:
-      'Project Pehchaan UDID card registration camp flyer and Sangati Star Awards announcement up to ₹50,000.',
+      'Independent mobility and dignified street-side commerce in action, proving how adaptive design breaks economic barriers for persons with disability.',
   },
 ];

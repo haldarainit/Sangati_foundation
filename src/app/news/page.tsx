@@ -141,13 +141,13 @@ export default function FilmsPage() {
             <ScrollReveal key={poster.id} variant="fade-up" delay={index * 100}>
               <article className="border-2 border-ink bg-white rounded-3xl p-5 sm:p-6 space-y-5 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between h-full">
                 <div className="space-y-4">
-                  <div className="relative aspect-[3/4] w-full bg-mist/60 border border-road/15 rounded-2xl overflow-hidden p-2">
+                  <div className="relative aspect-[4/5] w-full bg-mist border border-road/20 rounded-2xl overflow-hidden shadow-xs group">
                     <Image
                       src={poster.image}
                       alt={poster.title}
                       fill
                       sizes="(max-width: 768px) 100vw, 33vw"
-                      className="object-contain p-2 hover:scale-105 transition-transform duration-500"
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
                     />
                   </div>
 
