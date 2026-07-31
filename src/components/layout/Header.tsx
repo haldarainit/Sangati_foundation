@@ -271,15 +271,6 @@ export const Header: React.FC = () => {
           >
             Contact
           </Link>
-
-          {/* Strict Terracotta --clay Donate CTA */}
-          <Link
-            href="/donate"
-            className="ml-2 bg-clay text-field border-2 border-ink px-5 py-2 min-h-[44px] rounded-full font-bold hover:bg-marigold hover:text-ink transition-colors flex items-center gap-1.5 focus-visible:outline-marigold"
-          >
-            <Heart className="w-4 h-4 fill-current" aria-hidden="true" />
-            <span>Donate</span>
-          </Link>
         </nav>
 
         {/* Mobile Hamburger Toggle Button */}
@@ -400,16 +391,6 @@ export const Header: React.FC = () => {
               className="block p-3 font-bold border-2 border-ink hover:bg-mist text-lg"
             >
               Contact & Helpline
-            </Link>
-          </div>
-
-          <div className="pt-2">
-            <Link
-              href="/donate"
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="block w-full text-center bg-clay text-field border-2 border-ink py-3 rounded-full font-bold text-lg hover:bg-marigold hover:text-ink min-h-[44px]"
-            >
-              Donate to Sangati
             </Link>
           </div>
         </nav>

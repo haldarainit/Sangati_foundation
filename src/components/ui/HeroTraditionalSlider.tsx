@@ -3,7 +3,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Heart } from 'lucide-react';
 import { useAccessibility } from '../context/AccessibilityContext';
 
 export interface HeroSlideItem {
@@ -134,19 +133,21 @@ export const HeroTraditionalSlider: React.FC = () => {
       tabIndex={0}
       role="region"
       aria-label="Sangati Foundation Programmes Full-Bleed Hero Slider"
-      className="relative w-full h-[75vh] min-h-[460px] max-h-[680px] bg-ink overflow-hidden focus:outline-none select-none"
+      className="relative w-full h-[75vh] min-h-[460px] max-h-[680px] bg-ink overflow-hidden focus:outline-none select-none group"
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
     >
-      {/* Background Images Slider with Zoom-In Animation */}
+      {/* Background Images Slider with Direct Program Page Redirection Link */}
       {HERO_SLIDES.map((slide, idx) => {
         const isActive = idx === currentIndex;
         return (
-          <div
+          <Link
             key={slide.id}
-            className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
+            href={slide.ctaLink}
+            className={`absolute inset-0 transition-opacity duration-1000 ease-in-out cursor-pointer ${
               isActive ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'
             }`}
+            aria-label={`View ${slide.title} Programme Details`}
           >
             <Image
               src={slide.image}
@@ -160,29 +161,25 @@ export const HeroTraditionalSlider: React.FC = () => {
             />
             {/* Dark Vignette Overlay for High Legibility */}
             <div className="absolute inset-0 bg-gradient-to-t from-ink/95 via-ink/50 to-black/40" />
-          </div>
+          </Link>
         );
       })}
 
-      {/* Hero Overlay Content Container: ONLY Title and Donate Button */}
-      <div className="relative z-20 h-full max-w-7xl mx-auto px-6 sm:px-8 flex flex-col justify-end pb-12 sm:pb-16 items-center text-center">
-        <div key={currentSlide.id} className="max-w-3xl space-y-5 animate-fade-up">
+      {/* Hero Overlay Content Container: Title linking directly to Program Page */}
+      <div className="relative z-20 h-full max-w-7xl mx-auto px-6 sm:px-8 flex flex-col justify-end pb-12 sm:pb-16 items-center text-center pointer-events-none">
+        <Link
+          key={currentSlide.id}
+          href={currentSlide.ctaLink}
+          className="max-w-3xl space-y-3 animate-fade-up pointer-events-auto group/title inline-block cursor-pointer"
+        >
           {/* Main Slide Title */}
-          <h1 className="text-3xl sm:text-5xl md:text-6xl font-black font-display tracking-tight text-white leading-[1.15] drop-shadow-xl px-2 transition-all transform">
+          <h1 className="text-3xl sm:text-5xl md:text-6xl font-black font-display tracking-tight text-white leading-[1.15] drop-shadow-xl px-2 transition-all transform group-hover/title:scale-105 group-hover/title:text-marigold">
             {currentSlide.title}
           </h1>
-
-          {/* Primary Action CTA: Donate (80G Receipt) */}
-          <div className="pt-2 flex justify-center">
-            <Link
-              href="/donate"
-              className="bg-clay text-field hover:bg-road font-display font-black text-base sm:text-lg py-3.5 px-8 sm:px-10 rounded-full transition-all duration-300 flex items-center justify-center gap-2.5 border-2 border-clay shadow-2xl hover:scale-105 min-h-[50px]"
-            >
-              <Heart className="w-5 h-5 sm:w-6 sm:h-6 fill-current text-white shrink-0" />
-              <span>Donate Now (80G Receipt)</span>
-            </Link>
-          </div>
-        </div>
+          <p className="text-xs sm:text-sm font-mono font-bold text-marigold uppercase tracking-wider block opacity-90 group-hover/title:underline">
+            Click to View {currentSlide.category} Details →
+          </p>
+        </Link>
       </div>
 
       {/* Bottom Horizontal Slide Indicator Dots */}
@@ -192,7 +189,10 @@ export const HeroTraditionalSlider: React.FC = () => {
           return (
             <button
               key={slide.id}
-              onClick={() => setCurrentIndex(idx)}
+              onClick={(e) => {
+                e.stopPropagation();
+                setCurrentIndex(idx);
+              }}
               aria-label={`Go to slide ${idx + 1}: ${slide.title}`}
               aria-current={isActive ? 'true' : 'false'}
               className={`h-2.5 rounded-full transition-all duration-300 ${
