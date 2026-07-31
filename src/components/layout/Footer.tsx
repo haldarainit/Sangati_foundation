@@ -151,23 +151,22 @@ export const Footer: React.FC = () => {
           </ul>
         </div>
 
-        {/* Col 4: Centre Locations & Contact */}
+        {/* Col 4: Address & Connect */}
         <div className="space-y-3 font-sans text-xs">
           <h2 className="text-base font-bold font-mono text-marigold uppercase tracking-wider border-b border-field/20 pb-2">
-            Centres & Connect
+            Address & Connect
           </h2>
           <div className="space-y-2">
-            <div>
-              <strong className="text-field font-bold block text-sm">Gurgaon HQ:</strong>
-              <p className="text-field/80">{organizationInfo.address.gurgaon}</p>
-            </div>
-            <div>
-              <strong className="text-field font-bold block text-sm">Jodhpur Skill Hub:</strong>
-              <p className="text-field/80">{organizationInfo.address.jodhpur}</p>
-            </div>
-            <div>
-              <strong className="text-field font-bold block text-sm">Bathri Health Center:</strong>
-              <p className="text-field/80">{organizationInfo.address.dalhousie}</p>
+            <div className="flex items-start gap-2">
+              <MapPin className="w-4 h-4 text-marigold shrink-0 mt-0.5" aria-hidden="true" />
+              <div>
+                <strong className="text-field font-bold block text-sm">Main Office:</strong>
+                <p className="text-field/80 leading-relaxed">
+                  F18/3 Connaught Place<br />
+                  Middle Circle<br />
+                  New Delhi – 110001
+                </p>
+              </div>
             </div>
           </div>
 
