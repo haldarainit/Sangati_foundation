@@ -9,7 +9,7 @@ import { RouteLine } from '@/components/ui/RouteLine';
 import { InfiniteMarqueeSlider } from '@/components/ui/InfiniteMarqueeSlider';
 import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
-import { HeroVideoPlayer } from '@/components/ui/HeroVideoPlayer';
+import { HeroProgramBookSlider } from '@/components/ui/HeroProgramBookSlider';
 import { ScrollReveal } from '@/components/ui/ScrollReveal';
 import { ScrollProgressBar } from '@/components/ui/ScrollProgressBar';
 import { ArrowRight, Heart, Shield, CheckCircle, Sparkles, Compass, Award } from 'lucide-react';
@@ -20,25 +20,18 @@ export default function HomePage() {
       {/* Top Scroll Reading Progress Bar */}
       <ScrollProgressBar />
 
-      {/* 1. CRY.ORG STYLE HERO VIDEO BANNER AT TOP OF PAGE */}
-      <section className="relative w-full bg-field overflow-hidden">
-        {/* Full-Bleed Action Video Canvas at Top */}
-        <div className="max-w-7xl mx-auto sm:px-4 sm:pt-4">
-          <ScrollReveal variant="fade-down">
-            <HeroVideoPlayer src="/hero-video.mp4" variant="hero" />
-          </ScrollReveal>
-        </div>
-
-        {/* Clean, Inspiring Writing & CTAs Directly Below Video */}
-        <div className="max-w-4xl mx-auto px-4 py-8 sm:py-12 text-center space-y-5">
-          <ScrollReveal variant="fade-up" delay={100}>
+      {/* 1. HERO SECTION WITH PROGRAMMES BOOK SLIDER */}
+      <section className="relative w-full bg-field pt-2 sm:pt-4 overflow-hidden">
+        {/* Inspiring Headline & Tagline at Top */}
+        <div className="max-w-4xl mx-auto px-4 pt-4 sm:pt-6 pb-6 text-center space-y-4">
+          <ScrollReveal variant="fade-up">
             <span className="inline-flex items-center gap-1.5 sm:gap-2 font-mono text-[10px] sm:text-xs font-bold bg-marigold/20 text-ink border border-marigold/50 px-3.5 py-1 rounded-full uppercase tracking-wider shadow-2xs">
               <Sparkles className="w-3.5 h-3.5 text-road shrink-0" />
               <span>REGISTERED CHARITABLE TRUST • EST. 14 FEB 2019</span>
             </span>
           </ScrollReveal>
 
-          <ScrollReveal variant="fade-up" delay={200}>
+          <ScrollReveal variant="fade-up" delay={100}>
             <h1 className="text-2xl sm:text-4xl md:text-5xl font-black font-display tracking-tight text-ink leading-tight">
               Accessibility. Mobility.{' '}
               <span className="text-road bg-marigold/20 px-2 py-0.5 rounded-lg border border-marigold/30 inline-block mt-1">
@@ -47,32 +40,17 @@ export default function HomePage() {
             </h1>
           </ScrollReveal>
 
-          <ScrollReveal variant="fade-up" delay={300}>
-            <p className="text-sm sm:text-lg md:text-xl font-body text-ink/90 max-w-2xl mx-auto leading-relaxed font-normal">
+          <ScrollReveal variant="fade-up" delay={200}>
+            <p className="text-sm sm:text-base md:text-lg font-body text-ink/90 max-w-2xl mx-auto leading-relaxed">
               {homeContent.hero.subheadline}
             </p>
           </ScrollReveal>
+        </div>
 
-          <ScrollReveal variant="zoom-in" delay={400}>
-            <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 pt-3">
-              <Button
-                href="/donate"
-                variant="clay"
-                className="rounded-full shadow-lg hover:shadow-2xl hover:-translate-y-0.5 transition-all text-sm sm:text-base py-3 px-6 sm:px-8 border-2 border-clay"
-              >
-                <Heart className="w-4 h-4 sm:w-5 sm:h-5 fill-current text-marigold" aria-hidden="true" />
-                <span>Yes! I Want To Help (Donate 80G)</span>
-              </Button>
-
-              <Button
-                href="/programs"
-                variant="outline"
-                className="rounded-full shadow-sm hover:shadow-md transition-all text-sm sm:text-base py-3 px-6"
-              >
-                <span>See Our Work</span>
-                <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" aria-hidden="true" />
-              </Button>
-            </div>
+        {/* Book-Structured Programmes Showcase Slider */}
+        <div className="max-w-7xl mx-auto px-2 sm:px-4 pb-6">
+          <ScrollReveal variant="zoom-in" delay={150}>
+            <HeroProgramBookSlider />
           </ScrollReveal>
         </div>
       </section>
