@@ -247,11 +247,11 @@ export const Header: React.FC = () => {
 
           <Link
             href="/news"
-            className={`px-3 py-2 border-2 border-transparent hover:border-ink hover:bg-mist transition-colors min-h-[44px] flex items-center ${
-              pathname === '/news' ? 'bg-mist border-ink' : ''
+            className={`px-3 py-2 border-2 border-transparent hover:border-ink hover:bg-mist transition-colors min-h-[44px] flex items-center font-bold text-clay ${
+              pathname === '/news' || pathname === '/films' ? 'bg-mist border-ink' : ''
             }`}
           >
-            News & Events
+            Films
           </Link>
 
           <Link
@@ -385,7 +385,7 @@ export const Header: React.FC = () => {
               onClick={() => setIsMobileMenuOpen(false)}
               className="block p-3 font-bold border-2 border-ink hover:bg-mist text-lg"
             >
-              News & Posters Archive
+              Films & Video Documentaries
             </Link>
             <Link
               href="/get-involved"
