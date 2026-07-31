@@ -185,7 +185,7 @@ export default function HomePage() {
                 <h2 id="yatra-highlight-heading" className="text-3xl md:text-5xl font-black font-display tracking-tight text-field">
                   {homeContent.yatraTeaser.title}
                 </h2>
-                <blockquote className="text-lg md:text-xl font-body text-marigold italic border-l-4 border-marigold pl-4 py-1">
+                <blockquote className="text-lg md:text-xl font-body text-field/90 italic border-l-4 border-field/50 pl-4 py-1">
                   &quot;{homeContent.yatraTeaser.headline}&quot;
                 </blockquote>
                 <p className="text-base md:text-lg font-body text-field/90 leading-relaxed">
@@ -272,13 +272,13 @@ export default function HomePage() {
       <section className="max-w-7xl mx-auto px-4">
         <ScrollReveal variant="zoom-in">
           <div className="bg-road text-field rounded-3xl border border-road/40 p-8 md:p-12 text-center space-y-6 shadow-2xl">
-            <h2 className="text-3xl md:text-4xl font-black font-display text-marigold">
+            <h2 className="text-3xl md:text-4xl font-black font-display text-field">
               Your Support Drives Inclusivity, Mobility & Dignity
             </h2>
             <p className="text-base md:text-lg font-body max-w-2xl mx-auto text-field/90">
               Sangati Foundation is a registered charitable trust. All donations qualify for 80G tax deduction receipts.
             </p>
-            <Button href="/donate" variant="marigold" className="px-8 py-4 text-lg rounded-full shadow-xl">
+            <Button href="/donate" variant="outline" className="px-8 py-4 text-lg rounded-full shadow-xl bg-field text-ink border-2 border-field hover:bg-ink hover:text-field">
               <Heart className="w-6 h-6 fill-current text-ink" aria-hidden="true" />
               <span>Donate Now & Claim 80G Receipt</span>
             </Button>

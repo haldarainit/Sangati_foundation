@@ -116,7 +116,7 @@ export default function ProgramsIndexPage() {
                   <div className="pt-4 border-t border-road/10 flex justify-end">
                     <Link
                       href={`/programs/${program.slug}`}
-                      className="bg-road text-field hover:bg-marigold hover:text-ink font-mono text-xs font-bold py-3 px-6 rounded-full transition-all duration-300 flex items-center gap-2 shadow-md"
+                      className="bg-road text-field hover:bg-ink hover:text-field font-mono text-xs font-bold py-3 px-6 rounded-full transition-all duration-300 flex items-center gap-2 shadow-md"
                     >
                       <span>Read Full Programme Brief</span>
                       <ArrowRight className="w-4 h-4" aria-hidden="true" />
@@ -133,13 +133,13 @@ export default function ProgramsIndexPage() {
       <section className="max-w-7xl mx-auto px-4">
         <ScrollReveal variant="zoom-in">
           <div className="bg-road text-field rounded-3xl border border-road/40 p-8 md:p-12 text-center space-y-6 shadow-2xl">
-            <h2 className="text-3xl md:text-4xl font-black font-display text-marigold">
+            <h2 className="text-3xl md:text-4xl font-black font-display text-field">
               Partner With Us Across Our Core Programmes
             </h2>
             <p className="text-base md:text-lg font-body max-w-2xl mx-auto">
               Whether you represent a CSR foundation, municipal corporation, or volunteer network, your partnership powers real change.
             </p>
-            <Button href="/donate" variant="marigold" className="px-8 py-4 text-lg rounded-full shadow-xl">
+            <Button href="/donate" variant="outline" className="px-8 py-4 text-lg rounded-full shadow-xl bg-field text-ink border-2 border-field hover:bg-ink hover:text-field">
               <span>Explore Sponsorship & CSR Partnership</span>
               <ArrowRight className="w-5 h-5 text-ink" aria-hidden="true" />
             </Button>

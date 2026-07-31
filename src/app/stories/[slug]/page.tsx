@@ -102,7 +102,7 @@ export default function StoryDetailPage({ params }: { params: { slug: string } }
       {/* FOOTER CTA */}
       <section className="max-w-4xl mx-auto px-4">
         <div className="bg-road text-field border-2 border-ink p-8 text-center space-y-6">
-          <h2 className="text-2xl md:text-3xl font-bold font-display text-marigold">
+          <h2 className="text-2xl md:text-3xl font-bold font-display text-field">
             Help Us Write More Stories of Inclusion
           </h2>
           <p className="text-sm md:text-base font-body max-w-lg mx-auto">

@@ -232,7 +232,7 @@ export default function AboutPage() {
             <p className="text-base md:text-lg font-body max-w-2xl mx-auto">
               Your donation directly funds accessible public toilets, rural health camps, and free tech education.
             </p>
-            <Button href="/donate" variant="marigold" className="px-8 py-4 text-lg rounded-full shadow-xl">
+            <Button href="/donate" variant="outline" className="px-8 py-4 text-lg rounded-full shadow-xl bg-field text-ink border-2 border-field hover:bg-ink hover:text-field">
               <Heart className="w-6 h-6 fill-current text-ink" aria-hidden="true" />
               <span>Donate to Sangati (80G Receipt)</span>
             </Button>

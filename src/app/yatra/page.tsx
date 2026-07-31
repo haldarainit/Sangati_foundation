@@ -141,13 +141,13 @@ export default function YatraPage() {
       <section className="max-w-7xl mx-auto px-4">
         <ScrollReveal variant="zoom-in">
           <div className="bg-road text-field rounded-3xl border border-road/40 p-8 md:p-12 text-center space-y-6 shadow-2xl">
-            <h2 className="text-3xl md:text-4xl font-black font-display text-marigold">
+            <h2 className="text-3xl md:text-4xl font-black font-display text-field">
               Fuel the Next Sangati Yatra Drive
             </h2>
             <p className="text-base md:text-lg font-body max-w-2xl mx-auto">
               Your contribution sponsors modified vehicle maintenance, highway fuel, and accessibility advocacy stops along the route.
             </p>
-            <Button href="/donate" variant="marigold" className="px-8 py-4 text-lg rounded-full shadow-xl">
+            <Button href="/donate" variant="outline" className="px-8 py-4 text-lg rounded-full shadow-xl bg-field text-ink border-2 border-field hover:bg-ink hover:text-field">
               <Heart className="w-6 h-6 fill-current text-ink" aria-hidden="true" />
               <span>Sponsor Sangati Yatra (80G Eligible)</span>
             </Button>

@@ -6,9 +6,6 @@ import { AccessibilityProvider } from '@/components/context/AccessibilityContext
 import { SkipLink } from '@/components/layout/SkipLink';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
-import { AccessibilityToolbar } from '@/components/layout/AccessibilityToolbar';
-import { ScrollProgressBar } from '@/components/ui/ScrollProgressBar';
-import { BackgroundAudioPlayer } from '@/components/ui/BackgroundAudioPlayer';
 import { MobileQuickActions } from '@/components/ui/MobileQuickActions';
 import { organizationInfo } from '@/content/organization';
 
@@ -81,12 +78,6 @@ export default function RootLayout({
 
           {/* Footer Landmark */}
           <Footer />
-
-          {/* Bottom-left accessibility toolbar */}
-          <AccessibilityToolbar />
-
-          {/* Persistent Soft Piano Background Music Player */}
-          <BackgroundAudioPlayer />
 
           {/* Sticky Mobile Quick Action Bar */}
           <MobileQuickActions />
