@@ -108,10 +108,10 @@ export const Header: React.FC = () => {
         {/* Brand Logo & Tagline */}
         <Link
           href="/"
-          className="flex items-center gap-2 sm:gap-3 group min-h-[44px] focus-visible:outline-road"
+          className="flex items-center gap-2 sm:gap-3 group min-h-[44px] focus-visible:outline-road shrink-0"
           aria-label="Sangati Foundation - Home Page"
         >
-          <div className="relative w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 rounded-full overflow-hidden border-2 border-marigold/60 shadow-md shrink-0 bg-white hover:scale-105 transition-transform duration-200">
+          <div className="relative w-11 h-11 sm:w-13 sm:h-13 md:w-16 md:h-16 rounded-full overflow-hidden border-2 border-marigold/60 shadow-md shrink-0 bg-white hover:scale-105 transition-transform duration-200">
             <Image
               src="/sangati-logo.jpg"
               alt="Sangati Foundation Official Logo"
@@ -119,6 +119,17 @@ export const Header: React.FC = () => {
               priority
               sizes="80px"
               className="object-contain p-0.5"
+            />
+          </div>
+          {/* Sangati Foundation Text Logo */}
+          <div className="relative h-9 sm:h-11 md:h-14 w-32 sm:w-44 md:w-52 shrink-0">
+            <Image
+              src="/sangati-text-logo.png"
+              alt="Sangati Foundation - संगति Foundation www.sangati.org"
+              fill
+              priority
+              sizes="(max-width: 640px) 140px, 210px"
+              className="object-contain object-left"
             />
           </div>
         </Link>

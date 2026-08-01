@@ -9,37 +9,6 @@ import { Phone, Mail, MapPin, ExternalLink, ShieldCheck, Heart } from 'lucide-re
 export const Footer: React.FC = () => {
   return (
     <footer className="w-full bg-ink text-field border-t-4 border-marigold mt-16 font-body">
-      {/* Upper Helpline & Mission Banner */}
-      <div className="bg-road text-field px-4 py-8 border-b-2 border-ink">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
-          <div className="space-y-2 text-center md:text-left">
-            <span className="font-mono text-xs text-marigold uppercase tracking-wider font-bold block">
-              NATIONAL DISABILITY HELPLINE
-            </span>
-            <a
-              href={`tel:${organizationInfo.helpline.replace(/\s+/g, '')}`}
-              className="text-2xl md:text-3xl font-black font-mono text-field hover:text-marigold transition-colors inline-flex items-center gap-3 focus-visible:outline-marigold min-h-[44px]"
-            >
-              <Phone className="w-6 h-6 text-marigold" aria-hidden="true" />
-              <span>{organizationInfo.helpline}</span>
-            </a>
-            <p className="text-sm font-sans text-field/90 max-w-xl">
-              Call toll-free for accessibility assistance, mobility guidance, skill training inquiries, or disability rights support.
-            </p>
-          </div>
-
-          <div>
-            <Link
-              href="/donate"
-              className="bg-clay text-field border-2 border-field px-6 py-3.5 rounded-full font-bold text-lg hover:bg-marigold hover:text-ink transition-colors inline-flex items-center gap-2 shadow-lg min-h-[44px]"
-            >
-              <Heart className="w-5 h-5 fill-current" aria-hidden="true" />
-              <span>Support Our Mission (80G Eligible)</span>
-            </Link>
-          </div>
-        </div>
-      </div>
-
       {/* Main Footer Links & Information */}
       <div className="max-w-7xl mx-auto px-4 py-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
         {/* Col 1: About & Mission */}
@@ -54,12 +23,17 @@ export const Footer: React.FC = () => {
                 className="object-contain p-0.5"
               />
             </div>
-            <div className="flex items-center gap-2">
-              <span className="text-2xl font-black font-display tracking-tight text-marigold">
-                SANGATI
-              </span>
-              <span className="text-xs font-mono bg-marigold text-ink px-2 py-0.5 font-bold rounded-full">
-                FOUNDATION
+            <div className="flex flex-col">
+              <div className="flex items-center gap-2">
+                <span className="text-2xl font-black font-display tracking-tight text-marigold">
+                  SANGATI
+                </span>
+                <span className="text-xs font-mono bg-marigold text-ink px-2 py-0.5 font-bold rounded-full">
+                  FOUNDATION
+                </span>
+              </div>
+              <span className="text-xs font-semibold font-sans text-marigold/90 tracking-wide pt-0.5">
+                Empowering Persons with Disability
               </span>
             </div>
           </div>
