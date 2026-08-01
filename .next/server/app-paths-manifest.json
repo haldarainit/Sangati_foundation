@@ -5,13 +5,13 @@
   "/page": "app/page.js",
   "/yatra/page": "app/yatra/page.js",
   "/contact/page": "app/contact/page.js",
-  "/about/page": "app/about/page.js",
-  "/accessibility/page": "app/accessibility/page.js",
-  "/news/page": "app/news/page.js",
   "/get-involved/page": "app/get-involved/page.js",
-  "/stories/[slug]/page": "app/stories/[slug]/page.js",
+  "/accessibility/page": "app/accessibility/page.js",
+  "/about/page": "app/about/page.js",
   "/impact/page": "app/impact/page.js",
+  "/stories/page": "app/stories/page.js",
+  "/news/page": "app/news/page.js",
   "/programs/page": "app/programs/page.js",
-  "/programs/[slug]/page": "app/programs/[slug]/page.js",
-  "/stories/page": "app/stories/page.js"
+  "/stories/[slug]/page": "app/stories/[slug]/page.js",
+  "/programs/[slug]/page": "app/programs/[slug]/page.js"
 }
