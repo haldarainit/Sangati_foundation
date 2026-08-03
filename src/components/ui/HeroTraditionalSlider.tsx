@@ -198,21 +198,35 @@ export const HeroTraditionalSlider: React.FC = () => {
                 <ChevronRight className="w-4 h-4 text-road" />
               </button>
 
-              {/* White Screen Zooming Sangati Logo */}
+              {/* White Screen Zooming Sangati Emblem Logo & Writing Text Logo */}
               <div
-                className={`relative w-full max-w-md sm:max-w-lg md:max-w-xl h-48 sm:h-64 md:h-80 transition-all duration-[3600ms] ease-out transform ${
+                className={`flex flex-col items-center justify-center gap-3 sm:gap-4 transition-all duration-[3600ms] ease-out transform ${
                   zoomActive && isActive
-                    ? 'scale-110 opacity-100'
+                    ? 'scale-105 opacity-100'
                     : 'scale-90 opacity-0'
                 }`}
               >
-                <Image
-                  src={slide.image}
-                  alt="Sangati Foundation Logo"
-                  fill
-                  priority
-                  className="object-contain filter drop-shadow-md"
-                />
+                {/* Circular Emblem Logo */}
+                <div className="relative w-36 sm:w-48 md:w-56 h-36 sm:h-48 md:h-56 shrink-0">
+                  <Image
+                    src="/sangati-logo.jpg"
+                    alt="Sangati Foundation Emblem Logo"
+                    fill
+                    priority
+                    className="object-contain filter drop-shadow-md"
+                  />
+                </div>
+
+                {/* Stylized Brand Writing Logo ("संगति Sangati FOUNDATION www.sangati.org") */}
+                <div className="relative w-60 sm:w-72 md:w-84 h-16 sm:h-20 md:h-24 shrink-0">
+                  <Image
+                    src="/sangati-text-logo.png"
+                    alt="Sangati Foundation Writing Logo"
+                    fill
+                    priority
+                    className="object-contain filter drop-shadow-sm"
+                  />
+                </div>
               </div>
 
               {/* Tagline Reveal */}
