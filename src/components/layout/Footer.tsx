@@ -33,7 +33,7 @@ export const Footer: React.FC = () => {
                 </span>
               </div>
               <span className="text-xs font-semibold font-sans text-marigold/90 tracking-wide pt-0.5">
-                Empowering Persons with Disability
+                Empowering Persons with Disabilities
               </span>
             </div>
           </div>

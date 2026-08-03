@@ -18,6 +18,18 @@ export const programsList: ProgramItem[] = [
     partners: ['Yatra', 'Anuprayaas', 'Sangati Mobility Network'],
     gallery: [
       {
+        id: 'acc-toilet-1',
+        title: 'Sangati Durlabh Shauchalaya Accessible Toilet Interior',
+        src: '/images/accessibility/toilet-showcase-01.jpg',
+        caption: 'Wheelchair accessible toilet interior equipped with support grab bars and wide door access.',
+      },
+      {
+        id: 'acc-toilet-2',
+        title: 'Wheelchair Accessible Sanitation Facility',
+        src: '/images/accessibility/toilet-showcase-02.jpg',
+        caption: 'Accessible toilet facility designed for safety, dignity, and independent usage by PwDs.',
+      },
+      {
         id: 'acc-1',
         title: 'Sector 29 Gurgaon Accessible Toilet Inauguration Ceremony',
         src: '/images/accessibility/accessibility-inauguration-ceremony.jpg',
@@ -218,19 +230,43 @@ export const programsList: ProgramItem[] = [
       'Accessible Yoga at India Gate with Ministry of Ayush, Wheelchair Cricket Champions, Half-Marathon runners, and adaptive athletics.',
     fullContent: `Sangati Foundation actively champions Para Sports, Wheelchair Athletics, and Accessible Fitness across India. On International Yoga Day at India Gate, New Delhi, in collaboration with the Ministry of Ayush (Govt. of India), Eagle Specially Abled Riders, and Kaner Electric Connections, our Divyang athletes and retrofitted scooter riders made history by demonstrating Accessible Yoga ("सुगम्य योग"). We also sponsor Wheelchair Cricket tournaments (Delhi Abled & Wheelchair Cricket Warriors), field teams for the Vedanta Delhi Half-Marathon (Champions with Disability segment), and run inclusive athletic clubs.`,
     highlights: [
+      'Para Badminton Championship: Training camps, equipment, & competitive match support',
+      'Para Athletics & Wheelchair Running: Distance marathon runners & track events',
       'Accessible Yoga at India Gate on International Yoga Day with Ministry of Ayush (Govt. of India)',
-      'Sugamya Yoga ("सुगम्य योग") performed by Divyang athletes on retrofitted scooters and wheelchairs',
       'Wheelchair Cricket Warriors: Tournament sponsorship, equipment, and training support',
-      'Vedanta Delhi Half-Marathon: 25 Divyang marathon runners representing Sangati Foundation',
     ],
-    keyStats: ['Ministry of Ayush Partner', 'Wheelchair Cricket Team', '25+ Half-Marathon Runners'],
-    partners: ['Ministry of Ayush (Govt. of India)', 'Eagle Specially Abled Riders', 'Kaner Electric Connections', 'Wheelchair Cricket Association'],
+    keyStats: ['Para Badminton Champions', 'Wheelchair Marathon Runners', 'Ministry of Ayush Partner'],
+    partners: ['Ministry of Ayush (Govt. of India)', 'Para Badminton Association', 'Wheelchair Athletics India', 'Kaner Electric Connections'],
     gallery: [
       {
+        id: 'ps-showcase-1',
+        title: 'Para Badminton Singles Tournament Match Action',
+        src: '/images/parasports/sports-showcase-01.jpg',
+        caption: 'Sangati Para Badminton athlete competing on court during wheelchair badminton tournament match.',
+      },
+      {
+        id: 'ps-showcase-2',
+        title: 'Para Badminton Doubles & Court Rally',
+        src: '/images/parasports/sports-showcase-02.jpg',
+        caption: 'Wheelchair badminton athlete preparing for serve during competitive para badminton tournament.',
+      },
+      {
+        id: 'ps-showcase-3',
+        title: 'Sangati Para Badminton Training Squad',
+        src: '/images/parasports/sports-showcase-03.jpg',
+        caption: 'Sangati Foundation Para Badminton squad members on court after intensive training session.',
+      },
+      {
+        id: 'ps-showcase-4',
+        title: 'Para Athletics & Wheelchair Marathon Distance Running',
+        src: '/images/parasports/sports-showcase-04.jpg',
+        caption: 'Sangati Wheelchair Marathon distance runners competing in para athletics running event.',
+      },
+      {
         id: 'ps-1',
-        title: 'Accessible Yoga at India Gate (Ministry of Ayush)',
+        title: 'Accessible Yoga Landmark Event at India Gate',
         src: '/images/parasports/parasports-india-gate-yoga.jpg',
-        caption: 'Divyang athletes and wheelchair participants performing Accessible Yoga at India Gate on International Yoga Day.',
+        caption: 'Divyang athletes performing Sugamya Yoga at India Gate landmark.',
       },
       {
         id: 'ps-2',
@@ -249,12 +285,6 @@ export const programsList: ProgramItem[] = [
         title: 'Outdoor Accessible Yoga Masterclass Session',
         src: '/images/parasports/parasports-outdoor-yoga-session.png',
         caption: 'Yoga Guru Sandeep Kumar conducting an outdoor accessible yoga training session under the trees.',
-      },
-      {
-        id: 'ps-5',
-        title: 'Sangati Para Athletes & Retrofitted Scooter Riders Group',
-        src: '/images/parasports/parasports-riders-group.jpg',
-        caption: 'Group photo of Sangati Para Athletes and scooter riders gathering after their yoga and sports session.',
       },
     ],
   },

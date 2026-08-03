@@ -33,6 +33,7 @@ export default function ProgramDetailPage({ params }: { params: { slug: string }
   }
 
   const isParaSports = program.slug === 'para-sports';
+  const isAccessibility = program.slug === 'accessibility';
 
   return (
     <article className="space-y-8 sm:space-y-14 pb-20 md:pb-16">
@@ -171,6 +172,73 @@ export default function ProgramDetailPage({ params }: { params: { slug: string }
                     </ul>
                   </div>
                 </div>
+              </div>
+            </div>
+          </ScrollReveal>
+        )}
+
+        {/* FEATURED SPORTS AND ACTIVITIES PHOTO SHOWCASE GRID */}
+        {isParaSports && (
+          <ScrollReveal variant="zoom-in" delay={120}>
+            <div className="bg-white border-2 border-road/30 rounded-3xl p-6 sm:p-10 space-y-6 shadow-xl">
+              <h2 className="text-2xl sm:text-3xl font-black font-display text-ink border-b-2 border-road/15 pb-4">
+                Sports and Activities
+              </h2>
+
+              {/* Pure Image Showcase Grid */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+                {[
+                  '/images/parasports/sports-showcase-01.jpg',
+                  '/images/parasports/sports-showcase-02.jpg',
+                  '/images/parasports/sports-showcase-03.jpg',
+                  '/images/parasports/sports-showcase-04.jpg',
+                ].map((src, index) => (
+                  <div
+                    key={index}
+                    className="group relative aspect-[4/3] w-full rounded-2xl overflow-hidden border-2 border-road/20 bg-black shadow-md hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-1.5"
+                  >
+                    <Image
+                      src={src}
+                      alt={`Sports and Activities photo ${index + 1}`}
+                      fill
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                      className="object-cover object-center group-hover:scale-110 transition-transform duration-700 ease-out"
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
+          </ScrollReveal>
+        )}
+
+        {/* FEATURED ACCESSIBLE TOILETS PHOTO SHOWCASE GRID */}
+        {isAccessibility && (
+          <ScrollReveal variant="zoom-in" delay={120}>
+            <div className="bg-white border-2 border-road/30 rounded-3xl p-6 sm:p-10 space-y-6 shadow-xl">
+              <h2 className="text-2xl sm:text-3xl font-black font-display text-ink border-b-2 border-road/15 pb-4">
+                Sangati Durlabh Shauchalaya — Accessible Toilets Showcase
+              </h2>
+
+              {/* Pure Image Showcase Grid */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+                {[
+                  '/images/accessibility/toilet-showcase-01.jpg',
+                  '/images/accessibility/toilet-showcase-02.jpg',
+                  '/images/accessibility/accessibility-durlabh-shauchalaya.jpg',
+                ].map((src, index) => (
+                  <div
+                    key={index}
+                    className="group relative aspect-[4/3] w-full rounded-2xl overflow-hidden border-2 border-road/20 bg-black shadow-md hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-1.5"
+                  >
+                    <Image
+                      src={src}
+                      alt={`Accessible Toilet photo ${index + 1}`}
+                      fill
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      className="object-cover object-center group-hover:scale-110 transition-transform duration-700 ease-out"
+                    />
+                  </div>
+                ))}
               </div>
             </div>
           </ScrollReveal>

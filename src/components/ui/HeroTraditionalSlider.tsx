@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ChevronRight, Sparkles } from 'lucide-react';
+import { ChevronRight } from 'lucide-react';
 import { useAccessibility } from '../context/AccessibilityContext';
 
 export interface HeroSlideItem {
@@ -24,8 +24,8 @@ const HERO_SLIDES: HeroSlideItem[] = [
     slug: 'intro',
     category: 'SANGATI FOUNDATION INTRO',
     title: 'Sangati Foundation',
-    subtitle: 'Empowering Persons with Disability',
-    image: '/sangati-logo.jpg',
+    subtitle: 'Empowering Persons with Disabilities',
+    image: '/sangati-text-logo.png',
     isIntro: true,
     ctaLink: '/about',
     ctaText: 'About Sangati',
@@ -198,52 +198,31 @@ export const HeroTraditionalSlider: React.FC = () => {
                 <ChevronRight className="w-4 h-4 text-road" />
               </button>
 
-              {/* White Screen Zooming Sangati Emblem Logo & Writing Text Logo */}
+              {/* White Screen Zooming Sangati Text Logo Image */}
               <div
-                className={`flex flex-col items-center justify-center gap-3 sm:gap-4 transition-all duration-[3600ms] ease-out transform ${
+                className={`flex flex-col items-center justify-center space-y-6 transition-all duration-[3600ms] ease-out transform ${
                   zoomActive && isActive
-                    ? 'scale-105 opacity-100'
+                    ? 'scale-110 opacity-100'
                     : 'scale-90 opacity-0'
                 }`}
               >
-                {/* Circular Emblem Logo */}
-                <div className="relative w-36 sm:w-48 md:w-56 h-36 sm:h-48 md:h-56 shrink-0">
+                {/* Sangati Writing Logo Image */}
+                <div className="relative w-[320px] sm:w-[480px] md:w-[600px] h-[140px] sm:h-[200px] md:h-[250px] shrink-0">
                   <Image
-                    src="/sangati-logo.jpg"
-                    alt="Sangati Foundation Emblem Logo"
+                    src="/sangati-text-logo.png"
+                    alt="Sangati Foundation Logo"
                     fill
                     priority
                     className="object-contain filter drop-shadow-md"
                   />
                 </div>
 
-                {/* Stylized Brand Writing Logo ("संगति Sangati FOUNDATION www.sangati.org") */}
-                <div className="relative w-60 sm:w-72 md:w-84 h-16 sm:h-20 md:h-24 shrink-0">
-                  <Image
-                    src="/sangati-text-logo.png"
-                    alt="Sangati Foundation Writing Logo"
-                    fill
-                    priority
-                    className="object-contain filter drop-shadow-sm"
-                  />
+                {/* Tagline Badge */}
+                <div className="pt-1">
+                  <div className="inline-flex items-center gap-2 px-4 py-2 bg-road/10 text-road text-sm sm:text-base font-mono font-bold uppercase tracking-wider rounded-full border border-road/20 shadow-sm">
+                    <span>Empowering Persons with Disabilities</span>
+                  </div>
                 </div>
-              </div>
-
-              {/* Tagline Reveal */}
-              <div
-                className={`mt-6 text-center space-y-2 transition-all duration-1000 delay-300 transform ${
-                  zoomActive && isActive
-                    ? 'translate-y-0 opacity-100'
-                    : 'translate-y-4 opacity-0'
-                }`}
-              >
-                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-road/10 text-road text-xs sm:text-sm font-mono font-bold uppercase tracking-wider rounded-full shadow-sm">
-                  <Sparkles className="w-4 h-4" />
-                  <span>Empowering Persons with Disability</span>
-                </div>
-                <p className="text-base sm:text-lg text-gray-700 font-bold max-w-lg mx-auto pt-1">
-                  Empowering Persons with Disability
-                </p>
               </div>
             </div>
           );

@@ -12,124 +12,31 @@ import { useAccessibility } from '../context/AccessibilityContext';
 export const Header: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isMegaMenuOpen, setIsMegaMenuOpen] = useState(false);
-  const [isTopBarDismissed, setIsTopBarDismissed] = useState(false);
   const pathname = usePathname();
-  const { highContrast, toggleHighContrast } = useAccessibility();
 
   // Close menus on route change
   useEffect(() => {
     setIsMobileMenuOpen(false);
     setIsMegaMenuOpen(false);
   }, [pathname]);
-
-  // Handle escape key to close menus
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        setIsMobileMenuOpen(false);
-        setIsMegaMenuOpen(false);
-      }
-    };
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, []);
-
   return (
     <header className="w-full bg-field/95 backdrop-blur-md border-b border-road/20 sticky top-0 z-40 shadow-xs">
-      {/* Top Banner: Compact Mobile & Dismissible */}
-      {!isTopBarDismissed && (
-        <div className="bg-ink text-field px-3 py-1.5 text-xs border-b border-ink/30">
-          <div className="max-w-7xl mx-auto flex items-center justify-between gap-2">
-            {/* Mobile Layout (Slim 1-line) */}
-            <div className="flex items-center gap-3 font-mono sm:hidden w-full justify-between">
-              <a
-                href={`tel:${organizationInfo.helpline.replace(/\s+/g, '')}`}
-                className="flex items-center gap-1.5 font-bold text-marigold hover:underline py-1 focus-visible:outline-marigold"
-                aria-label={`Call National Helpline: ${organizationInfo.helpline}`}
-              >
-                <Phone className="w-3.5 h-3.5 text-marigold shrink-0" aria-hidden="true" />
-                <span>Helpline: <strong>{organizationInfo.helpline}</strong></span>
-              </a>
-              
-              <div className="flex items-center gap-2">
-                <button
-                  onClick={() => setIsTopBarDismissed(true)}
-                  className="p-1.5 hover:text-marigold text-field font-bold ml-1 min-h-[36px] min-w-[36px] flex items-center justify-center"
-                  aria-label="Dismiss top notification bar"
-                  title="Close top bar"
-                >
-                  <X className="w-4 h-4" aria-hidden="true" />
-                </button>
-              </div>
-            </div>
-
-            {/* Desktop / Tablet Layout (Sm & up) */}
-            <div className="hidden sm:flex items-center justify-between w-full">
-              <div className="flex items-center gap-4 font-mono">
-                <a
-                  href={`tel:${organizationInfo.helpline.replace(/\s+/g, '')}`}
-                  className="flex items-center gap-1.5 font-bold hover:text-marigold transition-colors py-1 focus-visible:outline-marigold"
-                  aria-label={`Call National Helpline: ${organizationInfo.helpline}`}
-                >
-                  <Phone className="w-4 h-4 text-marigold" aria-hidden="true" />
-                  <span>Helpline: <strong className="text-marigold font-black">{organizationInfo.helpline}</strong></span>
-                </a>
-                <span className="text-field/40" aria-hidden="true">|</span>
-                <span className="text-field/80">
-                  Registered Charitable Trust (Est. 14 Feb 2019)
-                </span>
-              </div>
-
-              <div className="flex items-center gap-3">
-                <Link
-                  href="/accessibility"
-                  className="text-xs font-mono underline hover:text-marigold px-1"
-                >
-                  Accessibility Statement
-                </Link>
-
-                {/* Dismiss Close Button */}
-                <button
-                  onClick={() => setIsTopBarDismissed(true)}
-                  className="p-1.5 hover:text-marigold text-field/80 hover:text-field transition-colors ml-1 min-h-[36px] min-w-[36px] flex items-center justify-center"
-                  aria-label="Dismiss top notification bar"
-                  title="Close top bar"
-                >
-                  <X className="w-4 h-4" aria-hidden="true" />
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-
       {/* Main Header Container */}
       <div className="max-w-7xl mx-auto px-3 sm:px-4 py-2 sm:py-3 flex items-center justify-between gap-2 sm:gap-4">
-        {/* Brand Logo & Tagline */}
+        {/* Brand Logo */}
         <Link
           href="/"
-          className="flex items-center gap-2 sm:gap-3 group min-h-[44px] focus-visible:outline-road shrink-0"
+          className="flex items-center group min-h-[44px] focus-visible:outline-road shrink-0 py-1"
           aria-label="Sangati Foundation - Home Page"
         >
-          <div className="relative w-11 h-11 sm:w-13 sm:h-13 md:w-16 md:h-16 rounded-full overflow-hidden border-2 border-marigold/60 shadow-md shrink-0 bg-white hover:scale-105 transition-transform duration-200">
+          <div className="relative w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 rounded-full overflow-hidden border-2 border-marigold/60 shadow-md shrink-0 bg-white hover:scale-105 transition-transform duration-200">
             <Image
               src="/sangati-logo.jpg"
               alt="Sangati Foundation Official Logo"
               fill
               priority
-              sizes="80px"
+              sizes="100px"
               className="object-contain p-0.5"
-            />
-          </div>
-          {/* Sangati Foundation Text Logo */}
-          <div className="relative h-9 sm:h-11 md:h-14 w-32 sm:w-44 md:w-52 shrink-0">
-            <Image
-              src="/sangati-text-logo.png"
-              alt="Sangati Foundation - संगति Foundation www.sangati.org"
-              fill
-              priority
-              sizes="(max-width: 640px) 140px, 210px"
-              className="object-contain object-left"
             />
           </div>
         </Link>
