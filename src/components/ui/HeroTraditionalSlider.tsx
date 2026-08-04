@@ -6,104 +6,42 @@ import Link from 'next/link';
 import { ChevronRight } from 'lucide-react';
 import { useAccessibility } from '../context/AccessibilityContext';
 
-export interface HeroSlideItem {
-  id: string;
-  slug: string;
-  category: string;
-  title: string;
-  subtitle: string;
-  image: string;
-  isIntro?: boolean;
-  ctaLink: string;
-  ctaText: string;
+import { DEFAULT_HERO_SLIDES, type HeroSlideItem } from '@/content/heroSlides';
+
+export type { HeroSlideItem };
+
+
+export interface HeroTraditionalSliderProps {
+  /**
+   * Slides managed in the admin panel. The logo intro slide is prepended
+   * automatically. When empty, DEFAULT_HERO_SLIDES is used instead.
+   */
+  slides?: Omit<HeroSlideItem, 'id' | 'slug' | 'isIntro'>[];
 }
 
-const HERO_SLIDES: HeroSlideItem[] = [
-  {
-    id: 'slide-intro',
-    slug: 'intro',
-    category: 'SANGATI FOUNDATION INTRO',
-    title: 'Sangati Foundation',
-    subtitle: 'Empowering Persons with Disabilities',
-    image: '/sangati-text-logo.png',
-    isIntro: true,
-    ctaLink: '/about',
-    ctaText: 'About Sangati',
-  },
-  {
-    id: 'slide-accessibility',
-    slug: 'accessibility',
-    category: 'ACCESSIBILITY & DURLABH SHAUCHALAYA',
-    title: 'Dignified & Wheelchair Accessible Public Spaces',
-    subtitle: 'Sangati Durlabh Shauchalaya accessible toilets, railway station transformations, and public accessibility audits across India.',
-    image: '/images/accessibility/accessibility-inauguration-ceremony.jpg',
-    ctaLink: '/programs/accessibility',
-    ctaText: 'Explore Accessibility',
-  },
-  {
-    id: 'slide-parasports',
-    slug: 'para-sports',
-    category: 'PARA SPORTS & ADAPTIVE YOGA',
-    title: 'Breaking Barriers Through Inclusive Sports',
-    subtitle: 'Accessible Yoga at India Gate with Ministry of Ayush, Wheelchair Cricket Warriors, and Delhi Half-Marathon runners.',
-    image: '/images/parasports/parasports-india-gate-yoga.jpg',
-    ctaLink: '/programs/para-sports',
-    ctaText: 'Explore Para Sports',
-  },
-  {
-    id: 'slide-livelihood',
-    slug: 'livelihood',
-    category: 'LIVELIHOOD & SANGATI SHOPPE',
-    title: 'Empowering Divyang Micro-Entrepreneurs',
-    subtitle: 'संगTea custom retrofitted e-karts and mobile vendor carts unlocking financial independence and dignity for persons with disability.',
-    image: '/images/livelihood/ekart-shoppe-sidecar.jpg',
-    ctaLink: '/programs/livelihood',
-    ctaText: 'Explore Sangati Shoppe',
-  },
-  {
-    id: 'slide-skills',
-    slug: 'skills',
-    category: 'SKILL DEVELOPMENT & JOBS',
-    title: 'Free Vocational Training & Job Placement',
-    subtitle: 'Project Udaan: Bakery & Pastry Arts, RPL Pump Operator, Laptop Repair, Web Dev, Python, & dedicated job mentorship.',
-    image: '/images/skills/skill-bakery-mandi-group.jpg',
-    ctaLink: '/programs/skills',
-    ctaText: 'Explore Skill Training',
-  },
-  {
-    id: 'slide-health',
-    slug: 'health',
-    category: 'HEALTH & CRITICAL CARE',
-    title: 'Mobile Cancer Screening & OPD Healthcare',
-    subtitle: 'Asha Kiran mobile cancer detection van drives, rural OPD care in Dalhousie HP, and winter warmth relief distributions.',
-    image: '/images/health/health-cancer-van-team.jpg',
-    ctaLink: '/programs/health',
-    ctaText: 'Explore Health Drives',
-  },
-  {
-    id: 'slide-yatra',
-    slug: 'yatra',
-    category: 'SANGATI YATRA 2024-25',
-    title: '6,500 KM Nationwide Accessibility Expedition',
-    subtitle: 'Flagged off by Dr. Deepa Malik — travelling across India with retrofitted scooters to audit travel hubs and drive inclusion.',
-    image: '/images/yatra/yatra-flagoff-deepa-malik.jpg',
-    ctaLink: '/yatra',
-    ctaText: 'Discover Sangati Yatra',
-  },
-];
-
-export const HeroTraditionalSlider: React.FC = () => {
+export const HeroTraditionalSlider: React.FC<HeroTraditionalSliderProps> = ({ slides: fromCms }) => {
   const { reduceMotion } = useAccessibility();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [zoomActive, setZoomActive] = useState(false);
   const touchStartX = useRef<number | null>(null);
 
+  const slides: HeroSlideItem[] = fromCms?.length
+    ? [
+        DEFAULT_HERO_SLIDES[0],
+        ...fromCms.map((slide, idx) => ({
+          ...slide,
+          id: `slide-${idx + 1}`,
+          slug: `slide-${idx + 1}`,
+        })),
+      ]
+    : DEFAULT_HERO_SLIDES;
+
   const nextSlide = () => {
-    setCurrentIndex((prev) => (prev + 1) % HERO_SLIDES.length);
+    setCurrentIndex((prev) => (prev + 1) % slides.length);
   };
 
   const prevSlide = () => {
-    setCurrentIndex((prev) => (prev - 1 + HERO_SLIDES.length) % HERO_SLIDES.length);
+    setCurrentIndex((prev) => (prev - 1 + slides.length) % slides.length);
   };
 
   const skipIntro = () => {
@@ -157,14 +95,14 @@ export const HeroTraditionalSlider: React.FC = () => {
       setZoomActive(false);
       // Regular 5-second slide rotation for program slides
       const timer = setInterval(() => {
-        setCurrentIndex((prev) => (prev + 1) % HERO_SLIDES.length);
+        setCurrentIndex((prev) => (prev + 1) % slides.length);
       }, 5000);
 
       return () => clearInterval(timer);
     }
-  }, [currentIndex, reduceMotion]);
+  }, [currentIndex, reduceMotion, slides.length]);
 
-  const currentSlide = HERO_SLIDES[currentIndex];
+  const currentSlide = slides[currentIndex];
 
   return (
     <div
@@ -177,7 +115,7 @@ export const HeroTraditionalSlider: React.FC = () => {
       onTouchEnd={handleTouchEnd}
     >
       {/* Background Slides */}
-      {HERO_SLIDES.map((slide, idx) => {
+      {slides.map((slide, idx) => {
         const isActive = idx === currentIndex;
 
         // Slide #0: Animated White Screen Intro Logo
@@ -206,23 +144,29 @@ export const HeroTraditionalSlider: React.FC = () => {
                     : 'scale-90 opacity-0'
                 }`}
               >
+                {/* Circular Emblem Logo */}
+                <div className="relative w-[110px] h-[110px] sm:w-[140px] sm:h-[140px] md:w-[170px] md:h-[170px] shrink-0 rounded-full overflow-hidden border-4 border-marigold/50 shadow-lg bg-white">
+                  <Image
+                    src="/sangati-logo.jpg"
+                    alt=""
+                    fill
+                    priority
+                    sizes="170px"
+                    className="object-contain p-1"
+                  />
+                </div>
+
                 {/* Sangati Writing Logo Image */}
                 <div className="relative w-[320px] sm:w-[480px] md:w-[600px] h-[140px] sm:h-[200px] md:h-[250px] shrink-0">
                   <Image
                     src="/sangati-text-logo.png"
-                    alt="Sangati Foundation Logo"
+                    alt="Sangati Foundation"
                     fill
                     priority
                     className="object-contain filter drop-shadow-md"
                   />
                 </div>
 
-                {/* Tagline Badge */}
-                <div className="pt-1">
-                  <div className="inline-flex items-center gap-2 px-4 py-2 bg-road/10 text-road text-sm sm:text-base font-mono font-bold uppercase tracking-wider rounded-full border border-road/20 shadow-sm">
-                    <span>Empowering Persons with Disabilities</span>
-                  </div>
-                </div>
               </div>
             </div>
           );
@@ -284,7 +228,7 @@ export const HeroTraditionalSlider: React.FC = () => {
 
       {/* Bottom Horizontal Slide Indicator Dots */}
       <div className="absolute bottom-4 inset-x-0 z-30 flex items-center justify-center gap-2 sm:gap-2.5">
-        {HERO_SLIDES.map((slide, idx) => {
+        {slides.map((slide, idx) => {
           const isActive = idx === currentIndex;
           if (slide.isIntro) {
             return (

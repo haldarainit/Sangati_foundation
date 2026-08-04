@@ -1,8 +1,17 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export',
+  // NOTE: this site used to build with `output: 'export'` (a folder of plain
+  // HTML files). That had to change for the admin panel: the Studio needs a
+  // running Next.js server, and content edits need to appear without a rebuild.
+  // Deploy to Vercel (or any Node host) instead of copying `out/` to a server.
   images: {
-    unoptimized: true,
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'cdn.sanity.io',
+        pathname: '/images/**',
+      },
+    ],
   },
 };
 

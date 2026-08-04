@@ -9,7 +9,15 @@ import { programsList } from '@/content/programs';
 import { Phone, ChevronDown, Menu, X, Heart, Shield, Eye } from 'lucide-react';
 import { useAccessibility } from '../context/AccessibilityContext';
 
-export const Header: React.FC = () => {
+export interface HeaderProps {
+  /**
+   * Programmes for the navigation menu, supplied by the site layout so the menu
+   * follows whatever is in the admin panel. Falls back to the built-in list.
+   */
+  programs?: { slug: string; title: string; summary: string }[];
+}
+
+export const Header: React.FC<HeaderProps> = ({ programs = programsList }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isMegaMenuOpen, setIsMegaMenuOpen] = useState(false);
   const pathname = usePathname();
@@ -97,7 +105,7 @@ export const Header: React.FC = () => {
                   </Link>
                 </div>
 
-                {programsList.filter((prog) => prog.slug !== 'mobility').map((prog) => (
+                {programs.filter((prog) => prog.slug !== 'mobility').map((prog) => (
                   <Link
                     key={prog.slug}
                     href={`/programs/${prog.slug}`}
@@ -228,7 +236,7 @@ export const Header: React.FC = () => {
               <span className="block font-mono text-xs text-road font-bold uppercase">
                 Specific Programmes
               </span>
-              {programsList.filter((prog) => prog.slug !== 'mobility').map((prog) => (
+              {programs.filter((prog) => prog.slug !== 'mobility').map((prog) => (
                 <Link
                   key={prog.slug}
                   href={`/programs/${prog.slug}`}

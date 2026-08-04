@@ -19,10 +19,12 @@
       }
     ],
     "paths": {
-      "@/*": ["./src/*"],
-      "@/content/*": ["./content/*"]
+      "@/content/*": ["./content/*"],
+      "@/sanity/*": ["./sanity/*"],
+      "@/*": ["./src/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
-  "exclude": ["node_modules"]
+  // `scripts/` runs in Node, not the browser — it has its own tsconfig.
+  "exclude": ["node_modules", "scripts"]
 }
