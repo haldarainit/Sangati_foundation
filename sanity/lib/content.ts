@@ -9,7 +9,7 @@ import { programsList as localPrograms } from '@/content/programs';
 import { storiesList as localStories } from '@/content/stories';
 import { yatraCampaign as localYatra } from '@/content/yatra';
 
-import { imageUrlOr, type SanityImage } from './image';
+import { imageUrl, imageUrlOr, type SanityImage } from './image';
 import { sanityFetch, sanityFetchList } from './fetch';
 import {
   ABOUT_QUERY,
@@ -24,6 +24,7 @@ import {
   STORY_BY_SLUG_QUERY,
   STORY_SLUGS_QUERY,
   TEAM_QUERY,
+  VIDEOS_QUERY,
   YATRA_QUERY,
 } from './queries';
 
@@ -193,6 +194,49 @@ export async function getNews(): Promise<typeof localNews> {
     description: item.description,
     linkText: item.linkText,
     image: imageUrlOr(item.image, '', { width: 1000 }),
+  }));
+}
+
+/* ------------------------------------------------------------------ *
+ * Films & videos
+ * ------------------------------------------------------------------ */
+
+export type Video = {
+  id: string;
+  title: string;
+  url: string;
+  description: string;
+  date?: string;
+  duration?: string;
+  thumbnail: string | null;
+  isFeatured: boolean;
+};
+
+type RawVideo = {
+  id: string;
+  title: string;
+  url: string;
+  description: string;
+  date?: string;
+  duration?: string;
+  isFeatured?: boolean;
+  thumbnail?: SanityImage;
+};
+
+/** Empty until the foundation adds videos in the admin panel. */
+export async function getVideos(): Promise<Video[]> {
+  const data = await sanityFetchList<RawVideo>(VIDEOS_QUERY, {}, ['video']);
+  if (!data) return [];
+
+  return data.map((v) => ({
+    id: v.id,
+    title: v.title,
+    url: v.url,
+    description: v.description,
+    date: v.date,
+    duration: v.duration,
+    thumbnail: imageUrl(v.thumbnail, { width: 1280, height: 720 }),
+    isFeatured: Boolean(v.isFeatured),
   }));
 }
 

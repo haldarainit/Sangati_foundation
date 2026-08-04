@@ -1,7 +1,8 @@
 import React from 'react';
 import Image from 'next/image';
-import { getNews } from '@/sanity/lib/content';
+import { getNews, getVideos } from '@/sanity/lib/content';
 import { REVALIDATE_SECONDS } from '@/sanity/lib/fetch';
+import { VideoEmbed } from '@/components/ui/VideoEmbed';
 import { HeroVideoPlayer } from '@/components/ui/HeroVideoPlayer';
 import { RouteLine } from '@/components/ui/RouteLine';
 import { ScrollReveal } from '@/components/ui/ScrollReveal';
@@ -16,7 +17,12 @@ export const metadata = {
 export const revalidate = REVALIDATE_SECONDS;
 
 export default async function FilmsPage() {
-  const newsList = await getNews();
+  const [newsList, videos] = await Promise.all([getNews(), getVideos()]);
+
+  // The film marked "featured" leads the page; if none is marked, the first
+  // one does. With no videos at all, the original local film still plays.
+  const featured = videos.find((v) => v.isFeatured) ?? videos[0] ?? null;
+  const others = videos.filter((v) => v.id !== featured?.id);
 
   return (
     <div className="space-y-8 sm:space-y-14 pb-20 md:pb-16">
@@ -63,12 +69,14 @@ export default async function FilmsPage() {
                 FEATURED DOCUMENTARY FILM
               </span>
               <h2 id="featured-film-heading" className="text-2xl sm:text-4xl font-black font-display text-ink">
-                Sangati Foundation: Driving Inclusivity, Mobility & Dignity
+                {featured
+                  ? featured.title
+                  : 'Sangati Foundation: Driving Inclusivity, Mobility & Dignity'}
               </h2>
             </div>
             <div className="flex items-center gap-2 font-mono text-xs font-bold bg-mist text-ink px-3 py-1.5 rounded-full border border-ink/20 shrink-0">
               <Clock className="w-4 h-4 text-road" />
-              <span>Duration: 3 min 45 sec • Full HD</span>
+              <span>{featured?.duration ?? 'Duration: 3 min 45 sec • Full HD'}</span>
             </div>
           </div>
         </ScrollReveal>
@@ -76,7 +84,11 @@ export default async function FilmsPage() {
         {/* Video Player Canvas Container */}
         <ScrollReveal variant="zoom-in" delay={100}>
           <div className="bg-ink rounded-3xl border-4 border-ink shadow-2xl overflow-hidden p-2 sm:p-4">
-            <HeroVideoPlayer src="/hero-video.mp4" variant="hero" />
+            {featured ? (
+              <VideoEmbed video={featured} priority />
+            ) : (
+              <HeroVideoPlayer src="/hero-video.mp4" variant="hero" />
+            )}
           </div>
         </ScrollReveal>
 
@@ -91,7 +103,9 @@ export default async function FilmsPage() {
                 About This Film
               </h3>
               <p className="text-base sm:text-lg font-body text-ink/90 leading-relaxed">
-                This flagship documentary film captures Sangati Foundation’s ground-level impact across India. It chronicles our key initiatives — establishing India’s first Sangati Durlabh Shauchalaya wheelchair-accessible public toilets, transforming Hazrat Nizamuddin railway hub for locomotor & visual disability access, deploying Asha Kiran mobile cancer screening vans across rural Himachal Pradesh, empowering Divyang street vendors with retrofitted sangTea e-karts, and completing the historic 6,500 km Sangati Yatra.
+                {featured
+                  ? featured.description
+                  : 'This flagship documentary film captures Sangati Foundation’s ground-level impact across India. It chronicles our key initiatives — establishing India’s first Sangati Durlabh Shauchalaya wheelchair-accessible public toilets, transforming Hazrat Nizamuddin railway hub for locomotor & visual disability access, deploying Asha Kiran mobile cancer screening vans across rural Himachal Pradesh, empowering Divyang street vendors with retrofitted sangTea e-karts, and completing the historic 6,500 km Sangati Yatra.'}
               </p>
             </div>
 
@@ -122,6 +136,43 @@ export default async function FilmsPage() {
           </div>
         </ScrollReveal>
       </section>
+
+      {/* MORE FILMS */}
+      {others.length > 0 && (
+        <section className="max-w-7xl mx-auto px-4 space-y-8" aria-labelledby="more-films-heading">
+          <ScrollReveal variant="fade-up">
+            <div className="border-b-2 border-ink pb-4">
+              <span className="font-mono text-xs font-bold text-road uppercase tracking-wider block">
+                VIDEO LIBRARY
+              </span>
+              <h2 id="more-films-heading" className="text-2xl sm:text-3xl font-bold font-display text-ink">
+                More Films & Video Stories
+              </h2>
+            </div>
+          </ScrollReveal>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
+            {others.map((v, idx) => (
+              <ScrollReveal key={v.id} variant="fade-up" delay={idx * 60}>
+                <article className="space-y-3 bg-white border border-road/20 rounded-3xl p-4 shadow-sm h-full">
+                  <VideoEmbed video={v} />
+                  <div className="space-y-1.5 px-1 pb-1">
+                    <div className="flex flex-wrap items-center gap-2">
+                      {v.date && (
+                        <span className="font-mono text-[10px] font-bold text-road bg-road/10 border border-road/20 px-2.5 py-0.5 rounded-full uppercase">
+                          {v.date}
+                        </span>
+                      )}
+                    </div>
+                    <h3 className="text-lg font-bold font-display text-ink">{v.title}</h3>
+                    <p className="font-body text-sm text-ink/80 leading-relaxed">{v.description}</p>
+                  </div>
+                </article>
+              </ScrollReveal>
+            ))}
+          </div>
+        </section>
+      )}
 
       {/* ROUTE LINE MOTIF */}
       <div className="max-w-7xl mx-auto px-4">

@@ -8,6 +8,7 @@ import { newsPoster } from './documents/newsPoster';
 import { program } from './documents/program';
 import { story } from './documents/story';
 import { teamMember } from './documents/teamMember';
+import { video } from './documents/video';
 
 import { aboutPage } from './singletons/aboutPage';
 import { donatePage } from './singletons/donatePage';
@@ -36,6 +37,7 @@ export const schemaTypes: SchemaTypeDefinition[] = [
   story,
   program,
   teamMember,
+  video,
   // One-off pages
   homePage,
   aboutPage,

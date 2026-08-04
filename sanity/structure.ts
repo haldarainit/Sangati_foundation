@@ -28,6 +28,15 @@ export const structure: StructureResolver = (S) =>
         ),
 
       S.listItem()
+        .title('Films & Videos')
+        .schemaType('video')
+        .child(
+          S.documentTypeList('video')
+            .title('Films & Videos')
+            .defaultOrdering([{ field: 'order', direction: 'asc' }])
+        ),
+
+      S.listItem()
         .title('Stories')
         .schemaType('story')
         .child(

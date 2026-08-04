@@ -24,6 +24,19 @@ export const NEWS_QUERY = groq`
   }
 `;
 
+export const VIDEOS_QUERY = groq`
+  *[_type == "video"] | order(order asc) {
+    "id": _id,
+    title,
+    url,
+    description,
+    date,
+    duration,
+    isFeatured,
+    thumbnail ${IMAGE}
+  }
+`;
+
 export const STORIES_QUERY = groq`
   *[_type == "story"] | order(order asc) {
     "slug": slug.current,

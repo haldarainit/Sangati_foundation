@@ -11,6 +11,12 @@ const nextConfig = {
         hostname: 'cdn.sanity.io',
         pathname: '/images/**',
       },
+      {
+        // YouTube thumbnails, used as the poster for un-played videos.
+        protocol: 'https',
+        hostname: 'i.ytimg.com',
+        pathname: '/vi/**',
+      },
     ],
   },
 };
