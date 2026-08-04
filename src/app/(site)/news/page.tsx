@@ -19,10 +19,12 @@ export const revalidate = REVALIDATE_SECONDS;
 export default async function FilmsPage() {
   const [newsList, videos] = await Promise.all([getNews(), getVideos()]);
 
-  // The film marked "featured" leads the page; if none is marked, the first
-  // one does. With no videos at all, the original local film still plays.
-  const featured = videos.find((v) => v.isFeatured) ?? videos[0] ?? null;
-  const others = videos.filter((v) => v.id !== featured?.id);
+  // The original trailer always holds the top slot. Everything added in the
+  // admin panel appears in the library below it, with any video marked
+  // "show first" pinned to the front.
+  const others = [...videos].sort(
+    (a, b) => Number(b.isFeatured) - Number(a.isFeatured)
+  );
 
   return (
     <div className="space-y-8 sm:space-y-14 pb-20 md:pb-16">
@@ -69,26 +71,20 @@ export default async function FilmsPage() {
                 FEATURED DOCUMENTARY FILM
               </span>
               <h2 id="featured-film-heading" className="text-2xl sm:text-4xl font-black font-display text-ink">
-                {featured
-                  ? featured.title
-                  : 'Sangati Foundation: Driving Inclusivity, Mobility & Dignity'}
+                Sangati Foundation: Driving Inclusivity, Mobility & Dignity
               </h2>
             </div>
             <div className="flex items-center gap-2 font-mono text-xs font-bold bg-mist text-ink px-3 py-1.5 rounded-full border border-ink/20 shrink-0">
               <Clock className="w-4 h-4 text-road" />
-              <span>{featured?.duration ?? 'Duration: 3 min 45 sec • Full HD'}</span>
+              <span>Duration: 3 min 45 sec • Full HD</span>
             </div>
           </div>
         </ScrollReveal>
 
-        {/* Video Player Canvas Container */}
+        {/* Video Player Canvas Container — the original trailer, always shown */}
         <ScrollReveal variant="zoom-in" delay={100}>
           <div className="bg-ink rounded-3xl border-4 border-ink shadow-2xl overflow-hidden p-2 sm:p-4">
-            {featured ? (
-              <VideoEmbed video={featured} priority />
-            ) : (
-              <HeroVideoPlayer src="/hero-video.mp4" variant="hero" />
-            )}
+            <HeroVideoPlayer src="/hero-video.mp4" variant="hero" />
           </div>
         </ScrollReveal>
 
@@ -103,9 +99,7 @@ export default async function FilmsPage() {
                 About This Film
               </h3>
               <p className="text-base sm:text-lg font-body text-ink/90 leading-relaxed">
-                {featured
-                  ? featured.description
-                  : 'This flagship documentary film captures Sangati Foundation’s ground-level impact across India. It chronicles our key initiatives — establishing India’s first Sangati Durlabh Shauchalaya wheelchair-accessible public toilets, transforming Hazrat Nizamuddin railway hub for locomotor & visual disability access, deploying Asha Kiran mobile cancer screening vans across rural Himachal Pradesh, empowering Divyang street vendors with retrofitted sangTea e-karts, and completing the historic 6,500 km Sangati Yatra.'}
+                This flagship documentary film captures Sangati Foundation’s ground-level impact across India. It chronicles our key initiatives — establishing India’s first Sangati Durlabh Shauchalaya wheelchair-accessible public toilets, transforming Hazrat Nizamuddin railway hub for locomotor & visual disability access, deploying Asha Kiran mobile cancer screening vans across rural Himachal Pradesh, empowering Divyang street vendors with retrofitted sangTea e-karts, and completing the historic 6,500 km Sangati Yatra.
               </p>
             </div>
 

@@ -64,9 +64,10 @@ export const video = defineType({
     }),
     defineField({
       name: 'isFeatured',
-      title: 'Show as the main film at the top of the page?',
+      title: 'Show first in the video library?',
       type: 'boolean',
-      description: 'Only one film should have this switched on.',
+      description:
+        'Pins this video to the front of the list. The documentary trailer at the very top of the Films page is fixed and is not affected by this.',
       initialValue: false,
     }),
     defineField({
