@@ -90,14 +90,21 @@ that stays visible when the photo is cropped on a phone.
 
 ---
 
-## Please always fill in the caption / alt text
+## Captions and alt text
 
-Every photo has a **Caption / alt text** box. This is read aloud to blind
-visitors using screen readers.
+Every photo has a **Photo title** and a **Caption / alt text** box. Both are
+optional — you can upload a batch of photos and leave them blank.
 
-For a website built for persons with disability, leaving it blank is the one
-mistake worth avoiding. One plain sentence describing what is in the photo is
-enough.
+They are worth filling in when you know what a photo shows. The caption is what
+a blind visitor's screen reader reads aloud in place of the image, so a photo
+with no caption is simply silent to them. On a website built for persons with
+disability that is worth a minute of your time.
+
+One plain sentence is enough: *"Trainees holding their bakery certificates at
+the Sangati Skill Centre in Mandi."*
+
+You do not have to do it all at once. Upload now, caption the ones you know
+later.
 
 ---
 

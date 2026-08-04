@@ -8,8 +8,9 @@ import { useAccessibility } from '../context/AccessibilityContext';
 
 export interface GalleryPhoto {
   id: string;
-  title: string;
   src: string;
+  /** Both optional — photos can be uploaded in bulk and described later. */
+  title?: string;
   caption?: string;
 }
 
@@ -180,7 +181,11 @@ export const PhotoGallery: React.FC<PhotoGalleryProps> = ({
                   }}
                   type="button"
                   onClick={() => open(idx)}
-                  aria-label={`View photo ${idx + 1} of ${total}: ${photo.title}`}
+                  aria-label={
+                    photo.title
+                      ? `View photo ${idx + 1} of ${total}: ${photo.title}`
+                      : `View photo ${idx + 1} of ${total}`
+                  }
                   className={`group relative block w-full h-full overflow-hidden rounded-2xl border-2 border-ink/15 bg-mist hover:border-road focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-marigold focus-visible:border-road ${motion} ${
                     reduceMotion ? '' : 'hover:-translate-y-1 hover:shadow-xl'
                   }`}
@@ -188,7 +193,7 @@ export const PhotoGallery: React.FC<PhotoGalleryProps> = ({
                   <div className={`relative w-full ${feature ? 'aspect-square' : 'aspect-[4/3]'}`}>
                     <Image
                       src={photo.src}
-                      alt={photo.caption || photo.title}
+                      alt={photo.caption || photo.title || ''}
                       fill
                       loading={idx < 4 ? undefined : 'lazy'}
                       priority={false}
@@ -201,24 +206,28 @@ export const PhotoGallery: React.FC<PhotoGalleryProps> = ({
                     />
                   </div>
 
-                  {/* Caption overlay */}
-                  <div
-                    className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink/95 via-ink/70 to-transparent p-3 pt-8 text-left"
-                    aria-hidden="true"
-                  >
-                    <p
-                      className={`font-mono text-[10px] sm:text-xs font-bold text-marigold uppercase tracking-wide ${
-                        feature ? 'line-clamp-2' : 'line-clamp-1'
-                      }`}
+                  {/* Caption overlay — only when there is something to show */}
+                  {(photo.title || (feature && photo.caption)) && (
+                    <div
+                      className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink/95 via-ink/70 to-transparent p-3 pt-8 text-left"
+                      aria-hidden="true"
                     >
-                      {photo.title}
-                    </p>
-                    {feature && photo.caption && (
-                      <p className="font-body text-xs text-field/90 line-clamp-2 mt-1">
-                        {photo.caption}
-                      </p>
-                    )}
-                  </div>
+                      {photo.title && (
+                        <p
+                          className={`font-mono text-[10px] sm:text-xs font-bold text-marigold uppercase tracking-wide ${
+                            feature ? 'line-clamp-2' : 'line-clamp-1'
+                          }`}
+                        >
+                          {photo.title}
+                        </p>
+                      )}
+                      {feature && photo.caption && (
+                        <p className="font-body text-xs text-field/90 line-clamp-2 mt-1">
+                          {photo.caption}
+                        </p>
+                      )}
+                    </div>
+                  )}
 
                   {/* Zoom affordance */}
                   <span
@@ -293,7 +302,7 @@ export const PhotoGallery: React.FC<PhotoGalleryProps> = ({
               <Image
                 key={current.id}
                 src={current.src}
-                alt={current.caption || current.title}
+                alt={current.caption || current.title || ''}
                 fill
                 sizes="100vw"
                 priority
@@ -311,19 +320,25 @@ export const PhotoGallery: React.FC<PhotoGalleryProps> = ({
             </button>
           </div>
 
-          {/* Caption */}
-          <div className="relative z-10 p-4 sm:p-6 text-center max-w-3xl mx-auto space-y-1">
-            <p className="font-display font-bold text-field text-sm sm:text-lg">{current.title}</p>
-            {current.caption && (
-              <p className="font-body text-xs sm:text-sm text-field/80">{current.caption}</p>
-            )}
-          </div>
+          {/* Caption — omitted entirely when the photo has neither */}
+          {(current.title || current.caption) && (
+            <div className="relative z-10 p-4 sm:p-6 text-center max-w-3xl mx-auto space-y-1">
+              {current.title && (
+                <p className="font-display font-bold text-field text-sm sm:text-lg">
+                  {current.title}
+                </p>
+              )}
+              {current.caption && (
+                <p className="font-body text-xs sm:text-sm text-field/80">{current.caption}</p>
+              )}
+            </div>
+          )}
 
           {/* Screen-reader announcement */}
           <p className="sr-only" role="status" aria-live="polite">
-            Photo {openIndex + 1} of {total}. {current.title}.{' '}
-            {current.caption ?? ''} Use the left and right arrow keys to move between photos, and
-            Escape to close.
+            {`Photo ${openIndex + 1} of ${total}.`}{' '}
+            {current.caption || current.title || 'No description available.'}{' '}
+            Use the left and right arrow keys to move between photos, and Escape to close.
           </p>
         </div>
       )}

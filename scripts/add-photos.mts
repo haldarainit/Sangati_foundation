@@ -13,8 +13,12 @@
  *                                     e.g. --to program:para-sports
  *   posters                           create one News & Posters entry per image
  *
- * Captions are left blank on purpose. Open /studio afterwards and write a
- * one-line description for each photo — it is read aloud to blind visitors.
+ * Titles and captions are left blank: camera filenames like IMG_20241214_WA0032
+ * make terrible labels. Pass --titles-from-filenames if your filenames are
+ * actually descriptive.
+ *
+ * Captions are worth adding later in the Studio — screen readers read them
+ * aloud to blind visitors — but nothing forces you to do it up front.
  */
 
 import { createClient } from '@sanity/client';
@@ -55,13 +59,16 @@ function arg(name: string): string | undefined {
 
 const folder = arg('folder');
 const target = arg('to') ?? 'yatra';
+const useFilenames = process.argv.includes('--titles-from-filenames');
 
 const USAGE =
   '\nUsage:\n  npm run add-photos -- --folder "C:/path/to/photos" --to yatra\n\n' +
   '  --to accepts:\n' +
   `    ${Object.keys(TARGETS).join(' | ')}   append to that page's gallery\n` +
   '    program:<slug>              e.g. --to program:para-sports\n' +
-  '    posters                     one News & Posters entry per image\n';
+  '    posters                     one News & Posters entry per image\n\n' +
+  '  --titles-from-filenames     use filenames as photo titles (only if they\n' +
+  '                              are descriptive; blank by default)\n';
 
 if (!folder) {
   console.error(USAGE);
@@ -160,6 +167,8 @@ for (const file of files) {
   console.log(`  ${String(n).padStart(3)}/${files.length}  ${file}`);
 
   const image = { _type: 'image', asset: { _type: 'reference', _ref: asset._id } };
+  // Posters must have a title (it is a required field), so they always get one
+  // from the filename. Gallery photos stay blank unless you ask otherwise.
   const title = titleFromFilename(file);
 
   if (isPosters) {
@@ -178,8 +187,7 @@ for (const file of files) {
     items.push({
       _type: 'galleryItem',
       _key: `add${Date.now().toString(36)}${n.toString(36)}`,
-      title,
-      caption: '',
+      ...(useFilenames ? { title } : {}),
       image,
     });
   }
@@ -201,9 +209,11 @@ if (isPosters) {
 
   console.log(
     `\nDone. ${items.length} photos appended to ${label}.\n\n` +
-      '⚠  Captions are blank. Open /studio → ' +
-      `${label} → Photo gallery and write one line per photo —\n` +
-      '   that text is what blind visitors hear instead of the image.\n'
+      '   The photos are live now — nothing else is required.\n\n' +
+      '   When you have time, adding a caption in /studio → ' +
+      `${label} → Photo gallery\n` +
+      '   is what blind visitors hear in place of the image. Worth doing for the\n' +
+      '   ones you know; leave the rest blank.\n'
   );
 }
 

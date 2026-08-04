@@ -19,19 +19,17 @@ export const galleryItem = defineType({
     }),
     defineField({
       name: 'title',
-      title: 'Photo title',
+      title: 'Photo title (optional)',
       type: 'string',
-      description: 'Short title shown above the caption.',
-      validation: (Rule) => Rule.required(),
+      description: 'Short label shown over the photo. Leave blank for no label.',
     }),
     defineField({
       name: 'caption',
-      title: 'Caption / alt text',
+      title: 'Caption / alt text (optional)',
       type: 'text',
       rows: 2,
       description:
-        'Describe the photo in one sentence. This is read aloud to blind visitors using screen readers, so please always fill it in.',
-      validation: (Rule) => Rule.required(),
+        'One sentence describing the photo. Screen readers read this aloud to blind visitors, so it is worth adding when you know what the photo shows — but you can upload first and fill it in later.',
     }),
   ],
   preview: {

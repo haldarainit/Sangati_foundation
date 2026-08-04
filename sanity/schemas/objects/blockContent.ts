@@ -51,11 +51,10 @@ export const blockContent = defineType({
       fields: [
         {
           name: 'alt',
-          title: 'Alt text',
+          title: 'Alt text (optional)',
           type: 'string',
           description:
-            'Describe the photo for blind visitors using screen readers. Always fill this in.',
-          validation: (Rule) => Rule.required(),
+            'Describe the photo for blind visitors using screen readers. Worth adding when you know what the photo shows.',
         },
         { name: 'caption', title: 'Caption', type: 'string' },
       ],
