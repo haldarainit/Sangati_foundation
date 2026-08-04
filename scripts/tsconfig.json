@@ -1,0 +1,19 @@
+{
+  // Node-side tooling (the one-off Sanity import). Run with `npm run seed`,
+  // never bundled into the website, so it targets modern Node rather than
+  // the browser settings used by the app's tsconfig.
+  "compilerOptions": {
+    "target": "es2022",
+    "lib": ["es2023"],
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "types": ["node"],
+    "strict": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "allowImportingTsExtensions": true
+  },
+  "include": ["**/*.ts", "**/*.mts", "../content/**/*.ts"]
+}

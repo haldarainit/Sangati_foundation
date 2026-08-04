@@ -18,17 +18,120 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000) in your web browser.
 
-To create a static production build:
+To create a production build:
 
 ```bash
 npm run build
 ```
 
-The output will be placed in the `out/` folder, ready to deploy to any web host (GitHub Pages, Netlify, Vercel, or traditional cPanel hosting) with zero server configuration required.
+> **⚠️ The deployment model changed when the admin panel was added.**
+> This site used to build with `output: 'export'` into a static `out/` folder
+> that was copied to GitHub Pages. It now needs a running Node server, because
+> the admin panel and the live content updates cannot work from static HTML.
+> Deploy to **Vercel** (free tier is sufficient) — see *Deploying* below.
+> The old `out/` folder is still committed and still serving the current live
+> site; leave it until the Vercel deploy is live, then remove it.
 
 ---
 
-## 📝 How to Edit Text & Content (For Non-Technical Editors)
+## 🔐 Admin Panel Setup (one-time)
+
+The site has an admin panel at **`/studio`** so the foundation can publish posts,
+photos and page content without a developer. It is
+[Sanity Studio](https://www.sanity.io/) embedded into this Next.js app — one
+deploy, one domain, one login.
+
+**Until this setup is done, nothing breaks**: every page falls back to the
+original files in `content/`, and `/studio` shows setup instructions instead of
+an error.
+
+### 1. Create the Sanity project
+
+1. Sign up free at [sanity.io](https://www.sanity.io/) → **Create new project**
+2. Name it *Sangati Foundation*, dataset **production** (public)
+3. Copy the **Project ID** from the dashboard
+
+### 2. Configure environment variables
+
+```bash
+cp .env.local.example .env.local
+```
+
+Fill in `NEXT_PUBLIC_SANITY_PROJECT_ID` and `NEXT_PUBLIC_SANITY_DATASET`.
+
+Then create a write token at **sanity.io/manage → API → Tokens → Add API token**
+(permissions: **Editor**) and put it in `SANITY_API_WRITE_TOKEN`.
+
+> `.env.local` is git-ignored. Never commit it. The write token is only used by
+> the one-time import below — **do not** add it to Vercel, since the website
+> only ever reads from Sanity.
+
+### 3. Import the existing content
+
+```bash
+npm run seed
+```
+
+This uploads every page, story, programme, poster, team member — and all 47
+images from `public/` — into Sanity. Your client opens the panel and finds the
+real website already there instead of a blank slate.
+
+Safe to re-run: documents have fixed IDs and are replaced, and Sanity
+de-duplicates images by file hash.
+
+### 4. Allow the browser to reach Sanity
+
+In **sanity.io/manage → API → CORS origins**, add:
+
+- `http://localhost:3000` — *with credentials*
+- your production URL — *with credentials*
+
+### 5. Check it
+
+```bash
+npm run dev
+```
+
+Open [http://localhost:3000/studio](http://localhost:3000/studio) and sign in.
+
+### 6. Invite the client
+
+**sanity.io/manage → Members → Invite**. Give them the **Editor** role, send
+them the `/studio` link and [ADMIN_GUIDE.md](./ADMIN_GUIDE.md).
+
+---
+
+## 🚢 Deploying
+
+1. Import this repository at [vercel.com/new](https://vercel.com/new)
+2. Add the environment variables (**not** the write token):
+   - `NEXT_PUBLIC_SANITY_PROJECT_ID`
+   - `NEXT_PUBLIC_SANITY_DATASET`
+   - `SANITY_REVALIDATE_SECRET` — any long random string
+3. Deploy, then point the domain at Vercel
+
+### Instant updates (optional)
+
+Published changes appear within 60 seconds by default. To make them appear
+immediately, add a webhook in **sanity.io/manage → API → Webhooks**:
+
+- **URL**: `https://your-domain/api/revalidate`
+- **Trigger on**: Create, Update, Delete
+- **Secret**: the same value as `SANITY_REVALIDATE_SECRET`
+
+---
+
+## 📝 How to Edit Text & Content
+
+**For the foundation:** use the admin panel at `/studio` — see
+[ADMIN_GUIDE.md](./ADMIN_GUIDE.md).
+
+**For developers:** the files below are the *fallback* content, used when Sanity
+is unreachable or not yet configured. Once the panel is live, editing them no
+longer changes the website — edit in `/studio` instead.
+
+Contact details, organisation info, bank/80G details and the accessibility
+statement are **not** in the panel and are still edited here.
 
 All copy across the entire website is stored inside the `/content` folder. **You do NOT need to edit code components or React files to change text, dates, numbers, or addresses.**
 

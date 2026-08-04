@@ -2,13 +2,6 @@ import React from 'react';
 import type { Metadata } from 'next';
 import { Bricolage_Grotesque, Source_Serif_4, IBM_Plex_Mono } from 'next/font/google';
 import './globals.css';
-import { AccessibilityProvider } from '@/components/context/AccessibilityContext';
-import { SkipLink } from '@/components/layout/SkipLink';
-import { Header } from '@/components/layout/Header';
-import { Footer } from '@/components/layout/Footer';
-import { ScrollProgressBar } from '@/components/ui/ScrollProgressBar';
-import { MobileQuickActions } from '@/components/ui/MobileQuickActions';
-import { BackgroundAudioPlayer } from '@/components/ui/BackgroundAudioPlayer';
 import { organizationInfo } from '@/content/organization';
 
 const bricolage = Bricolage_Grotesque({
@@ -46,6 +39,12 @@ export const metadata: Metadata = {
   ],
 };
 
+/**
+ * Root shell. Deliberately minimal — it only sets up <html>/<body> and fonts so
+ * that the admin panel at /studio can render full-screen without the site
+ * header, footer and accessibility toolbar around it. All public-facing pages
+ * live under the (site) route group, which adds that chrome back.
+ */
 export default function RootLayout({
   children,
 }: {
@@ -63,30 +62,7 @@ export default function RootLayout({
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
       </head>
       <body className="min-h-screen flex flex-col bg-field text-ink selection:bg-marigold selection:text-ink">
-        <AccessibilityProvider>
-          {/* Top Reading Progress Bar */}
-          <ScrollProgressBar />
-
-          {/* First focusable element */}
-          <SkipLink />
-
-          {/* Header Navigation */}
-          <Header />
-
-          {/* Main Landmark */}
-          <main id="main-content" tabIndex={-1} className="flex-1 focus-visible:outline-none">
-            {children}
-          </main>
-
-          {/* Footer Landmark */}
-          <Footer />
-
-          {/* Sticky Mobile Quick Action Bar */}
-          <MobileQuickActions />
-
-          {/* Encouraging Background Music Synthesizer & Floating Controller */}
-          <BackgroundAudioPlayer />
-        </AccessibilityProvider>
+        {children}
       </body>
     </html>
   );

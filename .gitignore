@@ -2,3 +2,15 @@ node_modules
 .next
 *.log
 WhatsApp Video*.mp4
+
+# Secrets — never commit these
+.env
+.env.local
+.env*.local
+
+# Sanity Studio build artefacts
+dist
+.sanity
+
+# TypeScript incremental build cache
+*.tsbuildinfo
