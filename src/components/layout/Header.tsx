@@ -288,7 +288,7 @@ export const Header: React.FC<HeaderProps> = ({ programs = programsList }) => {
               onClick={() => setIsMobileMenuOpen(false)}
               className="block p-3 font-bold border-2 border-ink hover:bg-mist text-lg"
             >
-              Contact & Helpline
+              Contact Us
             </Link>
           </div>
         </nav>

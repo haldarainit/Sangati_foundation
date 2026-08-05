@@ -9,7 +9,7 @@ import { Phone, Mail, MapPin, Building, Clock } from 'lucide-react';
 export const metadata = {
   title: 'Contact Us & Centres | Sangati Foundation',
   description:
-    'Reach Sangati Foundation on our toll-free helpline 1800 102 1622 or visit our centres in Gurgaon, Jodhpur, and Bathri.',
+    'Reach Sangati Foundation on 7428769622 or at support@sangati.org, or visit our centres in Gurgaon, Jodhpur, and Bathri.',
 };
 
 export default function ContactPage() {
@@ -19,7 +19,7 @@ export default function ContactPage() {
       <section className="relative w-full min-h-[260px] sm:min-h-[340px] md:min-h-[380px] flex items-center bg-ink text-field overflow-hidden">
         <Image
           src={contactContent.bannerImage}
-          alt="Sangati Foundation helpline and contact banner"
+          alt="Sangati Foundation contact banner"
           fill
           priority
           sizes="100vw"
@@ -30,7 +30,7 @@ export default function ContactPage() {
         <div className="relative z-10 max-w-7xl mx-auto px-4 py-8 sm:py-12 w-full space-y-3 sm:space-y-4">
           <ScrollReveal variant="fade-down">
             <span className="font-mono text-[10px] sm:text-xs font-bold bg-marigold text-ink px-3.5 py-1 rounded-full uppercase tracking-wider inline-block">
-              HELPLINE • CENTRES • ENQUIRIES
+              PHONE • EMAIL • CENTRES
             </span>
           </ScrollReveal>
 
@@ -54,7 +54,7 @@ export default function ContactPage() {
           <div className="bg-road text-field border border-road/40 rounded-3xl p-6 sm:p-10 md:p-12 flex flex-col md:flex-row items-center justify-between gap-6 shadow-2xl">
             <div className="space-y-2 text-center md:text-left">
               <span className="font-mono text-xs font-bold text-marigold uppercase tracking-wider block">
-                NATIONAL TOLL-FREE DISABILITY HELPLINE
+                CALL SANGATI FOUNDATION
               </span>
               <a
                 href={`tel:${contactContent.helpline.replace(/\s+/g, '')}`}

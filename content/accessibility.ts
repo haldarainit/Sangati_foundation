@@ -48,8 +48,8 @@ export const accessibilityContent = {
     title: 'Accessibility Feedback & Assistance',
     description:
       'We welcome your feedback on the accessibility of the Sangati Foundation website. If you encounter accessibility barriers or require content in an alternative accessible format (large print, audio, simplified text), please reach out to us:',
-    phone: '1800 102 1622 (Toll Free Helpline)',
-    email: 'accessibility@sangati.org',
+    phone: '7428769622',
+    email: 'support@sangati.org',
     responseWindow: 'We aim to respond to accessibility inquiries within 2 business days.',
   },
 };

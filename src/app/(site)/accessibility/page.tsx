@@ -102,7 +102,7 @@ export default function AccessibilityStatementPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 font-mono text-sm pt-2">
             <div className="p-4 bg-mist border border-ink space-y-1">
-              <span className="text-xs text-road font-bold block">NATIONAL HELPLINE:</span>
+              <span className="text-xs text-road font-bold block">PHONE:</span>
               <a
                 href={`tel:${accessibilityContent.feedbackChannel.phone.split(' ')[0]}`}
                 className="font-bold text-ink text-base hover:text-road underline"

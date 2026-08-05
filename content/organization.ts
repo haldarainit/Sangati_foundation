@@ -7,7 +7,7 @@ export const organizationInfo: OrganizationInfo = {
   founder: 'Mr Sudhir Dhir',
   leadAuthor: 'Alka Selot Asthana',
   sangatiDay: '14 February (celebrated annually)',
-  helpline: '1800 102 1622',
+  helpline: '7428769622',
   existingSite: 'thesangati.wordpress.com',
   twitter: '@thesangati',
   tagline: 'For People-with-Disability.',

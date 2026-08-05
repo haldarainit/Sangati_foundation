@@ -162,7 +162,7 @@ export const ContactForm: React.FC<ContactFormProps> = ({ formType = 'general' }
           value={formData.phone}
           onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
           className="w-full p-3 min-h-[44px] bg-field text-ink border-2 border-ink focus-visible:outline-road"
-          placeholder="e.g. +91 98765 43210"
+          placeholder="Your contact number"
         />
       </div>
 
