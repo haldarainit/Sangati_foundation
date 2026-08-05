@@ -6,7 +6,7 @@ import { PaymentProvider } from '@/components/ui/PaymentProvider';
 import { RouteLine } from '@/components/ui/RouteLine';
 import { ScrollReveal } from '@/components/ui/ScrollReveal';
 import type { DonateContent } from '@/sanity/lib/content';
-import { ShieldCheck, Heart, Building, Check, Copy, Sparkles, Award } from 'lucide-react';
+import { ShieldCheck, Heart, Sparkles, Award } from 'lucide-react';
 
 export default function DonatePageClient({ donateContent }: { donateContent: DonateContent }) {
   const [selectedTierAmount, setSelectedTierAmount] = useState<number | string>(
@@ -15,7 +15,6 @@ export default function DonatePageClient({ donateContent }: { donateContent: Don
 
   const [customAmount, setCustomAmount] = useState<string>('');
   const [isCustomActive, setIsCustomActive] = useState<boolean>(false);
-  const [copiedField, setCopiedField] = useState<string | null>(null);
 
   const handleSelectTier = (amount: number) => {
     setSelectedTierAmount(amount);
@@ -28,12 +27,6 @@ export default function DonatePageClient({ donateContent }: { donateContent: Don
     setCustomAmount(val);
     setSelectedTierAmount(val ? Number(val) : '');
     setIsCustomActive(true);
-  };
-
-  const copyToClipboard = (text: string, fieldName: string) => {
-    navigator.clipboard.writeText(text);
-    setCopiedField(fieldName);
-    setTimeout(() => setCopiedField(null), 2000);
   };
 
   return (
@@ -170,66 +163,6 @@ export default function DonatePageClient({ donateContent }: { donateContent: Don
       <div className="max-w-7xl mx-auto px-4">
         <RouteLine />
       </div>
-
-      {/* DIRECT BANK TRANSFER DETAILS */}
-      <section className="max-w-5xl mx-auto px-4" aria-labelledby="bank-details-heading">
-        <ScrollReveal variant="fade-up">
-          <div className="bg-white border border-road/20 rounded-3xl p-6 sm:p-8 space-y-6 shadow-xl">
-            <div className="flex items-center justify-between border-b border-road/20 pb-4">
-              <div className="flex items-center gap-3">
-                <div className="p-2.5 bg-road/10 border border-road/20 rounded-2xl">
-                  <Building className="w-6 h-6 text-road" aria-hidden="true" />
-                </div>
-                <h2 id="bank-details-heading" className="text-xl sm:text-2xl font-bold font-display text-ink">
-                  Direct Bank & NEFT / RTGS Transfer Details
-                </h2>
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 font-mono text-sm">
-              <div className="p-4 bg-mist/30 border border-road/15 rounded-2xl space-y-1">
-                <span className="text-xs text-road font-bold block uppercase">ACCOUNT NAME:</span>
-                <span className="font-bold text-ink text-sm sm:text-base">{donateContent.bankDetails.accountName}</span>
-              </div>
-
-              <div className="p-4 bg-mist/30 border border-road/15 rounded-2xl space-y-1">
-                <span className="text-xs text-road font-bold block uppercase">BANK NAME:</span>
-                <span className="font-bold text-ink text-sm sm:text-base">{donateContent.bankDetails.bankName}</span>
-              </div>
-
-              <div className="p-4 bg-mist/30 border border-road/15 rounded-2xl flex items-center justify-between gap-2">
-                <div>
-                  <span className="text-xs text-road font-bold block uppercase">ACCOUNT NUMBER:</span>
-                  <span className="font-bold text-ink text-sm sm:text-base">{donateContent.bankDetails.accountNumber}</span>
-                </div>
-                <button
-                  type="button"
-                  onClick={() => copyToClipboard(donateContent.bankDetails.accountNumber, 'acc')}
-                  className="p-2 bg-white border border-road/20 rounded-xl hover:bg-mist cursor-pointer"
-                  title="Copy Account Number"
-                >
-                  {copiedField === 'acc' ? <Check className="w-4 h-4 text-road" /> : <Copy className="w-4 h-4 text-road" />}
-                </button>
-              </div>
-
-              <div className="p-4 bg-mist/30 border border-road/15 rounded-2xl flex items-center justify-between gap-2">
-                <div>
-                  <span className="text-xs text-road font-bold block uppercase">IFSC CODE:</span>
-                  <span className="font-bold text-ink text-sm sm:text-base">{donateContent.bankDetails.ifscCode}</span>
-                </div>
-                <button
-                  type="button"
-                  onClick={() => copyToClipboard(donateContent.bankDetails.ifscCode, 'ifsc')}
-                  className="p-2 bg-white border border-road/20 rounded-xl hover:bg-mist cursor-pointer"
-                  title="Copy IFSC Code"
-                >
-                  {copiedField === 'ifsc' ? <Check className="w-4 h-4 text-road" /> : <Copy className="w-4 h-4 text-road" />}
-                </button>
-              </div>
-            </div>
-          </div>
-        </ScrollReveal>
-      </section>
     </div>
   );
 }
