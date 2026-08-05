@@ -1,118 +1,124 @@
 'use client';
 
 import React, { useEffect, useRef, useState } from 'react';
+import { Volume2, VolumeX } from 'lucide-react';
 
+const AUDIO_SRC = '/audio/sangati-theme.mp3';
+const STORAGE_KEY = 'sangati_audio_muted';
+
+/**
+ * Background theme music for the homepage.
+ *
+ * Notes on the choices here:
+ *  - There is a visible, keyboard-reachable play/pause button. WCAG 2.2 SC 1.4.2
+ *    requires a way to stop audio that runs for more than three seconds, and
+ *    this site is built for persons with disability. The previous version had
+ *    no control at all.
+ *  - Playback only begins after the visitor interacts with the page, because
+ *    browsers block autoplay with sound and it is rude besides.
+ *  - The choice is remembered, so someone who turns it off does not have to do
+ *    it again on every visit.
+ *  - The file is not downloaded until it is actually needed, which keeps the
+ *    homepage light on mobile data.
+ */
 export const BackgroundAudioPlayer: React.FC = () => {
+  const audioRef = useRef<HTMLAudioElement | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [hasInteracted, setHasInteracted] = useState(false);
+  const [ready, setReady] = useState(false);
 
-  const audioContextRef = useRef<AudioContext | null>(null);
-  const isPlayingRef = useRef(false);
-  const timerRef = useRef<NodeJS.Timeout | null>(null);
-  const volumeRef = useRef(0.65); // Louder inspiring 65% volume
+  // Restore the visitor's previous choice before doing anything noisy.
+  const mutedByChoice = useRef(true);
 
-  // Motivational Triumphant Harmony Synthesizer (Zero external file dependencies, 100% reliable)
-  const playMotivationalChord = (ctx: AudioContext, frequencies: number[], duration = 2.8) => {
-    if (!isPlayingRef.current) return;
-
-    const masterGain = ctx.createGain();
-    masterGain.gain.setValueAtTime(volumeRef.current * 0.55, ctx.currentTime);
-    masterGain.connect(ctx.destination);
-
-    frequencies.forEach((freq, idx) => {
-      // Warm Sine oscillator for rich core tone
-      const osc = ctx.createOscillator();
-      const gain = ctx.createGain();
-
-      osc.type = 'sine';
-      osc.frequency.setValueAtTime(freq, ctx.currentTime);
-
-      // Bright Harmonic Triangle oscillator for motivational resonance
-      const oscHarmonic = ctx.createOscillator();
-      const gainHarmonic = ctx.createGain();
-      oscHarmonic.type = 'triangle';
-      oscHarmonic.frequency.setValueAtTime(freq * 1.5, ctx.currentTime);
-
-      // Dynamic attack & decay envelope for an uplifting rhythmic pulse
-      const attackTime = 0.05 + idx * 0.03;
-
-      gain.gain.setValueAtTime(0.0001, ctx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.35, ctx.currentTime + attackTime);
-      gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + duration);
-
-      gainHarmonic.gain.setValueAtTime(0.0001, ctx.currentTime);
-      gainHarmonic.gain.exponentialRampToValueAtTime(0.12, ctx.currentTime + attackTime);
-      gainHarmonic.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + duration * 0.7);
-
-      osc.connect(gain);
-      oscHarmonic.connect(gainHarmonic);
-      gain.connect(masterGain);
-      gainHarmonic.connect(masterGain);
-
-      // Arpeggiated note entrance for uplifting rhythm
-      const noteDelay = idx * 0.08;
-      osc.start(ctx.currentTime + noteDelay);
-      oscHarmonic.start(ctx.currentTime + noteDelay);
-
-      osc.stop(ctx.currentTime + duration + 0.3);
-      oscHarmonic.stop(ctx.currentTime + duration + 0.3);
-    });
-  };
-
-  const startMotivationalSequence = () => {
-    if (!audioContextRef.current) {
-      const AudioCtx = window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
-      audioContextRef.current = new AudioCtx();
-    }
-
-    const ctx = audioContextRef.current;
-    if (ctx.state === 'suspended') {
-      ctx.resume();
-    }
-
-    isPlayingRef.current = true;
-    setIsPlaying(true);
-
-    // Uplifting & Motivational Progression: Cadd9 -> G/B -> Am7 -> Fadd9 (Bright, inspiring tempo)
-    const motivationalChords = [
-      [261.63, 329.63, 392.0, 587.33, 659.25], // Cadd9 (C4, E4, G4, D5, E5)
-      [246.94, 293.66, 392.0, 493.88, 587.33], // G/B (B3, D4, G4, B4, D5)
-      [220.0, 261.63, 329.63, 392.0, 523.25],  // Am7 (A3, C4, E4, G4, C5)
-      [174.61, 261.63, 329.63, 392.0, 440.0],  // Fadd9 (F3, C4, E4, G4, A4)
-    ];
-
-    let chordIdx = 0;
-
-    const playLoop = () => {
-      if (!isPlayingRef.current) return;
-      playMotivationalChord(ctx, motivationalChords[chordIdx], 2.6);
-      chordIdx = (chordIdx + 1) % motivationalChords.length;
-      timerRef.current = setTimeout(playLoop, 2500); // Energetic 2.5s loop pulse
-    };
-
-    playLoop();
-  };
-
-  // Auto-start sound on first click/touch/interaction anywhere on page
   useEffect(() => {
-    const handleFirstInteraction = () => {
-      if (!hasInteracted && !isPlayingRef.current) {
-        setHasInteracted(true);
-        startMotivationalSequence();
-      }
+    mutedByChoice.current = localStorage.getItem(STORAGE_KEY) !== 'false';
+    setReady(true);
+  }, []);
+
+  // Start on the first interaction, unless they previously turned it off.
+  useEffect(() => {
+    if (!ready || mutedByChoice.current) return;
+
+    const start = () => {
+      void audioRef.current?.play().then(
+        () => setIsPlaying(true),
+        () => {
+          /* Browser refused; the button still works. */
+        }
+      );
     };
 
-    window.addEventListener('click', handleFirstInteraction, { once: true });
-    window.addEventListener('keydown', handleFirstInteraction, { once: true });
-    window.addEventListener('touchstart', handleFirstInteraction, { once: true });
+    window.addEventListener('click', start, { once: true });
+    window.addEventListener('keydown', start, { once: true });
+    window.addEventListener('touchstart', start, { once: true });
 
     return () => {
-      window.removeEventListener('click', handleFirstInteraction);
-      window.removeEventListener('keydown', handleFirstInteraction);
-      window.removeEventListener('touchstart', handleFirstInteraction);
+      window.removeEventListener('click', start);
+      window.removeEventListener('keydown', start);
+      window.removeEventListener('touchstart', start);
     };
-  }, [hasInteracted]);
+  }, [ready]);
 
-  // Completely hidden visually on screen while audio plays seamlessly in background
-  return <div className="hidden pointer-events-none" aria-hidden="true" />;
+  // Pause when the tab is hidden — nobody wants audio from a tab they left.
+  useEffect(() => {
+    const onVisibility = () => {
+      if (document.hidden && audioRef.current && !audioRef.current.paused) {
+        audioRef.current.pause();
+        setIsPlaying(false);
+      }
+    };
+    document.addEventListener('visibilitychange', onVisibility);
+    return () => document.removeEventListener('visibilitychange', onVisibility);
+  }, []);
+
+  const toggle = () => {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    if (audio.paused) {
+      void audio.play().then(
+        () => {
+          setIsPlaying(true);
+          mutedByChoice.current = false;
+          localStorage.setItem(STORAGE_KEY, 'false');
+        },
+        () => setIsPlaying(false)
+      );
+    } else {
+      audio.pause();
+      setIsPlaying(false);
+      mutedByChoice.current = true;
+      localStorage.setItem(STORAGE_KEY, 'true');
+    }
+  };
+
+  return (
+    <>
+      <audio
+        ref={audioRef}
+        src={AUDIO_SRC}
+        loop
+        preload="none"
+        onPlay={() => setIsPlaying(true)}
+        onPause={() => setIsPlaying(false)}
+      />
+
+      <button
+        type="button"
+        onClick={toggle}
+        aria-pressed={isPlaying}
+        aria-label={isPlaying ? 'Turn background music off' : 'Turn background music on'}
+        title={isPlaying ? 'Turn background music off' : 'Turn background music on'}
+        className="fixed bottom-20 right-4 md:bottom-6 md:right-6 z-40 inline-flex items-center gap-2 pl-3 pr-4 py-2.5 min-h-[44px] bg-field text-ink border-2 border-ink rounded-full shadow-lg hover:bg-marigold focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-marigold transition-colors"
+      >
+        {isPlaying ? (
+          <Volume2 className="w-5 h-5 text-road" aria-hidden="true" />
+        ) : (
+          <VolumeX className="w-5 h-5 text-ink/70" aria-hidden="true" />
+        )}
+        <span className="font-mono text-[11px] font-bold uppercase tracking-wide">
+          {isPlaying ? 'Music on' : 'Music off'}
+        </span>
+      </button>
+    </>
+  );
 };

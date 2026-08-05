@@ -5,7 +5,6 @@ import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { ScrollProgressBar } from '@/components/ui/ScrollProgressBar';
 import { MobileQuickActions } from '@/components/ui/MobileQuickActions';
-import { BackgroundAudioPlayer } from '@/components/ui/BackgroundAudioPlayer';
 import { getPrograms } from '@/sanity/lib/content';
 import { REVALIDATE_SECONDS } from '@/sanity/lib/fetch';
 
@@ -45,8 +44,7 @@ export default async function SiteLayout({
       {/* Sticky Mobile Quick Action Bar */}
       <MobileQuickActions />
 
-      {/* Encouraging Background Music Synthesizer & Floating Controller */}
-      <BackgroundAudioPlayer />
+      {/* Background music lives on the homepage only — see (site)/page.tsx */}
     </AccessibilityProvider>
   );
 }

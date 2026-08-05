@@ -1,4 +1,5 @@
 import React from 'react';
+import { BackgroundAudioPlayer } from '@/components/ui/BackgroundAudioPlayer';
 import { HeroTraditionalSlider } from '@/components/ui/HeroTraditionalSlider';
 import { PhotoGallery } from '@/components/ui/PhotoGallery';
 import { ScrollProgressBar } from '@/components/ui/ScrollProgressBar';
@@ -15,6 +16,9 @@ export default async function HomePage() {
     <div className="w-full">
       {/* Top Reading Progress Bar */}
       <ScrollProgressBar />
+
+      {/* Background theme music — homepage only, with an on/off control */}
+      <BackgroundAudioPlayer />
 
       {/* TRADITIONAL FULL-BLEED HERO SLIDER AT TOP OF HOMEPAGE */}
       <section className="w-full">
