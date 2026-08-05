@@ -33,12 +33,20 @@ export const donateContent = {
       isPopular: false,
     },
   ] as DonationTier[],
+  /**
+   * Real account details, taken from the foundation's Union Bank cheque book.
+   *
+   * Donations depend on every character here being right — a single wrong digit
+   * sends money nowhere, or to a stranger. Verify against a bank statement or
+   * cheque leaf before changing anything.
+   */
   bankDetails: {
-    accountName: 'Sangati Foundation',
-    accountNumber: '919010012345678 (Placeholder)',
-    ifscCode: 'UTIB0000123',
-    bankName: 'Axis Bank Ltd',
-    branch: 'Sector 49, Gurgaon',
-    upiId: 'sangati@upi',
+    accountName: 'SANGATI FOUNDATION',
+    accountNumber: '307802010882010',
+    ifscCode: 'UBIN0530786',
+    bankName: 'Union Bank of India',
+    branch: 'Delhi–Connaught Place Branch, New Delhi – 110001',
+    // TODO: no real UPI handle supplied yet. See the note in PaymentProvider.
+    upiId: '',
   },
 };

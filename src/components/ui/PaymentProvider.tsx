@@ -2,13 +2,23 @@
 
 import React, { useState } from 'react';
 import { ShieldCheck, CreditCard, CheckCircle2, QrCode, Building, Lock, ArrowRight, Copy, Check } from 'lucide-react';
+import { donateContent } from '@/content/donate';
 
 interface PaymentProviderProps {
   selectedAmount: number | string;
 }
 
+/**
+ * The real UPI handle, or an empty string if the foundation has not supplied
+ * one. It must never be guessed: a donor who copies a wrong handle sends money
+ * to whoever owns it, and the payment succeeds silently.
+ */
+const UPI_ID = donateContent.bankDetails.upiId;
+
 export const PaymentProvider: React.FC<PaymentProviderProps> = ({ selectedAmount }) => {
-  const [paymentMethod, setPaymentMethod] = useState<'upi' | 'card' | 'netbanking'>('upi');
+  const [paymentMethod, setPaymentMethod] = useState<'upi' | 'card' | 'netbanking'>(
+    UPI_ID ? 'upi' : 'card'
+  );
   const [isProcessing, setIsProcessing] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [copiedUpi, setCopiedUpi] = useState(false);
@@ -20,7 +30,8 @@ export const PaymentProvider: React.FC<PaymentProviderProps> = ({ selectedAmount
   const [donorPan, setDonorPan] = useState('');
 
   const handleCopyUpi = () => {
-    navigator.clipboard.writeText('sangatifoundation@upi');
+    if (!UPI_ID) return;
+    navigator.clipboard.writeText(UPI_ID);
     setCopiedUpi(true);
     setTimeout(() => setCopiedUpi(false), 2000);
   };
@@ -141,19 +152,22 @@ export const PaymentProvider: React.FC<PaymentProviderProps> = ({ selectedAmount
               Select Preferred Payment Method
             </label>
             
-            <div className="grid grid-cols-3 gap-2 sm:gap-3">
-              <button
-                type="button"
-                onClick={() => setPaymentMethod('upi')}
-                className={`p-3 sm:p-4 rounded-2xl border text-xs sm:text-sm font-bold transition-all flex flex-col items-center justify-center gap-1.5 cursor-pointer ${
-                  paymentMethod === 'upi'
-                    ? 'bg-road text-field border-road shadow-md ring-2 ring-marigold'
-                    : 'bg-white text-ink border-road/20 hover:bg-mist'
-                }`}
-              >
-                <QrCode className="w-5 h-5 text-marigold" />
-                <span>UPI / QR Code</span>
-              </button>
+            <div className={`grid ${UPI_ID ? 'grid-cols-3' : 'grid-cols-2'} gap-2 sm:gap-3`}>
+              {/* UPI is offered only when a real handle is configured. */}
+              {UPI_ID && (
+                <button
+                  type="button"
+                  onClick={() => setPaymentMethod('upi')}
+                  className={`p-3 sm:p-4 rounded-2xl border text-xs sm:text-sm font-bold transition-all flex flex-col items-center justify-center gap-1.5 cursor-pointer ${
+                    paymentMethod === 'upi'
+                      ? 'bg-road text-field border-road shadow-md ring-2 ring-marigold'
+                      : 'bg-white text-ink border-road/20 hover:bg-mist'
+                  }`}
+                >
+                  <QrCode className="w-5 h-5 text-marigold" />
+                  <span>UPI / QR Code</span>
+                </button>
+              )}
 
               <button
                 type="button"
@@ -183,7 +197,7 @@ export const PaymentProvider: React.FC<PaymentProviderProps> = ({ selectedAmount
             </div>
 
             {/* Tab 1: UPI / GPay / PhonePe */}
-            {paymentMethod === 'upi' && (
+            {paymentMethod === 'upi' && UPI_ID && (
               <div className="p-5 bg-mist/40 border border-road/20 rounded-2xl space-y-4">
                 <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
                   <div className="space-y-1 text-center sm:text-left">
@@ -196,7 +210,7 @@ export const PaymentProvider: React.FC<PaymentProviderProps> = ({ selectedAmount
                     className="inline-flex items-center gap-2 bg-white border border-road/20 px-4 py-2 rounded-xl text-xs font-mono font-bold text-ink hover:bg-mist cursor-pointer shadow-2xs"
                   >
                     {copiedUpi ? <Check className="w-4 h-4 text-road" /> : <Copy className="w-4 h-4 text-road" />}
-                    <span>{copiedUpi ? 'UPI ID Copied!' : 'sangatifoundation@upi'}</span>
+                    <span>{copiedUpi ? 'UPI ID Copied!' : UPI_ID}</span>
                   </button>
                 </div>
               </div>
